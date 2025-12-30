@@ -19,7 +19,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
   const scenarios = [
     {
       title: isTurkish ? 'Gizemli Link' : 'Mystery Link',
-      image: '/images/quiz/link-message.jpg',
+      image: '/images/game_first_post.png',
       question: isTurkish
         ? 'Efe hangisine tıklamalı?'
         : 'Where should Efe click?',
@@ -36,7 +36,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
     },
     {
       title: isTurkish ? 'Şifre Tuzağı' : 'Password Trap',
-      image: '/images/quiz/password.jpg',
+      image: '/images/game_password_creation.png',
       question: isTurkish
         ? 'Doğru davranış hangisi?'
         : 'Which is the right action?',
@@ -53,7 +53,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
     },
     {
       title: isTurkish ? 'Tanımadık Mesaj' : 'Unknown Message',
-      image: '/images/quiz/stranger-message.jpg',
+      image: '/images/game_friend_request.png',
       question: isTurkish
         ? 'Efe ne yapmalı?'
         : 'What should Efe do?',
@@ -70,7 +70,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
     },
     {
       title: isTurkish ? 'Acil E-posta' : 'Urgent Email',
-      image: '/images/quiz/email-urgent.jpg',
+      image: '/images/game_privacy_settings.png',
       question: isTurkish
         ? 'En güvenli seçim hangisi?'
         : 'What is the safest choice?',
@@ -422,4 +422,3 @@ function Module6() {
 }
 
 export default Module6;
-

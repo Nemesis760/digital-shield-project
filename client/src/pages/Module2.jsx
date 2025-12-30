@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'wouter';
 import { AnimatePresence, motion } from 'framer-motion';
 import { MODULE_CONTENT_TR } from '../content/module_content_tr';
-import { MODULE3_EN } from '../content/module3_lang_en';
+import { MODULE2_EN } from '../content/module2_lang_en';
 import LoadingScreen from '../components/LoadingScreen';
 import { useLanguage } from '../contexts/LanguageContext';
 import PacketDeliveryGame from '../components/PacketDeliveryGame';
@@ -11,10 +11,12 @@ import HardwareHotspot from '../components/HardwareHotspot';
 import TruthOrTrollGame from '../components/TruthOrTrollGame';
 import InteractiveQuiz from '../components/InteractiveQuiz';
 import ScenarioGame from '../components/ScenarioGame';
+import StoryMode from '../components/StoryMode';
 import '../modules.css';
 
 // Her bölüm için genel bir bileşen
 const SectionComponent = ({ section, isTurkish }) => {
+  const [showStory, setShowStory] = useState(false);
   const renderActivity = () => {
     const activityType = section.activity_type;
     
@@ -168,7 +170,7 @@ function Module2() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Get module data based on language
-  const moduleData = isTurkish ? MODULE_CONTENT_TR.module_3 : MODULE3_EN.module_3;
+  const moduleData = isTurkish ? MODULE_CONTENT_TR.module_2 : MODULE2_EN.module_2;
 
   const sections = moduleData.sections.map((section, index) => ({
     id: index + 1,

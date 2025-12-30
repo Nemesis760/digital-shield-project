@@ -75,6 +75,9 @@ function Module4() {
                   src={moduleData.hero_image}
                   alt={isTurkish ? "Dijital güvenlik görseli" : "Digital safety visual"}
                   className="section-hero-image"
+                  onError={(e) => {
+                    e.currentTarget.style.display = "none";
+                  }}
                 />
 
                 <div className="section-intro">
@@ -96,7 +99,14 @@ function Module4() {
                 <div className="m4-image-grid">
                   {currentSection.images.map((img, idx) => (
                     <figure key={`${currentSection.id}-img-${idx}`} className="m4-image-card">
-                      <img src={img.src} alt={isTurkish ? img.alt_tr : img.alt_en} loading="lazy" />
+                      <img
+                        src={img.src}
+                        alt={isTurkish ? img.alt_tr : img.alt_en}
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.style.display = "none";
+                        }}
+                      />
                       <figcaption>{isTurkish ? img.alt_tr : img.alt_en}</figcaption>
                     </figure>
                   ))}

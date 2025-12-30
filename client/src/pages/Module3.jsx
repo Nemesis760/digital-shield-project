@@ -18,10 +18,12 @@ import { DEVICE_COMMUNICATION_HOTSPOT } from '../content/activities/device_commu
 import { WIRED_WIRELESS_TRUTH_OR_TROLL } from '../content/activities/wired_wireless_truth_or_troll';
 import { NETWORK_SECURITY_QUIZ } from '../content/activities/network_security_quiz';
 import { NETWORK_LOST_PACKET_SCENARIO } from '../content/activities/network_lost_packet_scenario';
+import StoryMode from '../components/StoryMode';
 import '../modules.css';
 
 // Her bölüm için genel bir bileşen
 const SectionComponent = ({ section, isTurkish }) => {
+  const [showStory, setShowStory] = useState(false);
   const renderActivity = () => {
     const activityType = section.activity_type;
     

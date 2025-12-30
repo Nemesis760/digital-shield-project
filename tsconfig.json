@@ -8,6 +8,8 @@
 
     /* Bundler mode */
     "moduleResolution": "bundler",
+    "allowJs": true,
+    "checkJs": false,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -29,4 +31,3 @@
   "include": ["client/src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
-

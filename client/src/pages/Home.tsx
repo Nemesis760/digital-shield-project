@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
-import { Shield, Cpu, ArrowRight, Globe, BookOpen, Award, Zap, Network, Handshake, Lock, Unlock, Star, Trophy } from 'lucide-react';
+import { Shield, Cpu, ArrowRight, Globe, BookOpen, Award, Zap, Network, Lock, Star, Trophy } from 'lucide-react';
 
 export default function Home() {
   const { language, toggleLanguage } = useLanguage();
