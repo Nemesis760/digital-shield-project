@@ -14,6 +14,10 @@ export const MODULE_CONTENT_TR = {
         title: "🟢 ALT BAŞLIK 1: BİLGİSAYAR NEDİR VE NASIL DÜŞÜNÜR?",
         subtitle: "Giriş, Mantık ve Temel Tanımlar",
         intro: "Bilgisayar; verileri hammadde olarak alan, işleyen, saklayan ve sonuçları bize ürün olarak sunan elektronik bir makinedir. Tıpkı bir fabrika gibi çalışır!",
+        video_links: [
+          { title: "Khan Academy: ?kili Say? Sistemi (Bilgisayarlar ve ?nternet)", url: "https://www.youtube.com/watch?v=c-KcEvYJzPQ" },
+          { title: "Khan Academy: ?kili Say? Sistemi ve Veri", url: "https://www.youtube.com/watch?v=uErAI2_g0Ws" }
+        ],
         content: {
           "1.1": {
             title: "Bilgisayarın Tanımı (Fabrika Analojisi)",
@@ -59,6 +63,10 @@ export const MODULE_CONTENT_TR = {
         title: "🔵 ALT BAŞLIK 2: DONANIM (BİLGİSAYARIN VÜCUDU)",
         subtitle: "Fiziksel Parçalar ve Görevleri",
         intro: "Bilgisayarın elle tutulabilen, gözle görülebilen tüm metal ve plastik parçalarıdır. İnsan vücuduna benzer - tıpkı bizim kemiklerimiz, kaslarımız ve organlarımız olduğu gibi, bilgisayarın da fiziksel bileşenleri vardır.",
+        video_links: [
+          { title: "5. S?n?f: Bilgisayar Sistemleri (Donan?m-Yaz?l?m)", url: "https://www.youtube.com/watch?v=FawDtMN4WKM" },
+          { title: "Donan?m ve Yaz?l?m Nedir? (Animasyon)", url: "https://www.youtube.com/watch?v=YbvWEd0q5YU" }
+        ],
         content: {
           "2.1": {
             title: "Donanım Nedir?",
@@ -141,6 +149,10 @@ export const MODULE_CONTENT_TR = {
         title: "🟠 ALT BAŞLIK 3: YAZILIM (BİLGİSAYARIN RUHU)",
         subtitle: "Programlar, İşletim Sistemleri ve Lisanslar",
         intro: "Donanım parçalarına ne yapması gerektiğini söyleyen komutlardır. Yazılım olmadan donanım cansız bir metal yığınıdır. Yazılım bilgisayara hayat veren ruhtur!",
+        video_links: [
+          { title: "??letim Sistemi Nedir?", url: "https://www.youtube.com/watch?v=Ox5trKYGXZ0" },
+          { title: "??letim Sistemi ve T?rleri (5. s?n?f animasyon)", url: "https://www.youtube.com/watch?v=Y1gxRHcWz_o" }
+        ],
         content: {
           "3.1": {
             title: "Yazılım Nedir?",
@@ -208,6 +220,10 @@ export const MODULE_CONTENT_TR = {
         title: "🟣 ALT BAŞLIK 4: HAFIZA VE DOSYA YÖNETİMİ",
         subtitle: "Kapasite Birimleri ve Düzen",
         intro: "Bilgisayardaki dosyaların ne kadar yer kapladığını ölçeriz ve onları düzenli bir şekilde saklarız.",
+        video_links: [
+          { title: "Dosya ve Klas?r Y?netimi ? Dosya Uzant?lar? (5. s?n?f)", url: "https://www.youtube.com/watch?v=mJ2aDEV7zrA" },
+          { title: "Dosya ve Klas?r Kavram? (5. s?n?f)", url: "https://www.youtube.com/watch?v=zgeMy2T-tFY" }
+        ],
         content: {
           "4.1": {
             title: "Kapasite Birimleri (Büyükten Küçüğe)",
@@ -257,6 +273,10 @@ export const MODULE_CONTENT_TR = {
         title: "🔴 ALT BAŞLIK 5: DİJİTAL SAĞLIK, ETİK VE GÜVENLİK",
         subtitle: "Kurallar, Tehlikeler ve Korunma",
         intro: "Bilgisayarı güvenli ve sağlıklı kullanmak, hem fiziksel hem de dijital tehlikelerden korunmak için önemlidir.",
+        video_links: [
+          { title: "ASELSAN Tekno Macera: Siber G?venlik (?ocuk?a Anlat)", url: "https://www.youtube.com/watch?v=qjQ6mU7NiSc" },
+          { title: "?ocuklar ??in: G??l? ?ifre Nas?l Olu?turulur?", url: "https://www.youtube.com/watch?v=ZRI6pw7hz8Y" }
+        ],
         content: {
           "5.1": {
             title: "Ergonomi (Sağlıklı Oturuş)",

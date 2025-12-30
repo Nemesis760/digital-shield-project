@@ -11,6 +11,7 @@ import SoftwareSorting from '../components/SoftwareSorting';
 import FileExtensionFlashcards from '../components/FileExtensionFlashcards';
 import ScenarioTest from '../components/ScenarioTest';
 import BoxGame from '../components/BoxGame';
+import VideoLinks from '../components/VideoLinks';
 import '../modules.css';
 
 // Her bölüm için genel bir bileşen
@@ -262,6 +263,8 @@ const SectionComponent = ({ section, isTurkish }) => {
       )}
 
       {/* Aktivite Alanı */}
+      <VideoLinks videoLinks={section.video_links} />
+
       <div className="activity-box">
         <h3>{section.activity_title}</h3>
         <p>{section.activity_desc}</p>

@@ -10,6 +10,10 @@ export const MODULE1_EN = {
         title: "🟢 SUBTOPIC 1: WHAT IS A COMPUTER AND HOW DOES IT THINK?",
         subtitle: "Introduction, Logic and Basic Definitions",
         intro: "A computer is an electronic machine that takes data as raw material, processes it, stores it, and presents the results to us as products. It works just like a factory!",
+        video_links: [
+          { title: "Code.org: What Makes a Computer, a Computer?", url: "https://www.youtube.com/watch?v=mCq8-xTH7jA" },
+          { title: "Crash Course: Representing Numbers with Binary", url: "https://www.youtube.com/watch?v=1GSjbWt0c9M" }
+        ],
         content: {
           "1.1": {
             title: "Definition of Computer (Factory Analogy)",
@@ -55,6 +59,10 @@ export const MODULE1_EN = {
         title: "🔵 SUBTOPIC 2: HARDWARE (THE COMPUTER'S BODY)",
         subtitle: "Physical Parts and Their Functions",
         intro: "All the metal and plastic parts of a computer that can be touched and seen. Similar to the human body.",
+        video_links: [
+          { title: "Code.org: Hardware and Software", url: "https://www.youtube.com/watch?v=xnyFYiK2rSY" },
+          { title: "Scratch Garden: Hardware vs Software", url: "https://www.youtube.com/watch?v=xZKMmk8JSUk" }
+        ],
         content: {
           "2.1": {
             title: "What is Hardware?",
@@ -124,6 +132,10 @@ export const MODULE1_EN = {
         title: "🟠 SUBTOPIC 3: SOFTWARE (THE COMPUTER'S SOUL)",
         subtitle: "Programs, Operating Systems and Licenses",
         intro: "Commands that tell hardware parts what to do. Without software, hardware is just a lifeless pile of metal.",
+        video_links: [
+          { title: "Code.org: Hardware and Software", url: "https://www.youtube.com/watch?v=xnyFYiK2rSY" },
+          { title: "What are Hardware and Software?", url: "https://www.youtube.com/watch?v=YbARkFqcAWw" }
+        ],
         content: {
           "3.1": {
             title: "What is Software?",
@@ -191,6 +203,10 @@ export const MODULE1_EN = {
         title: "🟣 SUBTOPIC 4: MEMORY AND FILE MANAGEMENT",
         subtitle: "Capacity Units and Organization",
         intro: "We measure how much space files take up on the computer and store them in an organized way.",
+        video_links: [
+          { title: "CS Basics: File extensions", url: "https://www.youtube.com/watch?v=68GD6oiqLL0" },
+          { title: "Different File Types (Extensions)", url: "https://www.youtube.com/watch?v=XS15VVPRqs0" }
+        ],
         content: {
           "4.1": {
             title: "Capacity Units (From Largest to Smallest)",
@@ -240,6 +256,10 @@ export const MODULE1_EN = {
         title: "🔴 SUBTOPIC 5: DIGITAL HEALTH, ETHICS AND SECURITY",
         subtitle: "Rules, Dangers and Protection",
         intro: "Using the computer safely and healthily is important to protect yourself from both physical and digital dangers.",
+        video_links: [
+          { title: "Common Sense: 5 Internet Safety Tips for Kids", url: "https://www.commonsensemedia.org/videos/5-internet-safety-tips-for-kids" },
+          { title: "NetSmartzKids: The Password Rap", url: "https://www.youtube.com/watch?v=DE5xKaf4E9E" }
+        ],
         content: {
           "5.1": {
             title: "Ergonomics (Healthy Posture)",
@@ -317,4 +337,3 @@ export const MODULE1_EN = {
     ]
   }
 };
-
