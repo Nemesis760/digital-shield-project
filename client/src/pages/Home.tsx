@@ -102,8 +102,8 @@ export default function Home() {
         locked: !progress.module2
       },
       m4: {
-        title: isTurkish ? 'Şifre Güvenliği ve Hesap Koruma' : 'Password Security & Account Protection',
-        desc: isTurkish ? 'Şifre ve Hesap Güvenliği' : 'Password & Account Security',
+        title: isTurkish ? 'Dijital Güvenlik ve Bilinçli Teknoloji' : 'Digital Safety & Smart Tech Habits',
+        desc: isTurkish ? 'Dijital Güvenlik ve Bilinçli Teknoloji' : 'Digital Safety & Smart Tech Habits',
         icon: <Shield className="w-8 h-8" />,
         color: 'from-purple-500 to-pink-500',
         link: '/module4',

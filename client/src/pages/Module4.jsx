@@ -1,297 +1,246 @@
-import { useState } from 'react';
-import { Link } from 'wouter';
-import { AnimatePresence, motion } from 'framer-motion';
-import { MODULE_CONTENT_TR } from '../content/module_content_tr';
-import { MODULE4_EN } from '../content/module4_lang_en';
-import LoadingScreen from '../components/LoadingScreen';
-import { useLanguage } from '../contexts/LanguageContext';
-import PasswordSmithGame from '../components/PasswordSmithGame';
-import InteractiveQuiz from '../components/InteractiveQuiz';
-import WordleGame from '../components/WordleGame';
-import ScenarioGame_2FA from '../components/ScenarioGame_2FA';
-import TruthOrTrollGame from '../components/TruthOrTrollGame';
-import '../modules.css';
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "wouter";
+import { AnimatePresence, motion } from "framer-motion";
+import { useLanguage } from "../contexts/LanguageContext";
+import LoadingScreen from "../components/LoadingScreen";
+import Module4MiniQuiz from "../components/Module4MiniQuiz";
+import Module4ScenarioQuiz from "../components/Module4ScenarioQuiz";
+import { MODULE4_TR } from "../content/module4_lang_tr";
+import { MODULE4_EN } from "../content/module4_lang_en";
 
-// Her bölüm için genel bir bileşen
-const SectionComponent = ({ section, isTurkish }) => {
-  const renderActivity = () => {
-    const activityType = section.activity_type;
-    
-    switch(activityType) {
-      case 'password_smith':
-        return <PasswordSmithGame isTurkish={isTurkish} />;
-      case 'wordle_game':
-        return <WordleGame isTurkish={isTurkish} />;
-      case 'truth_or_troll':
-        return <TruthOrTrollGame isTurkish={isTurkish} />;
-      case 'scenario_2fa':
-        return <ScenarioGame_2FA isTurkish={isTurkish} />;
-      case 'quiz':
-        // Section içindeki quiz sorularını bul
-        let quizContent = null;
-        if (section.content) {
-          // Tüm content item'larında quiz ara
-          for (const key in section.content) {
-            if (section.content[key]?.quiz) {
-              quizContent = section.content[key].quiz;
-              break;
-            }
-          }
-        }
-        return quizContent ? (
-          <InteractiveQuiz quizItems={quizContent} isTurkish={isTurkish} />
-        ) : (
-          <div className="activity-placeholder">
-            <p className="activity-placeholder-text">
-              {isTurkish ? 'Quiz soruları yükleniyor...' : 'Loading quiz questions...'}
-            </p>
-          </div>
-        );
-      case 'interactive_quiz':
-        // Section 6 için quiz sorularını içerikten al
-        let interactiveQuizContent = null;
-        if (section.content) {
-          if (section.content["6.1"]?.quiz) {
-            interactiveQuizContent = section.content["6.1"].quiz;
-          }
-        }
-        return interactiveQuizContent ? (
-          <InteractiveQuiz quizItems={interactiveQuizContent} isTurkish={isTurkish} />
-        ) : (
-          <div className="activity-placeholder">
-            <p className="activity-placeholder-text">
-              {isTurkish ? 'Quiz soruları yükleniyor...' : 'Loading quiz questions...'}
-            </p>
-          </div>
-        );
-      default:
-        return (
-          <div className="activity-placeholder">
-            <p className="activity-placeholder-text">
-              {isTurkish ? 'Aktivite bileşeni yükleniyor...' : 'Loading activity component...'}
-            </p>
-          </div>
-        );
-    }
-  };
+import "../modules.css";
+import "./module4.css";
 
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="section-content"
-    >
-      {section.subtitle && (
-        <div className="section-subtitle">
-          <p>{section.subtitle}</p>
-        </div>
-      )}
-
-      <div className="section-intro">
-        <p>{section.intro}</p>
-      </div>
-
-      {/* Content Sections */}
-      {section.content && (
-        <div className="content-sections">
-          {Object.entries(section.content).map(([key, contentItem]) => (
-            <motion.div
-              key={key}
-              className="content-item"
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <h3 className="content-item-title">{contentItem.title}</h3>
-              
-              {contentItem.image && (
-                <img 
-                  src={contentItem.image} 
-                  alt={contentItem.title}
-                  className="content-image"
-                  onError={(e) => {
-                    e.target.style.display = 'none';
-                  }}
-                />
-              )}
-
-              <p className="content-description">{contentItem.description}</p>
-
-              {contentItem.points && (
-                <ul className="content-points">
-                  {contentItem.points.map((point, idx) => (
-                    <li key={idx}>{point}</li>
-                  ))}
-                </ul>
-              )}
-
-              {contentItem.examples && Array.isArray(contentItem.examples) && (
-                <div className="content-examples">
-                  <h4>{isTurkish ? 'Örnekler:' : 'Examples:'}</h4>
-                  <ul>
-                    {contentItem.examples.map((example, idx) => (
-                      <li key={idx}>{example}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-
-              {contentItem.quiz && (
-                <InteractiveQuiz quizItems={contentItem.quiz} isTurkish={isTurkish} />
-              )}
-            </motion.div>
-          ))}
-        </div>
-      )}
-
-      {/* Aktivite Alanı */}
-      <div className="activity-box">
-        <h3>{section.activity_title}</h3>
-        <p>{section.activity_desc}</p>
-        {renderActivity()}
-      </div>
-    </motion.div>
-  );
-};
-
-// Ana Module4 Bileşeni
 function Module4() {
   const { language } = useLanguage();
-  const isTurkish = language === 'tr';
+  const isTurkish = language === "tr";
+
   const [activeSection, setActiveSection] = useState(1);
-  const [completedSections, setCompletedSections] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Get module data based on language
-  const moduleData = isTurkish ? MODULE_CONTENT_TR.module_4 : MODULE4_EN.module_4;
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 450);
+    return () => clearTimeout(timer);
+  }, []);
 
-  const sections = moduleData.sections.map((section, index) => ({
-    id: index + 1,
-    title_tr: section.title,
-    component: () => <SectionComponent section={section} isTurkish={isTurkish} />,
-  }));
+  const moduleData = useMemo(() => (isTurkish ? MODULE4_TR.module_4 : MODULE4_EN.module_4), [isTurkish]);
+  const sections = moduleData.sections;
+  const currentSection = sections.find((s) => s.id === activeSection) || sections[0];
 
-  const handleSectionComplete = (sectionId) => {
-    if (!completedSections.includes(sectionId)) {
-      const newCompleted = [...completedSections, sectionId];
-      setCompletedSections(newCompleted);
-      
-      // Check if all sections are completed
-      if (newCompleted.length === sections.length) {
-        // Mark module as completed in localStorage
-        const progress = JSON.parse(localStorage.getItem('digitalShieldProgress') || '{}');
-        progress.module4 = true;
-        localStorage.setItem('digitalShieldProgress', JSON.stringify(progress));
-        
-        // Dispatch custom event to notify Home page
-        window.dispatchEvent(new CustomEvent('moduleCompleted', { detail: { module: 'module4' } }));
-        
-        // Show completion message
-        setTimeout(() => {
-          alert(isTurkish 
-            ? '🎉 Tebrikler! Modül 4\'ü tamamladın! Artık Modül 5\'e geçebilirsin!'
-            : '🎉 Congratulations! You completed Module 4! You can now access Module 5!');
-        }, 500);
-      }
-    }
-  };
-
-  const currentSection = sections.find(s => s.id === activeSection);
-  const SectionComponentToRender = currentSection?.component;
-
-  // Simülasyon için Loading ekranını kaldır
   if (isLoading) {
-    setTimeout(() => setIsLoading(false), 1000);
     return <LoadingScreen onComplete={() => setIsLoading(false)} isTurkish={isTurkish} />;
   }
 
   return (
-    <div className="module-container">
+    <div className="module-container module4">
       <div className="module-layout">
-        {/* Sol Menu */}
-        <div className="module-sidebar">
+        <aside className="module-sidebar">
           <div className="sidebar-header">
             <Link href="/" className="back-home-btn">
-              ← {isTurkish ? 'Ana Sayfa' : 'Home'}
+              {isTurkish ? "Ana Sayfa" : "Home"}
             </Link>
             <h2>{moduleData.title}</h2>
             <p>{moduleData.subtitle}</p>
           </div>
 
-          <div className="progress-bar">
-            <div 
-              className="progress-fill"
-              style={{ width: `${(completedSections.length / sections.length) * 100}%` }}
-            ></div>
-          </div>
-          <p className="progress-text">
-            {completedSections.length}/{sections.length} {isTurkish ? 'Tamamlandı' : 'Completed'}
-          </p>
-
           <div className="sections-nav">
             {sections.map((section) => (
               <button
                 key={section.id}
-                className={`nav-item ${activeSection === section.id ? 'active' : ''} ${completedSections.includes(section.id) ? 'completed' : ''}`}
+                className={`nav-item ${activeSection === section.id ? "active" : ""}`}
                 onClick={() => setActiveSection(section.id)}
               >
-                {section.title_tr}
+                {section.title}
               </button>
             ))}
           </div>
-        </div>
+        </aside>
 
-        {/* Ana İçerik */}
-        <div className="module-content">
+        <main className="module-content">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeSection}
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
+              transition={{ duration: 0.35 }}
               className="content-wrapper"
             >
               <div className="content-header">
-                <h1>{currentSection?.title_tr}</h1>
-                <button 
-                  className="mark-complete-btn"
-                  onClick={() => handleSectionComplete(activeSection)}
-                  disabled={completedSections.includes(activeSection)}
-                >
-                  {completedSections.includes(activeSection) 
-                    ? (isTurkish ? 'Tamamlandı ✓' : 'Completed ✓')
-                    : (isTurkish ? 'Tamamla' : 'Complete')}
-                </button>
+                <h1>{currentSection.title}</h1>
               </div>
 
-              {SectionComponentToRender && <SectionComponentToRender />}
+              <div className="section-content">
+                <img
+                  src={moduleData.hero_image}
+                  alt={isTurkish ? "Dijital güvenlik görseli" : "Digital safety visual"}
+                  className="section-hero-image"
+                />
+
+                <div className="section-intro">
+                  <p>{currentSection.intro}</p>
+                </div>
+
+                <div className="m4-paragraphs">
+                  {currentSection.content.map((paragraph, idx) => (
+                    <p key={`${currentSection.id}-p-${idx}`}>{paragraph}</p>
+                  ))}
+                </div>
+
+                <div className="m4-image-note">
+                  {isTurkish
+                    ? "Not: Görseller placeholder olarak eklendi. Dosyalar eklendiğinde otomatik görünecek."
+                    : "Note: Images are placeholders. They will appear automatically once added."}
+                </div>
+
+                <div className="m4-image-grid">
+                  {currentSection.images.map((img, idx) => (
+                    <figure key={`${currentSection.id}-img-${idx}`} className="m4-image-card">
+                      <img src={img.src} alt={isTurkish ? img.alt_tr : img.alt_en} loading="lazy" />
+                      <figcaption>{isTurkish ? img.alt_tr : img.alt_en}</figcaption>
+                    </figure>
+                  ))}
+                </div>
+
+                <div className="activity-box">
+                  <h3>{currentSection.activity.title}</h3>
+                  <p>{currentSection.activity.description}</p>
+                  <ActivityRenderer activity={currentSection.activity} isTurkish={isTurkish} />
+                </div>
+
+                {activeSection === sections.length && (
+                  <div className="activity-box">
+                    <h3>{moduleData.scenario.title}</h3>
+                    <p>{moduleData.scenario.description}</p>
+                    <Module4ScenarioQuiz isTurkish={isTurkish} />
+                  </div>
+                )}
+
+                <div className="section-navigation">
+                  <button
+                    className="nav-btn prev"
+                    onClick={() => setActiveSection((prev) => Math.max(1, prev - 1))}
+                    disabled={activeSection === 1}
+                  >
+                    {isTurkish ? "Önceki" : "Previous"}
+                  </button>
+                  <button
+                    className="nav-btn next"
+                    onClick={() => setActiveSection((prev) => Math.min(sections.length, prev + 1))}
+                    disabled={activeSection === sections.length}
+                  >
+                    {isTurkish ? "Sonraki" : "Next"}
+                  </button>
+                </div>
+              </div>
             </motion.div>
           </AnimatePresence>
+        </main>
+      </div>
+    </div>
+  );
+}
 
-          {/* Bölüm Navigasyonu */}
-          <div className="section-navigation">
-            <button 
-              className="nav-btn prev"
-              onClick={() => setActiveSection(prev => Math.max(1, prev - 1))}
-              disabled={activeSection === 1}
-            >
-              ← {isTurkish ? 'Önceki' : 'Previous'}
-            </button>
-            
-            <button 
-              className="nav-btn next"
-              onClick={() => {
-                handleSectionComplete(activeSection);
-                setActiveSection(prev => Math.min(sections.length, prev + 1));
-              }}
-              disabled={activeSection === sections.length}
-            >
-              {isTurkish ? 'Sonraki' : 'Next'} →
-            </button>
+function ActivityRenderer({ activity, isTurkish }) {
+  if (!activity) return null;
+
+  if (activity.type === "mini_quiz") {
+    return <Module4MiniQuiz isTurkish={isTurkish} questions={activity.questions} />;
+  }
+
+  if (activity.type === "flashcards") {
+    return <Flashcards cards={activity.cards} />;
+  }
+
+  if (activity.type === "sorter") {
+    return <Sorter activity={activity} isTurkish={isTurkish} />;
+  }
+
+  return (
+    <div className="m4-activity-placeholder">
+      {isTurkish ? "Aktivite yüklenemedi." : "Activity could not be loaded."}
+    </div>
+  );
+}
+
+function Flashcards({ cards = [] }) {
+  const [flipped, setFlipped] = useState(() => new Set());
+
+  return (
+    <div className="m4-flashcards">
+      {cards.map((card, idx) => {
+        const isFlipped = flipped.has(idx);
+        return (
+          <button
+            key={`${card.front}-${idx}`}
+            className={`m4-flashcard ${isFlipped ? "flipped" : ""}`}
+            onClick={() => {
+              setFlipped((prev) => {
+                const next = new Set(prev);
+                next.has(idx) ? next.delete(idx) : next.add(idx);
+                return next;
+              });
+            }}
+          >
+            <div className="m4-flashcard-inner">
+              <div className="m4-flashcard-front">{card.front}</div>
+              <div className="m4-flashcard-back">{card.back}</div>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+function Sorter({ activity, isTurkish }) {
+  const { categories, items } = activity;
+  const [assignments, setAssignments] = useState({});
+  const [checked, setChecked] = useState(false);
+
+  const onPick = (itemId, categoryId) => {
+    setAssignments((prev) => ({ ...prev, [itemId]: categoryId }));
+    setChecked(false);
+  };
+
+  const reset = () => {
+    setAssignments({});
+    setChecked(false);
+  };
+
+  return (
+    <div className="m4-sorter">
+      {items.map((item) => {
+        const selected = assignments[item.id];
+        const isCorrect = selected && selected === item.correctCategory;
+        return (
+          <div
+            key={item.id}
+            className={`m4-sorter-item ${checked ? (isCorrect ? "correct" : "wrong") : ""}`}
+          >
+            <div className="m4-sorter-text">{item.text}</div>
+            <div className="m4-sorter-buttons">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  className={`m4-sorter-btn ${selected === cat.id ? "active" : ""}`}
+                  onClick={() => onPick(item.id, cat.id)}
+                >
+                  {cat.label}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
+        );
+      })}
+
+      <div className="m4-sorter-actions">
+        <button className="m4-sorter-check" onClick={() => setChecked(true)} disabled={!items.length}>
+          {isTurkish ? "Kontrol Et" : "Check"}
+        </button>
+        <button className="m4-sorter-reset" onClick={reset}>
+          {isTurkish ? "Sıfırla" : "Reset"}
+        </button>
       </div>
     </div>
   );

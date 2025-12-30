@@ -1,356 +1,329 @@
-// Module 4: Password Security & Account Protection - English Language File
+// Module 4: Digital Safety & Smart Tech Habits - English Language File
 
 export const MODULE4_EN = {
   module_4: {
-    title: "Module 4: Password Security & Account Protection",
-    subtitle: "🔐 The Keys to the Digital Vault",
-    hero_image: "/images/module4/locked_door_tablet_metaphor.png",
+    title: "Module 4: Digital Safety & Smart Tech Habits",
+    subtitle: "Protect devices, data, and well-being with smart choices.",
+    hero_image: "/images/module4/hero_digital_safety.png",
     sections: [
       {
         id: 1,
-        title: "🔐 What is a Password and Why is it So Important?",
-        intro: "A password is the first and most important line of defense protecting our digital assets. Just like the key to our home!",
-        activity_title: "📝 Quiz: Password Security",
-        activity_desc: "Answer questions about password security.",
-        content: {
-          "1.1": {
-            title: "What is a Password?",
-            description: "A password is the first and most important line of defense protecting our digital assets. Just like the key to our home, passwords provide access to our private spaces (email, game accounts, school portals, social media). However, in the digital world, thieves are invisible. If someone gets your password, it's called 'account hacking'.",
-            image: "/images/password_security_hero.png",
-            points: [
-              "Password is the key to our digital identity",
-              "Provides access to our email, game, and social media accounts",
-              "If password is stolen, account hacking occurs",
-              "Passwords are like toothbrushes: never share them and change them frequently"
-            ],
-            examples: [
-              "✅ Safe: Only you know your password",
-              "❌ Unsafe: You share your password with a friend",
-              "✅ Safe: You use different passwords for each account",
-              "❌ Unsafe: You use the same password for all accounts"
-            ],
-            quiz: [
-              {
-                type: "true_false",
-                question: "If my password is stolen, only my game score is lost, nothing else happens.",
-                answer: false
-              },
-              {
-                type: "true_false",
-                question: "Passwords are the key to our digital identity.",
-                answer: true
-              },
-              {
-                type: "true_false",
-                question: "We can't say accounts with strong passwords are never hacked, but it's very difficult.",
-                answer: true
-              }
-            ]
+        title: "Device Security: Lock, Update, Back Up",
+        intro:
+          "Your device is like a backpack for your digital life. When it is protected, your photos, notes, and accounts stay safe too.",
+        content: [
+          "A screen lock is your first shield. A PIN, pattern, or fingerprint keeps strangers out if the device is lost.",
+          "Updates are not just new features. They also fix security holes that bad people try to use.",
+          "Backups are your safety net. If your phone breaks or gets stolen, your files can still come back.",
+          "Use separate accounts when possible. A student account for school and a personal account for games keeps things tidy.",
+          "Small habits, done often, create big safety. Lock it, update it, and back it up."
+        ],
+        images: [
+          {
+            src: "/images/module4/device_lock_01.png",
+            alt_tr: "Ekran kilidi açan bir el",
+            alt_en: "A hand unlocking a screen"
           },
-          "1.2": {
-            title: "What Happens if Your Account is Hacked?",
-            description: "If your account is hacked, you may face serious problems:",
-            points: [
-              "Identity Theft: They can send rude messages to your friends or try to scam them in your name",
-              "Data Loss: Your game character you've worked on for years, your photos, or your homework can be deleted",
-              "Spying: They can read your private messages",
-              "Reputation Loss: They can share bad things in your name"
-            ],
-            examples: [
-              "A hacker can send messages asking for money to your friends in your name",
-              "Your game character can be deleted or your items can be stolen",
-              "Your private photos or messages can be shared"
-            ]
+          {
+            src: "/images/module4/device_update_01.png",
+            alt_tr: "Telefon güncelleme bildirimi",
+            alt_en: "Phone update notification"
           },
-          "1.3": {
-            title: "Discussion Question",
-            description: "Would you give your house key to a stranger on the street? So why do we sometimes give our passwords to websites we don't know on the internet?",
-            points: [
-              "In real life, we don't give our keys to people we don't know",
-              "We should be careful in the digital world in the same way",
-              "We should not give passwords to websites we don't know",
-              "Password security is not just a rule, it's a survival skill in the digital world"
-            ]
+          {
+            src: "/images/module4/cloud_backup_01.png",
+            alt_tr: "Bulut yedekleme simgesi",
+            alt_en: "Cloud backup icon"
+          },
+          {
+            src: "/images/module4/device_care_kit.png",
+            alt_tr: "Cihaz bakımını simgeleyen görsel",
+            alt_en: "Visual showing device care"
           }
-        },
-        activity_type: "quiz"
+        ],
+        activity: {
+          type: "mini_quiz",
+          title: "Mini Quiz: Device Safety Check",
+          description: "Answer quickly to see if you remember the basics.",
+          questions: [
+            {
+              type: "tf",
+              question: "A screen lock helps even if you never leave your phone alone.",
+              answer: true,
+              explanation: "Accidents happen, and a lock protects your data in every situation."
+            },
+            {
+              type: "mcq",
+              question: "Why are updates important?",
+              options: [
+                "They only change the colors of apps",
+                "They fix security problems and bugs",
+                "They delete your photos",
+                "They turn off the internet"
+              ],
+              answerIndex: 1,
+              explanation: "Updates close security gaps and keep your device safe."
+            },
+            {
+              type: "tf",
+              question: "Backups help you recover files after a loss.",
+              answer: true,
+              explanation: "A backup is like a copy you can restore later."
+            }
+          ]
+        }
       },
       {
         id: 2,
-        title: "🛡️ Unbreakable Passwords: The 'Sentence Method'",
-        intro: "In the past, passwords like 'cat123' were used, but now computers can guess these passwords in seconds. Let's learn to create strong passwords!",
-        activity_title: "🎮 Activity: Password Workshop",
-        activity_desc: "Create a strong password using the given words.",
-        content: {
-          "2.1": {
-            title: "3 Golden Rules for Strong Passwords",
-            description: "To create a strong password, you must follow these 3 rules:",
-            image: "/images/password_security_hero.png",
-            points: [
-              "Complexity: Mix uppercase (A), lowercase (a), numbers (9), and symbols (!,?,*)",
-              "Length: The longer the password, the harder it is to crack. At least 10-12 characters are recommended",
-              "Unpredictability: Your name, birth year, or sequential numbers like '123456' should NEVER be used"
-            ],
-            examples: [
-              "❌ Weak: cat123 (too short and predictable)",
-              "❌ Weak: John2024 (name and birth year used)",
-              "✅ Strong: BlueElephant!3Pizza (long, complex, unpredictable)"
-            ]
+        title: "Malware & Safe Downloads",
+        intro:
+          "Not every file on the internet is friendly. Some downloads hide viruses or tricks.",
+        content: [
+          "Malware is harmful software. It can slow your device, show ads, or steal your data.",
+          "The safest downloads come from official stores and trusted websites.",
+          "Free game coins or cheat tools are common traps. If it sounds too good, pause and check.",
+          "Before you install, read the app name, reviews, and size. Fake apps often look almost real.",
+          "If something feels wrong, ask an adult or teacher. A quick question can prevent big problems."
+        ],
+        images: [
+          {
+            src: "/images/module4/malware_warning_01.png",
+            alt_tr: "Zararlı yazılım uyarısı ekranı",
+            alt_en: "Malware warning screen"
           },
-          "2.2": {
-            title: "New Method: Sentence Passwords (Passphrases)",
-            description: "Create a silly sentence that sticks in your mind and turn it into a password. This password is easy to remember but it would take years for a computer to crack!",
-            points: [
-              "Example Sentence: 'Blue elephant ate 3 pizzas in the garden!'",
-              "Password: BlueElephant!3Pizza",
-              "Words starting with capital letters",
-              "Add numbers and symbols",
-              "Easy to remember but hard to crack"
-            ],
-            examples: [
-              "Sentence: 'Red car goes fast 5!'",
-              "Password: RedCar!5Fast",
-              "Sentence: 'Green apple on tree 7 pieces!'",
-              "Password: GreenApple@7Pieces"
-            ]
+          {
+            src: "/images/module4/safe_download_store.png",
+            alt_tr: "Güvenli uygulama mağazası simgesi",
+            alt_en: "Safe app store icon"
           },
-          "2.3": {
-            title: "Password Workshop Example",
-            description: "Words: Summer, IceCream, 2024",
-            points: [
-              "Weak Example: summer2024 (too simple, predictable)",
-              "Strong Example: Summer!IceCream2024? (complex, long, contains symbols)"
-            ],
-            examples: [
-              "Combine the words",
-              "Use capital letters",
-              "Add symbols (!, ?, @, #)",
-              "Add numbers"
-            ]
+          {
+            src: "/images/module4/fake_app_trap.png",
+            alt_tr: "Sahte uygulama tuzağı görseli",
+            alt_en: "Fake app trap visual"
+          },
+          {
+            src: "/images/module4/check_reviews.png",
+            alt_tr: "Yorumları ve puanları kontrol etme",
+            alt_en: "Checking reviews and ratings"
           }
-        },
-        activity_type: "password_smith"
+        ],
+        activity: {
+          type: "mini_quiz",
+          title: "Mini Quiz: Download Detective",
+          description: "Choose the safer option in each question.",
+          questions: [
+            {
+              type: "mcq",
+              question: "Where is it safest to download an app?",
+              options: [
+                "A random website",
+                "An official app store",
+                "A pop-up ad",
+                "A link from a stranger"
+              ],
+              answerIndex: 1,
+              explanation: "Official stores check apps for many risks."
+            },
+            {
+              type: "tf",
+              question: "A free cheat tool is always safe if your friend used it.",
+              answer: false,
+              explanation: "Even friends can be tricked by harmful files."
+            },
+            {
+              type: "mcq",
+              question: "What should you check before installing?",
+              options: [
+                "Only the app icon",
+                "App name, reviews, and size",
+                "How many emojis are used",
+                "Nothing, just install"
+              ],
+              answerIndex: 1,
+              explanation: "Details and reviews help spot fake apps."
+            }
+          ]
+        }
       },
       {
         id: 3,
-        title: "🎭 Social Engineering and Password Sharing",
-        intro: "Sometimes hackers don't use computer programs, they use deception methods (Social Engineering). They try to gain your trust.",
-        activity_title: "📝 Quiz: Social Engineering Scenarios",
-        activity_desc: "Identify social engineering traps in the given scenarios.",
-        content: {
-          "3.1": {
-            title: "What is Social Engineering?",
-            description: "Sometimes hackers don't use computer programs, they use deception methods (Social Engineering). They try to gain your trust.",
-            image: "/images/password_security_hero.png",
-            points: [
-              "Hackers try to deceive you",
-              "They try to gain your trust",
-              "They use deception methods instead of computer programs",
-              "They want you to give them your password"
-            ],
-            examples: [
-              "They can act like a fake friend",
-              "They can pretend there's an emergency",
-              "They can promise something free"
-            ]
+        title: "App Permissions & Privacy Settings",
+        intro:
+          "Apps ask for permissions, but not all requests make sense. You can say yes or no.",
+        content: [
+          "Permissions are like doors. A camera app needs the camera, but a calculator does not.",
+          "If an app asks for too much, it might be collecting data you do not want to share.",
+          "Privacy settings help you control who can see your posts, photos, and location.",
+          "Turn off location sharing when you do not need it. Your location is personal.",
+          "Check permissions regularly. You can change your mind and update them anytime."
+        ],
+        images: [
+          {
+            src: "/images/module4/app_permissions_01.png",
+            alt_tr: "Uygulama izinleri ekranı",
+            alt_en: "App permissions screen"
           },
-          "3.2": {
-            title: "Friend Traps",
-            description: "Your closest friend Kerem might say, 'Give me your account, I'll pass that hard level for you.' Even if Kerem doesn't have bad intentions;",
-            points: [
-              "Kerem's computer might have a virus",
-              "Kerem might forget to log out and let someone else use your account",
-              "You might have a fight with Kerem and he could harm your account out of anger",
-              "Password means 'Secret'. Secrets are private information that shouldn't be shared even with closest friends"
-            ],
-            examples: [
-              "❌ Wrong: 'Okay, my password is 123456'",
-              "✅ Right: 'No, I can't share my password. It's not safe.'",
-              "❌ Wrong: 'Just once, it won't be a problem'",
-              "✅ Right: 'Passwords are never shared'"
-            ]
+          {
+            src: "/images/module4/location_toggle.png",
+            alt_tr: "Konum izni aç/kapat düğmesi",
+            alt_en: "Location permission toggle"
           },
-          "3.3": {
-            title: "Two Paths",
-            description: "There are two paths in password sharing:",
-            points: [
-              "Path A: You gave your password to your friend → Your friend logged in from a virus-infected computer → Account Hacked ❌",
-              "Path B: You said 'No' → Your account stayed with you → You're safe ✅"
-            ],
-            examples: [
-              "Always learn to say 'No'",
-              "Remember that passwords are private",
-              "Don't share passwords even if your friends have good intentions"
-            ]
+          {
+            src: "/images/module4/privacy_settings_01.png",
+            alt_tr: "Gizlilik ayarları menüsü",
+            alt_en: "Privacy settings menu"
+          },
+          {
+            src: "/images/module4/data_minimization.png",
+            alt_tr: "Veri paylaşımını azaltma simgesi",
+            alt_en: "Data minimization icon"
           }
-        },
-        activity_type: "quiz"
+        ],
+        activity: {
+          type: "flashcards",
+          title: "Flashcards: Permission Sense",
+          description: "Tap a card to reveal the smart choice.",
+          cards: [
+            {
+              front: "Camera app wants access to the camera",
+              back: "Reasonable. The app needs it to work."
+            },
+            {
+              front: "Flashlight app wants access to contacts",
+              back: "Suspicious. It does not need contacts."
+            },
+            {
+              front: "Game app wants location all the time",
+              back: "Consider turning it off unless needed."
+            },
+            {
+              front: "Photo editor wants access to photos",
+              back: "Makes sense if you are editing pictures."
+            }
+          ]
+        }
       },
       {
         id: 4,
-        title: "🕵️ Advanced Phishing Detection",
-        intro: "Phishers try to lure you by creating fake websites. These sites are copies of the original (for example, Instagram or Roblox).",
-        activity_title: "🎮 Activity: Cyber Word Game",
-        activity_desc: "Find and learn cybersecurity words!",
-        content: {
-          "4.1": {
-            title: "What is Phishing?",
-            description: "Phishers try to lure you by creating fake websites. These sites are copies of the original (for example, Instagram or Roblox).",
-            image: "/images/password_security_hero.png",
-            points: [
-              "They create fake websites",
-              "They copy original sites",
-              "They try to deceive you",
-              "They want to steal your password"
-            ],
-            examples: [
-              "Fake Instagram login page",
-              "Fake Roblox account page",
-              "Fake email sending"
-            ]
+        title: "Shared Networks, Wi-Fi Safety & Logging Out",
+        intro:
+          "Public Wi-Fi is like a crowded bus. You can ride, but you must guard your bag.",
+        content: [
+          "Shared networks are used by many people at once. That makes them less private.",
+          "Avoid logging into important accounts on public Wi-Fi. Save that for home or school networks.",
+          "If you must use public Wi-Fi, avoid entering passwords and payments.",
+          "Always log out on shared devices. It is like closing the door behind you.",
+          "Use the forget network option when you are done. It prevents auto-connecting later."
+        ],
+        images: [
+          {
+            src: "/images/module4/public_wifi_01.png",
+            alt_tr: "Ortak Wi-Fi ağına bağlanan cihazlar",
+            alt_en: "Devices connected to public Wi-Fi"
           },
-          "4.2": {
-            title: "How Do You Recognize a Fake Message? 4 Clues",
-            description: "Pay attention to these 4 clues to detect fake messages:",
-            points: [
-              "Sense of Urgency: 'Your account will be closed if you don't do it immediately!' (They want to panic you and prevent you from thinking)",
-              "Free Promise: 'Click to win free diamonds/skins!' (Offers that are too good to be true are traps)",
-              "Spelling Errors: Official institutions don't write misspelled words like 'Hello', 'Click'",
-              "Address Bar (URL): lnstagram.com instead of instagram.com (with lowercase L) or strange addresses like instagram-login.net"
-            ],
-            examples: [
-              "❌ Fake: 'Click immediately or your account will be closed!'",
-              "✅ Safe: 'Please log in to update your account'",
-              "❌ Fake: 'Win 1000 free diamonds!'",
-              "✅ Safe: 'You can make in-game purchases'"
-            ],
-            quiz: [
-              {
-                type: "multiple_choice",
-                question: "Which of the following links is safe?",
-                options: [
-                  { text: "A) www.faceb00k.com (Written with zero - FAKE)", correct: false },
-                  { text: "B) security-warning-google.com (Strange additions - FAKE)", correct: false },
-                  { text: "C) www.google.com (Written correctly - SAFE)", correct: true }
-                ]
-              }
-            ]
+          {
+            src: "/images/module4/logout_all_devices.png",
+            alt_tr: "Oturumu kapatmayı gösteren ikon",
+            alt_en: "Icon showing sign out"
+          },
+          {
+            src: "/images/module4/secure_network_badge.png",
+            alt_tr: "Güvenli ağ rozeti",
+            alt_en: "Secure network badge"
+          },
+          {
+            src: "/images/module4/forget_network.png",
+            alt_tr: "Ağı unut seçeneği",
+            alt_en: "Forget network option"
           }
-        },
-        activity_type: "wordle_game"
+        ],
+        activity: {
+          type: "sorter",
+          title: "Sort It: Safe or Risky?",
+          description: "Pick where each action belongs.",
+          categories: [
+            { id: "safe", label: "Safe Choice" },
+            { id: "risky", label: "Risky Choice" }
+          ],
+          items: [
+            { id: "wifi1", text: "Checking homework on public Wi-Fi", correctCategory: "risky" },
+            { id: "wifi2", text: "Reading news on public Wi-Fi", correctCategory: "safe" },
+            { id: "wifi3", text: "Logging out of a shared computer", correctCategory: "safe" },
+            { id: "wifi4", text: "Saving a password on a cafe computer", correctCategory: "risky" }
+          ]
+        }
       },
       {
         id: 5,
-        title: "🔒 Two-Lock System: 2FA",
-        intro: "Let's say you made your password very strong but it was somehow stolen. This is where Two-Factor Authentication (2FA) comes in.",
-        activity_title: "🎮 Activity: 2FA Security Adventure",
-        activity_desc: "Learn the importance of 2FA through scenarios and discover how to protect your accounts!",
-        content: {
-          "5.1": {
-            title: "What is 2FA?",
-            description: "Let's say you made your password very strong but it was somehow stolen. This is where Two-Factor Authentication (2FA) comes in. Think of it like a 'Two-Lock Door'.",
-            image: "/images/2fa_hero.png",
-            points: [
-              "Lock 1: Your password (Something you know)",
-              "Lock 2: A 6-digit temporary code sent to your phone (Something you have)",
-              "Even if a hacker knows your password, they can't open the second lock because they don't have your phone",
-              "You must enable this feature in the 'Settings' section of email, social media, and game accounts"
-            ],
-            examples: [
-              "✅ Safe: Password + Phone code = Double protection",
-              "❌ Unsafe: Only password = Single protection",
-              "✅ Safe: Account with 2FA enabled",
-              "❌ Unsafe: Account with 2FA disabled"
-            ]
+        title: "Digital Citizenship, Cyberbullying & Getting Help",
+        intro:
+          "Being safe online is not only about devices. It is also about how we treat people.",
+        content: [
+          "Digital citizens are respectful and kind. They think before they post or share.",
+          "Cyberbullying can be messages, jokes, or images that hurt someone. It is never okay.",
+          "If you feel unsafe, do not answer the bully. Save evidence and tell a trusted adult.",
+          "Use blocking and reporting tools. They are there to protect you.",
+          "Helping a friend is powerful. When you speak up, you stop harm from growing."
+        ],
+        images: [
+          {
+            src: "/images/module4/digital_citizenship.png",
+            alt_tr: "Dijital vatandaşlık davranışları",
+            alt_en: "Digital citizenship behaviors"
           },
-          "5.2": {
-            title: "How Does 2FA Work?",
-            description: "The 2FA system provides two-step verification:",
-            points: [
-              "First step: You enter your password",
-              "Second step: You enter the 6-digit code sent to your phone",
-              "If both steps are correct, you can log in",
-              "Even if a hacker knows your password, they can't log in without your phone"
-            ],
-            examples: [
-              "When logging in, first you enter your password",
-              "Then you enter the code sent to your phone",
-              "If both codes are correct, login is successful"
-            ]
+          {
+            src: "/images/module4/cyberbullying_stop.png",
+            alt_tr: "Siber zorbalığa dur de posteri",
+            alt_en: "Stop cyberbullying poster"
           },
-          "5.3": {
-            title: "Where Should I Enable 2FA?",
-            description: "You should enable 2FA on all your important accounts:",
-            points: [
-              "Email accounts (Gmail, Outlook)",
-              "Social media (Instagram, Facebook, TikTok)",
-              "Game accounts (Roblox, Minecraft)",
-              "School accounts (E-School)",
-              "Enable 'Two-Factor Authentication' or '2FA' option from the Settings section"
-            ],
-            examples: [
-              "Instagram: Settings → Security → Two-Factor Authentication",
-              "Gmail: My Account → Security → 2-Step Verification",
-              "Roblox: Settings → Security → Two-Factor Authentication"
-            ]
+          {
+            src: "/images/module4/report_block_tools.png",
+            alt_tr: "Bildir ve engelle araçları",
+            alt_en: "Report and block tools"
+          },
+          {
+            src: "/images/module4/ask_for_help.png",
+            alt_tr: "Yardım istemeyi gösteren görsel",
+            alt_en: "Visual of asking for help"
           }
-        },
-        activity_type: "scenario_2fa"
-      },
-      {
-        id: 6,
-        title: "🎭 Scenario Quiz: 'The Big Tournament Trap'",
-        intro: "Deniz (12 years old) receives a 'Tournament Invitation' message in her favorite online game. The message didn't come from the game's chat, but from an unknown Instagram account.",
-        activity_title: "📝 Scenario Quiz: Deniz's Story",
-        activity_desc: "Read Deniz's story and answer the questions.",
-        content: {
-          "6.1": {
-            title: "Scenario: The Big Tournament Trap",
-            description: "Deniz (12 years old) receives a 'Tournament Invitation' message in her favorite online game. The message didn't come from the game's chat, but from an unknown Instagram account. The message says: 'Hello Deniz! You've been selected for the legendary tournament. Click this link and log in with your game account to participate and win 5000 Diamonds: www.game-tournament-login.com' Deniz gets excited. At that moment, her closest friend Asya says, 'Let's enter right away, I already entered and typed my password!'",
-            image: "/images/password_security_hero.png",
-            quiz: [
-              {
-                type: "multiple_choice",
-                question: "What is the biggest clue showing this is a 'Phishing' message?",
-                options: [
-                  { text: "A) The message coming from Instagram", correct: false },
-                  { text: "B) The link not being the official game site (game-tournament-login.com) and the message coming from outside the game (from Instagram)", correct: true },
-                  { text: "C) The promise of 5000 Diamonds", correct: false }
-                ]
-              },
-              {
-                type: "multiple_choice",
-                question: "Does Asya entering her password show that the link is safe?",
-                options: [
-                  { text: "A) Yes, if my friend did it, it's safe", correct: false },
-                  { text: "B) No. Asya has fallen into the trap. Even if our friend did it, we should question it.", correct: true },
-                  { text: "C) Maybe, it depends on the situation", correct: false }
-                ]
-              },
-              {
-                type: "multiple_choice",
-                question: "What would happen if Deniz clicked the link and entered her password but 2FA (Two-Factor Authentication) was enabled?",
-                options: [
-                  { text: "A) The hacker could access the account", correct: false },
-                  { text: "B) The hacker would get the password but couldn't access the account because they wouldn't know the code sent to Deniz's phone. 2FA would save Deniz.", correct: true },
-                  { text: "C) 2FA wouldn't help at all", correct: false }
-                ]
-              },
-              {
-                type: "multiple_choice",
-                question: "What should Deniz say to Asya?",
-                options: [
-                  { text: "A) 'Great, let me enter too'", correct: false },
-                  { text: "B) 'Asya, change your password immediately! That site is fake, your account can be hacked.'", correct: true },
-                  { text: "C) 'Okay, I'll wait'", correct: false }
-                ]
-              }
-            ]
-          }
-        },
-        activity_type: "interactive_quiz"
+        ],
+        activity: {
+          type: "mini_quiz",
+          title: "Mini Quiz: Kind and Safe Online",
+          description: "Choose the most respectful and safe response.",
+          questions: [
+            {
+              type: "tf",
+              question: "If a message hurts someone, it can be cyberbullying.",
+              answer: true,
+              explanation: "Words online can harm just like words face to face."
+            },
+            {
+              type: "mcq",
+              question: "What should you do if you see bullying?",
+              options: [
+                "Join in to fit in",
+                "Ignore and save proof, then tell an adult",
+                "Reply with a mean joke",
+                "Share it with more people"
+              ],
+              answerIndex: 1,
+              explanation: "Do not engage. Save evidence and ask for help."
+            },
+            {
+              type: "tf",
+              question: "Blocking and reporting tools are helpful.",
+              answer: true,
+              explanation: "These tools can reduce harm and keep you safe."
+            }
+          ]
+        }
       }
-    ]
+    ],
+    scenario: {
+      title: "Scenario Quiz: The Weekend Chat Group",
+      description:
+        "Follow the story and make safe, respectful choices. Each answer gives feedback."
+    }
   }
 };
 
