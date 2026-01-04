@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MODULE_CONTENT_TR } from '../content/module_content_tr';
+import { MODULE5_TR } from '../content/module5_lang_tr';
 import { MODULE5_EN } from '../content/module5_lang_en';
 import LoadingScreen from '../components/LoadingScreen';
 import { useLanguage } from '../contexts/LanguageContext';
 import InteractiveQuiz from '../components/InteractiveQuiz';
 import '../modules.css';
 
-// Her bölüm için genel bir bileşen
+// Her bölüm için genel bir bile�xen
 const SectionComponent = ({ section, isTurkish }) => {
   const renderActivity = () => {
     const activityType = section.activity_type;
@@ -40,7 +40,7 @@ const SectionComponent = ({ section, isTurkish }) => {
         return (
           <div className="activity-placeholder">
             <p className="activity-placeholder-text">
-              {isTurkish ? 'Aktivite bileşeni yükleniyor...' : 'Loading activity component...'}
+              {isTurkish ? 'Aktivite bile�xeni yükleniyor...' : 'Loading activity component...'}
             </p>
           </div>
         );
@@ -100,7 +100,7 @@ const SectionComponent = ({ section, isTurkish }) => {
 
               {contentItem.examples && Array.isArray(contentItem.examples) && (
                 <div className="content-examples">
-                  <h4>{isTurkish ? 'Örnekler:' : 'Examples:'}</h4>
+                  <h4>{isTurkish ? '�rnekler:' : 'Examples:'}</h4>
                   <ul>
                     {contentItem.examples.map((example, idx) => (
                       <li key={idx}>{example}</li>
@@ -127,7 +127,7 @@ const SectionComponent = ({ section, isTurkish }) => {
   );
 };
 
-// Ana Module5 Bileşeni
+// Ana Module5 Bile�xeni
 function Module5() {
   const { language } = useLanguage();
   const isTurkish = language === 'tr';
@@ -136,7 +136,7 @@ function Module5() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Get module data based on language
-  const moduleData = isTurkish ? MODULE_CONTENT_TR.module_5 : MODULE5_EN.module_5;
+  const moduleData = isTurkish ? MODULE5_TR.module_5 : MODULE5_EN.module_5;
 
   const sections = moduleData.sections.map((section, index) => ({
     id: index + 1,
@@ -162,8 +162,8 @@ function Module5() {
         // Show completion message
         setTimeout(() => {
           alert(isTurkish 
-            ? '🎉 Tebrikler! Modül 5\'i tamamladın! Artık Modül 6\'ya geçebilirsin!'
-            : '🎉 Congratulations! You completed Module 5! You can now access Module 6!');
+            ? 'x�0 Tebrikler! Modül 5\'i tamamladın! Artık Modül 6\'ya geçebilirsin!'
+            : 'x�0 Congratulations! You completed Module 5! You can now access Module 6!');
         }, 500);
       }
     }
@@ -185,7 +185,7 @@ function Module5() {
         <div className="module-sidebar">
           <div className="sidebar-header">
             <Link href="/" className="back-home-btn">
-              ← {isTurkish ? 'Ana Sayfa' : 'Home'}
+              � � {isTurkish ? 'Ana Sayfa' : 'Home'}
             </Link>
             <h2>{moduleData.title}</h2>
             <p>{moduleData.subtitle}</p>
@@ -233,7 +233,7 @@ function Module5() {
                   disabled={completedSections.includes(activeSection)}
                 >
                   {completedSections.includes(activeSection) 
-                    ? (isTurkish ? 'Tamamlandı ✓' : 'Completed ✓')
+                    ? (isTurkish ? 'Tamamlandı �S' : 'Completed �S')
                     : (isTurkish ? 'Tamamla' : 'Complete')}
                 </button>
               </div>
@@ -249,7 +249,7 @@ function Module5() {
               onClick={() => setActiveSection(prev => Math.max(1, prev - 1))}
               disabled={activeSection === 1}
             >
-              ← {isTurkish ? 'Önceki' : 'Previous'}
+              � � {isTurkish ? '�nceki' : 'Previous'}
             </button>
             
             <button 
@@ -260,7 +260,7 @@ function Module5() {
               }}
               disabled={activeSection === sections.length}
             >
-              {isTurkish ? 'Sonraki' : 'Next'} →
+              {isTurkish ? 'Sonraki' : 'Next'} � 
             </button>
           </div>
         </div>
@@ -270,3 +270,5 @@ function Module5() {
 }
 
 export default Module5;
+
+

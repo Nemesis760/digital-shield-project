@@ -2626,3 +2626,25 @@
 .video-link-cta:hover {
   background: rgba(255,255,255,0.2);
 }
+
+/* DataFactoryGame (Module1) full-bleed wrapper: only affects this game */
+.dfg-wrap{
+  width:100vw;
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
+}
+
+.dfg-viewport{
+  height:100dvh;
+  overflow:hidden;
+}
+
+.dfg-viewport .data-factory-game{
+  height:100%;
+  width:100%;
+  overflow-y:auto;
+  overflow-x:hidden;
+}

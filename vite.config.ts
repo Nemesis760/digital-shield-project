@@ -2,17 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import path from 'path'
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-
-  // ⚠️ client klasörünü root yaptığın için bu şart
   root: './client',
 
-  // ⚠️ GitHub Pages için ZORUNLU
-  base: '/digital-shield-project/',
+  // GitHub Pages prod'da lazım, dev'de zararlı
+  base: mode === 'production' ? '/digital-shield-project/' : '/',
 
   build: {
-    outDir: '../dist',   // client/dist yerine repo kökünde dist
+    outDir: '../dist',
     emptyOutDir: true,
   },
 
@@ -21,4 +19,4 @@ export default defineConfig({
       '@': path.resolve(__dirname, './client/src'),
     },
   },
-})
+}))

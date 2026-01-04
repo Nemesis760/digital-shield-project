@@ -247,9 +247,9 @@ export const MODULE1_EN = {
             ]
           }
         },
-        activity_title: "🎮 Activity: Card Flip (Flashcards)",
-        activity_desc: "Card shows '.jpg' on front, student clicks and it flips to show 'Image File' on back.",
-        activity_type: "file_flashcards"
+        activity_title: "File Extensions Airplane Game",
+        activity_desc: "Fly through correct extension clouds and avoid wrong ones. Advances automatically.",
+        activity_type: "file_extensions_airplane"
       },
       {
         id: 5,

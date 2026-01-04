@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'wouter';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MODULE_CONTENT_TR } from '../content/module_content_tr';
+import { MODULE6_TR } from '../content/module6_lang_tr';
 import { MODULE6_EN } from '../content/module6_lang_en';
 import LoadingScreen from '../components/LoadingScreen';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -28,27 +28,27 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         { id: 2, correct: true, style: { top: '72%', left: '65%' } }
       ],
       correctText: isTurkish
-        ? 'Harika! Bilinmeyen linkler silinmelidir 🛡️'
-        : 'Great! Unknown links should be deleted 🛡️',
+        ? 'Harika! Bilinmeyen linkler silinmelidir x:�️'
+        : 'Great! Unknown links should be deleted x:�️',
       wrongText: isTurkish
         ? 'Bu tehlikeli olabilir. Tekrar dene!'
         : 'This could be dangerous. Try again!'
     },
     {
-      title: isTurkish ? 'Şifre Tuzağı' : 'Password Trap',
+      title: isTurkish ? 'Şifre Tuza�xı' : 'Password Trap',
       image: '/images/game_password_creation.png',
       question: isTurkish
-        ? 'Doğru davranış hangisi?'
+        ? 'Do�xru davranı�x hangisi?'
         : 'Which is the right action?',
       hotspots: [
         { id: 1, correct: false, style: { top: '55%', left: '42%' } },
         { id: 2, correct: true, style: { top: '78%', left: '68%' } }
       ],
       correctText: isTurkish
-        ? 'Süper! Şifreler gizli tutulur 🔐'
-        : 'Well done! Passwords are private 🔐',
+        ? 'Süper! Şifreler gizli tutulur x�'
+        : 'Well done! Passwords are private x�',
       wrongText: isTurkish
-        ? 'Yanlış seçim! Şifre paylaşılmaz.'
+        ? 'Yanlı�x seçim! Şifre payla�xılmaz.'
         : 'Wrong choice! Passwords are not shared.'
     },
     {
@@ -62,10 +62,10 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         { id: 2, correct: true, style: { top: '75%', left: '70%' } }
       ],
       correctText: isTurkish
-        ? 'Doğru! Tanımadığın kişilerle konuşma 🚫'
-        : 'Correct! Do not talk to strangers 🚫',
+        ? 'Do�xru! Tanımadı�xın ki�xilerle konu�xma xa�'
+        : 'Correct! Do not talk to strangers xa�',
       wrongText: isTurkish
-        ? 'Bu güvenli değil. Tekrar dene.'
+        ? 'Bu güvenli de�xil. Tekrar dene.'
         : 'This is not safe. Try again.'
     },
     {
@@ -79,8 +79,8 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         { id: 2, correct: true, style: { top: '80%', left: '65%' } }
       ],
       correctText: isTurkish
-        ? 'Harika! Önce bir büyüğüne danışmalısın 👨‍👩‍👧'
-        : 'Great! Ask an adult first 👨‍👩‍👧',
+        ? 'Harika! �nce bir büyü�xüne danı�xmalısın x�⬍x�⬍x�'
+        : 'Great! Ask an adult first x�⬍x�⬍x�',
       wrongText: isTurkish
         ? 'Acele etmek risklidir!'
         : 'Rushing can be risky!'
@@ -128,10 +128,10 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         initial={{ scale: 0.7, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
       >
-        <h3>🏆 {isTurkish ? 'Tüm Görevler Tamamlandı!' : 'All Missions Completed!'}</h3>
+        <h3>x�  {isTurkish ? 'Tüm Görevler Tamamlandı!' : 'All Missions Completed!'}</h3>
         <p>
           {isTurkish
-            ? 'Artık bilinçli bir dijital vatandaşsın!'
+            ? 'Artık bilinçli bir dijital vatanda�xsın!'
             : 'You are now a responsible digital citizen!'}
         </p>
       </motion.div>
@@ -143,7 +143,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
   return (
     <div className="hotspot-quiz-container">
       <div className="hotspot-quiz-header">
-        <h3>🕵️ {current.title}</h3>
+        <h3>x"�️ {current.title}</h3>
         <p className="hotspot-quiz-question">{current.question}</p>
         <div className="hotspot-quiz-progress">
           {isTurkish ? 'Görev' : 'Mission'} {step + 1}/{scenarios.length}
@@ -180,7 +180,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
   );
 }
 
-// Her bölüm için genel bir bileşen
+// Her bölüm için genel bir bile�xen
 const SectionComponent = ({ section, isTurkish }) => {
   const renderActivity = () => {
     const activityType = section.activity_type;
@@ -196,7 +196,7 @@ const SectionComponent = ({ section, isTurkish }) => {
         return (
           <div className="activity-placeholder">
             <p className="activity-placeholder-text">
-              {isTurkish ? 'Aktivite bileşeni yükleniyor...' : 'Loading activity component...'}
+              {isTurkish ? 'Aktivite bile�xeni yükleniyor...' : 'Loading activity component...'}
             </p>
           </div>
         );
@@ -256,7 +256,7 @@ const SectionComponent = ({ section, isTurkish }) => {
 
               {contentItem.examples && Array.isArray(contentItem.examples) && (
                 <div className="content-examples">
-                  <h4>{isTurkish ? 'Örnekler:' : 'Examples:'}</h4>
+                  <h4>{isTurkish ? '�rnekler:' : 'Examples:'}</h4>
                   <ul>
                     {contentItem.examples.map((example, idx) => (
                       <li key={idx}>{example}</li>
@@ -279,7 +279,7 @@ const SectionComponent = ({ section, isTurkish }) => {
   );
 };
 
-// Ana Module6 Bileşeni
+// Ana Module6 Bile�xeni
 function Module6() {
   const { language } = useLanguage();
   const isTurkish = language === 'tr';
@@ -288,7 +288,7 @@ function Module6() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Get module data based on language
-  const moduleData = isTurkish ? MODULE_CONTENT_TR.module_6 : MODULE6_EN.module_6;
+  const moduleData = isTurkish ? MODULE6_TR.module_6 : MODULE6_EN.module_6;
 
   const sections = moduleData.sections.map((section, index) => ({
     id: index + 1,
@@ -314,8 +314,8 @@ function Module6() {
         // Show completion message
         setTimeout(() => {
           alert(isTurkish 
-            ? '🎉 Tebrikler! Modül 6\'yı tamamladın! Tüm modülleri bitirdin!'
-            : '🎉 Congratulations! You completed Module 6! You finished all modules!');
+            ? 'x�0 Tebrikler! Modül 6\'yı tamamladın! Tüm modülleri bitirdin!'
+            : 'x�0 Congratulations! You completed Module 6! You finished all modules!');
         }, 500);
       }
     }
@@ -337,7 +337,7 @@ function Module6() {
         <div className="module-sidebar">
           <div className="sidebar-header">
             <Link href="/" className="back-home-btn">
-              ← {isTurkish ? 'Ana Sayfa' : 'Home'}
+              � � {isTurkish ? 'Ana Sayfa' : 'Home'}
             </Link>
             <h2>{moduleData.title}</h2>
             <p>{moduleData.subtitle}</p>
@@ -385,7 +385,7 @@ function Module6() {
                   disabled={completedSections.includes(activeSection)}
                 >
                   {completedSections.includes(activeSection) 
-                    ? (isTurkish ? 'Tamamlandı ✓' : 'Completed ✓')
+                    ? (isTurkish ? 'Tamamlandı �S' : 'Completed �S')
                     : (isTurkish ? 'Tamamla' : 'Complete')}
                 </button>
               </div>
@@ -401,7 +401,7 @@ function Module6() {
               onClick={() => setActiveSection(prev => Math.max(1, prev - 1))}
               disabled={activeSection === 1}
             >
-              ← {isTurkish ? 'Önceki' : 'Previous'}
+              � � {isTurkish ? '�nceki' : 'Previous'}
             </button>
             
             <button 
@@ -412,7 +412,7 @@ function Module6() {
               }}
               disabled={activeSection === sections.length}
             >
-              {isTurkish ? 'Sonraki' : 'Next'} →
+              {isTurkish ? 'Sonraki' : 'Next'} � 
             </button>
           </div>
         </div>
@@ -422,3 +422,5 @@ function Module6() {
 }
 
 export default Module6;
+
+

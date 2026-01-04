@@ -1,34 +1,45 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { Link } from 'wouter';
 import { AnimatePresence, motion } from 'framer-motion';
-import { MODULE_CONTENT_TR } from '../content/module_content_tr';
+import { MODULE1_TR } from '../content/module1_lang_tr';
 import { MODULE1_EN } from '../content/module1_lang_en';
 import LoadingScreen from '../components/LoadingScreen';
 import { useLanguage } from '../contexts/LanguageContext';
 import DataFactoryGame from '../components/DataFactoryGame';
+import DataUnitsCrosswordWordwall from '../components/DataUnitsCrosswordWordwall';
 import HardwareHotspot from '../components/HardwareHotspot';
 import SoftwareSorting from '../components/SoftwareSorting';
 import FileExtensionFlashcards from '../components/FileExtensionFlashcards';
+import FileExtensionsAirplaneGame from '../components/games/FileExtensionsAirplaneGame';
 import ScenarioTest from '../components/ScenarioTest';
 import BoxGame from '../components/BoxGame';
 import VideoLinks from '../components/VideoLinks';
 import { handleImgError } from '../utils/imageFallback';
 import '../modules.css';
 
-// Her bölüm için genel bir bileşen
+// Her bÃ¶lÃ¼m iÃ§in genel bir bileï¿½xen
 const SectionComponent = ({ section, isTurkish }) => {
-  const renderActivity = () => {
-    const activityType = section.activity_type;
-    
+  const renderActivityByType = (activityType) => {
     switch(activityType) {
       case 'data_factory':
-        return <DataFactoryGame isTurkish={isTurkish} />;
+        return (
+          <div className="dfg-wrap">
+            <div className="dfg-viewport">
+              <DataFactoryGame isTurkish={isTurkish} />
+            </div>
+          </div>
+        );
+      case 'data_units_crossword':
+      case 'data_units_crossword_wordwall':
+        return <DataUnitsCrosswordWordwall />;
       case 'hardware_hotspot':
         return <HardwareHotspot isTurkish={isTurkish} />;
       case 'software_sorting':
         return <SoftwareSorting isTurkish={isTurkish} />;
       case 'box_game':
         return <BoxGame isTurkish={isTurkish} />;
+      case 'file_extensions_airplane':
+        return <FileExtensionsAirplaneGame />;
       case 'file_flashcards':
         return <FileExtensionFlashcards isTurkish={isTurkish} />;
       case 'scenario_test':
@@ -37,7 +48,7 @@ const SectionComponent = ({ section, isTurkish }) => {
         return (
           <div className="activity-placeholder">
             <p className="activity-placeholder-text">
-              {isTurkish ? 'Aktivite bileşeni yükleniyor...' : 'Loading activity component...'}
+              {isTurkish ? 'Aktivite bileï¿½xeni yÃ¼kleniyor...' : 'Loading activity component...'}
             </p>
           </div>
         );
@@ -95,7 +106,7 @@ const SectionComponent = ({ section, isTurkish }) => {
 
               {contentItem.examples && Array.isArray(contentItem.examples) && (
                 <div className="content-examples">
-                  <h4>{isTurkish ? 'Örnekler:' : 'Examples:'}</h4>
+                  <h4>{isTurkish ? 'ï¿½rnekler:' : 'Examples:'}</h4>
                   <ul>
                     {contentItem.examples.map((example, idx) => (
                       <li key={idx}>{example}</li>
@@ -109,8 +120,8 @@ const SectionComponent = ({ section, isTurkish }) => {
                   {Object.entries(contentItem.table).map(([category, data]) => (
                     <div key={category} className="table-item">
                       <h4>{category}</h4>
-                      <p><strong>{isTurkish ? 'Görev:' : 'Function:'}</strong> {data.görev || data.function}</p>
-                      <p><strong>{isTurkish ? 'Örnekler:' : 'Examples:'}</strong> {data.örnekler || data.examples}</p>
+                      <p><strong>{isTurkish ? 'GÃ¶rev:' : 'Function:'}</strong> {data["g\u00c3\u00b6rev"] || data.function}</p>
+                      <p><strong>{isTurkish ? 'ï¿½rnekler:' : 'Examples:'}</strong> {data["\u00c3\u00b6rnekler"] || data.examples}</p>
                       {data.image && (
                         <img 
                           src={data.image} 
@@ -152,7 +163,7 @@ const SectionComponent = ({ section, isTurkish }) => {
                         />
                       )}
                       <h4>{part.name}</h4>
-                      <p><strong>{isTurkish ? 'Görev:' : 'Role:'}</strong> {part.role}</p>
+                      <p><strong>{isTurkish ? 'GÃ¶rev:' : 'Role:'}</strong> {part.role}</p>
                       <p><em>{part.analogy}</em></p>
                     </div>
                   ))}
@@ -221,7 +232,7 @@ const SectionComponent = ({ section, isTurkish }) => {
               {contentItem.examples && contentItem.examples.bad && (
                 <div className="password-examples">
                   <div className="bad-examples">
-                    <h4>{isTurkish ? '❌ Kötü Şifreler:' : '❌ Bad Passwords:'}</h4>
+                    <h4>{isTurkish ? 'ï¿½R KÃ¶tÃ¼ Åifreler:' : 'ï¿½R Bad Passwords:'}</h4>
                     <ul>
                       {contentItem.examples.bad.map((pwd, idx) => (
                         <li key={idx}>{pwd}</li>
@@ -229,7 +240,7 @@ const SectionComponent = ({ section, isTurkish }) => {
                     </ul>
                   </div>
                   <div className="good-examples">
-                    <h4>{isTurkish ? '✅ İyi Şifreler:' : '✅ Good Passwords:'}</h4>
+                    <h4>{isTurkish ? 'ï¿½S& Ä°yi Åifreler:' : 'ï¿½S& Good Passwords:'}</h4>
                     <ul>
                       {contentItem.examples.good.map((pwd, idx) => (
                         <li key={idx}>{pwd}</li>
@@ -244,8 +255,8 @@ const SectionComponent = ({ section, isTurkish }) => {
                   {contentItem.scenarios.map((scenario, idx) => (
                     <div key={idx} className="scenario-card">
                       <h4>{scenario.situation}</h4>
-                      <p><strong>{isTurkish ? '❌ Yanlış:' : '❌ Wrong:'}</strong> {scenario.wrong}</p>
-                      <p><strong>{isTurkish ? '✅ Doğru:' : '✅ Right:'}</strong> {scenario.right}</p>
+                      <p><strong>{isTurkish ? 'ï¿½R YanlÄ±ï¿½x:' : 'ï¿½R Wrong:'}</strong> {scenario.wrong}</p>
+                      <p><strong>{isTurkish ? 'ï¿½S& Doï¿½xru:' : 'ï¿½S& Right:'}</strong> {scenario.right}</p>
                     </div>
                   ))}
                 </div>
@@ -255,19 +266,29 @@ const SectionComponent = ({ section, isTurkish }) => {
         </div>
       )}
 
-      {/* Aktivite Alanı */}
+      {/* Aktivite AlanÄ± */}
       <VideoLinks videoLinks={section.video_links} />
 
-      <div className="activity-box">
-        <h3>{section.activity_title}</h3>
-        <p>{section.activity_desc}</p>
-        {renderActivity()}
-      </div>
+      {Array.isArray(section.activities) && section.activities.length > 0 ? (
+        section.activities.map((activity, index) => (
+          <div className="activity-box" key={`${activity.activity_type}-${index}`}>
+            <h3>{activity.activity_title}</h3>
+            <p>{activity.activity_desc}</p>
+            {renderActivityByType(activity.activity_type)}
+          </div>
+        ))
+      ) : (
+        <div className="activity-box">
+          <h3>{section.activity_title}</h3>
+          <p>{section.activity_desc}</p>
+          {renderActivityByType(section.activity_type)}
+        </div>
+      )}
     </motion.div>
   );
 };
 
-// Ana Module1 Bileşeni
+// Ana Module1 Bileï¿½xeni
 function Module1() {
   const { language } = useLanguage();
   const isTurkish = language === 'tr';
@@ -276,7 +297,7 @@ function Module1() {
   const [isLoading, setIsLoading] = useState(true);
 
   // Get module data based on language
-  const moduleData = isTurkish ? MODULE_CONTENT_TR.module_1 : MODULE1_EN.module_1;
+  const moduleData = isTurkish ? MODULE1_TR.module_1 : MODULE1_EN.module_1;
 
   const sections = moduleData.sections.map((section, index) => ({
     id: index + 1,
@@ -302,8 +323,8 @@ function Module1() {
         // Show completion message
         setTimeout(() => {
           alert(isTurkish 
-            ? '🎉 Tebrikler! Modül 1\'i tamamladın! Artık Modül 2\'ye geçebilirsin!'
-            : '🎉 Congratulations! You completed Module 1! You can now access Module 2!');
+            ? 'xï¿½0 Tebrikler! ModÃ¼l 1\'i tamamladÄ±n! ArtÄ±k ModÃ¼l 2\'ye geÃ§ebilirsin!'
+            : 'xï¿½0 Congratulations! You completed Module 1! You can now access Module 2!');
         }, 500);
       }
     }
@@ -312,7 +333,7 @@ function Module1() {
   const currentSection = sections.find(s => s.id === activeSection);
   const SectionComponentToRender = currentSection?.component;
 
-  // Simülasyon için Loading ekranını kaldır
+  // SimÃ¼lasyon iÃ§in Loading ekranÄ±nÄ± kaldÄ±r
   if (isLoading) {
     setTimeout(() => setIsLoading(false), 1000);
     return <LoadingScreen onComplete={() => setIsLoading(false)} isTurkish={isTurkish} />;
@@ -325,7 +346,7 @@ function Module1() {
         <div className="module-sidebar">
           <div className="sidebar-header">
             <Link href="/" className="back-home-btn">
-              ← {isTurkish ? 'Ana Sayfa' : 'Home'}
+              ï¿½ ï¿½ {isTurkish ? 'Ana Sayfa' : 'Home'}
             </Link>
             <h2>{moduleData.title}</h2>
             <p>{moduleData.subtitle}</p>
@@ -338,7 +359,7 @@ function Module1() {
             ></div>
           </div>
           <p className="progress-text">
-            {completedSections.length}/{sections.length} {isTurkish ? 'Tamamlandı' : 'Completed'}
+            {completedSections.length}/{sections.length} {isTurkish ? 'TamamlandÄ±' : 'Completed'}
           </p>
 
           <div className="sections-nav">
@@ -354,7 +375,7 @@ function Module1() {
           </div>
         </div>
 
-        {/* Ana İçerik */}
+        {/* Ana Ä°Ã§erik */}
         <div className="module-content">
           <AnimatePresence mode="wait">
             <motion.div
@@ -373,7 +394,7 @@ function Module1() {
                   disabled={completedSections.includes(activeSection)}
                 >
                   {completedSections.includes(activeSection) 
-                    ? (isTurkish ? 'Tamamlandı ✓' : 'Completed ✓')
+                    ? (isTurkish ? 'TamamlandÄ± ï¿½S' : 'Completed ï¿½S')
                     : (isTurkish ? 'Tamamla' : 'Complete')}
                 </button>
               </div>
@@ -382,14 +403,14 @@ function Module1() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Bölüm Navigasyonu */}
+          {/* BÃ¶lÃ¼m Navigasyonu */}
           <div className="section-navigation">
             <button 
               className="nav-btn prev"
               onClick={() => setActiveSection(prev => Math.max(1, prev - 1))}
               disabled={activeSection === 1}
             >
-              ← {isTurkish ? 'Önceki' : 'Previous'}
+              ï¿½ ï¿½ {isTurkish ? 'ï¿½nceki' : 'Previous'}
             </button>
             
             <button 
@@ -400,7 +421,7 @@ function Module1() {
               }}
               disabled={activeSection === sections.length}
             >
-              {isTurkish ? 'Sonraki' : 'Next'} →
+              {isTurkish ? 'Sonraki' : 'Next'} ï¿½ 
             </button>
           </div>
         </div>
@@ -410,3 +431,9 @@ function Module1() {
 }
 
 export default Module1;
+
+
+
+
+
+
