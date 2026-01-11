@@ -1,4 +1,4 @@
-// Module 4: Digital Safety & Smart Tech Habits - English Language File
+﻿// Module 4: Digital Safety & Smart Tech Habits - English Language File
 
 export const MODULE4_EN = {
   module_4: {
@@ -142,6 +142,12 @@ export const MODULE4_EN = {
               explanation: "Details and reviews help spot fake apps."
             }
           ]
+        },
+        game: {
+          type: "word_puzzle",
+          title: "Word Puzzle: Safe Download Terms",
+          description: "Find the hidden security words.",
+          words: ["SAFE", "VIRUS", "CLOUD", "CYBER", "LOCKS", "GUARD", "SMART"]
         }
       },
       {
@@ -200,6 +206,16 @@ export const MODULE4_EN = {
               back: "Makes sense if you are editing pictures."
             }
           ]
+        },
+        game: {
+          type: "password_game",
+          title: "Activity: Build a Strong Password",
+          description: "Type a password and see how strong it is.",
+          tips: [
+            "Use 8-12+ characters.",
+            "Mix uppercase, lowercase, and numbers.",
+            "Avoid common words or personal info."
+          ]
         }
       },
       {
@@ -250,11 +266,23 @@ export const MODULE4_EN = {
             { id: "wifi3", text: "Logging out of a shared computer", correctCategory: "safe" },
             { id: "wifi4", text: "Saving a password on a cafe computer", correctCategory: "risky" }
           ]
+        },
+        game: {
+          type: "card_match",
+          title: "Match: Threat and Protection",
+          description: "Match each threat with the right protection.",
+          pairs: [
+            { term: "Open Wi-Fi", def: "Avoid passwords and payments" },
+            { term: "Shared Computer", def: "Log out after use" },
+            { term: "Saved Password", def: "Remove from browser" },
+            { term: "Auto-Connect", def: "Turn it off" },
+            { term: "Suspicious Network Name", def: "Do not connect" }
+          ]
         }
       },
       {
         id: 5,
-        title: "Digital Citizenship, Cyberbullying & Getting Help",
+        title: "Digital Citizenship & Getting Help",
         intro:
           "Being safe online is not only about devices. It is also about how we treat people.",
         content: [

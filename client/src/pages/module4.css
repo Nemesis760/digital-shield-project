@@ -1,421 +1,489 @@
-/* Module 4 specific styles */
+﻿/* --- MODULE 4: MAIN PAGE STYLES --- */
 
-.m4-paragraphs {
-  display: grid;
-  gap: 0.75rem;
-  margin-bottom: 1.5rem;
+.m4-page {
+  --m4-primary: #3b82f6;
+  --m4-success: #10b981;
+  --m4-warning: #f59e0b;
+  --m4-bg-soft: rgba(59, 130, 246, 0.08);
 }
 
-.m4-paragraphs p {
-  margin: 0;
-  line-height: 1.7;
-  color: var(--text-primary);
-}
-
-.m4-image-note {
-  margin: 1rem 0 0.75rem;
-  font-size: 0.95rem;
+.m4-subtitle {
   color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.6rem;
 }
 
-.m4-image-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 14px;
-  margin-bottom: 2rem;
+.m4-visual-block {
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 1.5rem 0 2rem;
 }
 
-.m4-image-card {
-  margin: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  box-shadow: var(--shadow-sm);
+.m4-text-block {
+  flex: 1;
+  min-width: 0;
+  order: 1;
 }
 
-.m4-image-card img {
+.m4-image-wrapper {
+  flex: 0 0 auto;
+  max-width: 360px;
+  text-align: center;
+  order: 2;
+}
+
+.m4-section-image {
   width: 100%;
-  height: 160px;
-  object-fit: cover;
-  display: block;
+  max-width: 360px;
+  max-height: 240px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+  background: var(--bg-secondary);
 }
 
-.m4-image-card figcaption {
-  padding: 10px 12px;
+.m4-image-caption {
+  margin-top: 0.5rem;
   font-size: 0.85rem;
   color: var(--text-secondary);
 }
 
-/* Mini Quiz */
-.m4-mini-quiz {
-  display: grid;
-  gap: 12px;
+.m4-game-notes {
+  margin-top: 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
 }
 
-.m4-mini-quiz-header {
-  display: grid;
-  gap: 6px;
-}
-
-.m4-mini-quiz-count {
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.m4-mini-quiz-question {
+.m4-game-notes-title {
+  margin: 0 0 0.5rem;
   font-weight: 700;
   color: var(--text-primary);
 }
 
-.m4-mini-quiz-options {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
+.m4-game-tips {
+  margin: 0;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+  color: var(--text-secondary);
 }
+
+/* 1. VISUAL CONTAINER (POSTER) */
+.m4-visual-container {
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background: var(--bg-secondary);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.m4-main-image {
+  width: 100%;
+  max-height: 350px;
+  object-fit: cover;
+  display: block;
+}
+
+/* 2. SCENARIO BOX (SENARYO KUTUSU) */
+.m4-scenario-box {
+  background: var(--m4-bg-soft);
+  border-left: 5px solid var(--m4-primary);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.m4-scenario-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.m4-scenario-content h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--m4-primary);
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.m4-scenario-content p {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* 3. KEY POINTS (BILMEN GEREKENLER) */
+.m4-keypoints-section {
+  margin-bottom: 2.5rem;
+}
+
+.m4-keypoints-section h3 {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.m4-keypoints-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.m4-keypoints-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.m4-keypoints-list li::before {
+  content: "✓";
+  color: var(--m4-success);
+  font-weight: bold;
+  font-size: 1.2rem;
+  position: absolute;
+  left: 0;
+  top: -0.1rem;
+}
+
+/* 4. VIDEO CARD */
+.m4-video-section {
+  margin-bottom: 2.5rem;
+}
+
+.m4-video-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.m4-task-bubble {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--text-primary);
+  border: 1px solid var(--m4-warning);
+  padding: 1rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+}
+
+/* 5. CHECKLIST (OZEL CHECKBOX TASARIMI) */
+.m4-checklist-container {
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+  border: 2px dashed var(--border-color);
+}
+
+.m4-checklist-container h3 {
+  margin-top: 0;
+  margin-bottom: 1.2rem;
+  font-size: 1.2rem;
+}
+
+.m4-checklist-items {
+  display: grid;
+  gap: 1rem;
+}
+
+.m4-checkbox-label {
+  display: block;
+  position: relative;
+  padding-left: 3rem;
+  margin-bottom: 0;
+  cursor: pointer;
+  font-size: 1rem;
+  user-select: none;
+  color: var(--text-primary);
+  transition: color 0.2s;
+}
+
+.m4-checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: var(--bg-primary);
+  border: 2px solid var(--text-secondary);
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.m4-checkbox-label:hover input ~ .checkmark {
+  border-color: var(--m4-primary);
+}
+
+.m4-checkbox-label input:checked ~ .checkmark {
+  background-color: var(--m4-success);
+  border-color: var(--m4-success);
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.m4-checkbox-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.m4-checkbox-label .checkmark:after {
+  left: 8px;
+  top: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+.m4-checkbox-label input:checked ~ span {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* 6. ACTIVITY WRAPPER */
+.m4-activity-wrapper {
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.m4-activity-header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.m4-activity-header h3 {
+  color: var(--m4-primary);
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.m4-instr {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.m4-game-board {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.5rem;
+}
+
+/* 7. NAVIGATION BUTTONS */
+.m4-section-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 3rem;
+  gap: 1rem;
+}
+
+.m4-btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+  border: none;
+}
+
+.m4-btn-primary {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.m4-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+}
+
+.m4-btn-ghost {
+  background: transparent;
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.m4-btn-ghost:hover:not(:disabled) {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.m4-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 8. END SCREEN (BITIS EKRANI) */
+.m4-end-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.m4-success-card {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 3rem;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.m4-success-card h1 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  line-height: 1.3;
+  color: var(--text-primary);
+}
+
+.m4-badge-container {
+  background: var(--m4-bg-soft);
+  border-radius: 20px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  display: inline-block;
+}
+
+.m4-badge-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.m4-badge-text {
+  font-weight: 800;
+  color: var(--m4-primary);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.m4-summary-list {
+  text-align: left;
+  background: var(--bg-primary);
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+.m4-summary-list h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.m4-summary-list ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.m4-summary-list li {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.m4-action-buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .m4-visual-block {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .m4-image-wrapper {
+    order: 1;
+    max-width: 320px;
+  }
+
+  .m4-text-block {
+    order: 2;
+    width: 100%;
+  }
+
+  .m4-scenario-box {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .m4-btn {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+
+  .m4-success-card {
+    padding: 1.5rem;
+  }
+}
+
+/* --- LEGACY GAME STYLES (Keep these for the Activity Components) --- */
 
 .m4-mini-quiz-options.grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 10px;
 }
-
 .m4-mini-quiz-option {
-  padding: 10px 12px;
+  padding: 12px;
   border-radius: 12px;
   border: 2px solid var(--border-color);
-  background: var(--bg-secondary);
+  background: var(--bg-primary);
   cursor: pointer;
-  font-weight: 600;
-  text-align: left;
-  transition: all 0.2s ease;
+  transition: all 0.2s;
 }
-
+.m4-mini-quiz-option:hover {
+  border-color: var(--m4-primary);
+}
 .m4-mini-quiz-option.active {
-  border-color: var(--module-primary);
-  background: rgba(99, 102, 241, 0.12);
+  border-color: var(--m4-primary);
+  background: var(--m4-bg-soft);
 }
-
-.m4-mini-quiz-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.m4-mini-quiz-btn {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.m4-mini-quiz-btn.primary {
-  background: var(--gradient-primary);
-  color: var(--text-light);
-  border: none;
-}
-
 .m4-mini-quiz-feedback {
+  margin-top: 1rem;
+  padding: 1rem;
   border-radius: 12px;
-  padding: 12px 14px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
 }
-
-.m4-mini-quiz-feedback.ok {
-  border-color: #16a34a;
-  background: rgba(22, 163, 74, 0.12);
-}
-
-.m4-mini-quiz-feedback.bad {
-  border-color: #dc2626;
-  background: rgba(220, 38, 38, 0.12);
-}
-
-.m4-mini-quiz-feedback-title {
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.m4-mini-quiz-empty {
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-/* Flashcards */
-.m4-flashcards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 12px;
-}
-
-.m4-flashcard {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  height: 160px;
-  perspective: 1000px;
-}
-
-.m4-flashcard-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.4s ease;
-  transform-style: preserve-3d;
-}
-
-.m4-flashcard.flipped .m4-flashcard-inner {
-  transform: rotateY(180deg);
-}
-
-.m4-flashcard-front,
-.m4-flashcard-back {
-  position: absolute;
-  inset: 0;
-  border-radius: 14px;
-  border: 2px solid var(--border-color);
-  background: var(--bg-secondary);
-  padding: 16px;
-  display: grid;
-  place-items: center;
-  text-align: center;
-  font-weight: 700;
-  color: var(--text-primary);
-  backface-visibility: hidden;
-  box-shadow: var(--shadow-sm);
-}
-
-.m4-flashcard-back {
-  transform: rotateY(180deg);
-  background: rgba(99, 102, 241, 0.12);
-  border-color: var(--module-primary);
-}
-
-/* Sorter */
-.m4-sorter {
-  display: grid;
-  gap: 12px;
-}
-
-.m4-sorter-item {
-  border: 2px solid var(--border-color);
-  border-radius: 12px;
-  padding: 12px;
-  display: grid;
-  gap: 10px;
-  background: var(--bg-secondary);
-}
-
-.m4-sorter-item.correct {
-  border-color: #16a34a;
-  background: rgba(22, 163, 74, 0.12);
-}
-
-.m4-sorter-item.wrong {
-  border-color: #dc2626;
-  background: rgba(220, 38, 38, 0.1);
-}
-
-.m4-sorter-text {
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.m4-sorter-buttons {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.m4-sorter-btn {
-  padding: 8px 12px;
-  border-radius: 10px;
-  border: 2px solid var(--border-color);
-  background: var(--bg-primary);
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.m4-sorter-btn.active {
-  border-color: var(--module-primary);
-  background: rgba(99, 102, 241, 0.12);
-}
-
-.m4-sorter-actions {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.m4-sorter-check,
-.m4-sorter-reset {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
-  cursor: pointer;
-  font-weight: 700;
-}
-
-/* Scenario Quiz */
-.m4-scenario-quiz {
-  display: grid;
-  gap: 16px;
-}
-
-.m4-scenario-header {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-}
-
-.m4-scenario-title {
-  font-size: 1.3rem;
-  font-weight: 800;
-}
-
-.m4-scenario-intro {
-  color: var(--text-secondary);
-}
-
-.m4-scenario-score {
-  font-weight: 700;
-  color: var(--module-primary);
-}
-
-.m4-scenario-progress-bar {
-  height: 10px;
-  background: var(--border-color);
-  border-radius: 999px;
-  overflow: hidden;
-}
-
-.m4-scenario-progress {
-  display: grid;
-  gap: 6px;
-}
-
-.m4-scenario-progress-fill {
-  height: 100%;
-  background: var(--gradient-primary);
-  transition: width 0.3s ease;
-}
-
-.m4-scenario-progress-text {
-  margin-top: 6px;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.m4-scenario-card {
-  border-radius: 16px;
-  border: 2px solid var(--border-color);
-  background: var(--bg-secondary);
-  padding: 16px;
-  display: grid;
-  gap: 12px;
-}
-
-.m4-scenario-story {
-  font-weight: 700;
-  color: var(--text-primary);
-}
-
-.m4-scenario-question {
-  font-size: 1.05rem;
-  font-weight: 700;
-}
-
-.m4-scenario-options {
-  display: grid;
-  gap: 10px;
-}
-
-.m4-scenario-option {
-  padding: 10px 12px;
-  border-radius: 12px;
-  border: 2px solid var(--border-color);
-  background: var(--bg-primary);
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.2s ease;
-}
-
-.m4-scenario-option.picked {
-  border-color: var(--module-primary);
-}
-
-.m4-scenario-option.correct {
-  border-color: #16a34a;
-  background: rgba(22, 163, 74, 0.12);
-}
-
-.m4-scenario-option.wrong {
-  border-color: #dc2626;
-  background: rgba(220, 38, 38, 0.12);
-}
-
-.m4-scenario-feedback {
-  border-radius: 12px;
-  padding: 12px;
-  border: 1px solid var(--border-color);
-}
-
-.m4-scenario-feedback.ok {
-  border-color: #16a34a;
-  background: rgba(22, 163, 74, 0.12);
-}
-
-.m4-scenario-feedback.bad {
-  border-color: #dc2626;
-  background: rgba(220, 38, 38, 0.12);
-}
-
-.m4-scenario-feedback-title {
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.m4-scenario-actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.m4-scenario-btn {
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
-  background: var(--gradient-primary);
-  color: var(--text-light);
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.m4-scenario-summary {
-  font-weight: 700;
-  color: var(--text-secondary);
-}
-
-.m4-activity-placeholder {
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-@media (max-width: 768px) {
-  .m4-mini-quiz-options.grid {
-    grid-template-columns: 1fr;
-  }
-
-  .m4-image-card img {
-    height: 140px;
-  }
-
-  .m4-scenario-header {
-    flex-direction: column;
-  }
-}
+.m4-mini-quiz-feedback.ok { background: rgba(22, 163, 74, 0.1); border: 1px solid #16a34a; }
+.m4-mini-quiz-feedback.bad { background: rgba(220, 38, 38, 0.1); border: 1px solid #dc2626; }

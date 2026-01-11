@@ -2,20 +2,20 @@ export const MODULE5_TR = {
   "module_5": {
     "title": "Modül 5: Dijital Güvenlik ve Bilinçli Teknoloji Kullanımı",
     "subtitle": "🛡️ Dijital Kalkan: Kendini ve Başkalarını Koruma",
-    "hero_image": "/images/module4/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
+    "hero_image": "/images/module5/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
     "sections": [
       {
         "id": 1,
         "title": "🛡️ Dijital Güvenlik Nedir?",
         "intro": "Dijital güvenlik, internet ve dijital cihazları kullanırken kendimizi, bilgilerimizi, paramızı ve itibarımızı koruma becerisidir. Bunu evimizin kapısını kilitlemek gibi düşünebiliriz.",
-        "hero_image": "/images/module4/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
+        "hero_image": "/images/module5/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
         "activity_title": "📝 Quiz: Dijital Güvenlik Temelleri",
         "activity_desc": "Dijital güvenlik hakkındaki soruları cevapla.",
         "content": {
           "1.1": {
             "title": "Dijital Güvenlik Nedir?",
             "description": "Dijital güvenlik, internet ve dijital cihazları kullanırken kendimizi, bilgilerimizi, paramızı ve itibarımızı koruma becerisidir. Bunu evimizin kapısını kilitlemek gibi düşünebiliriz. Nasıl ki evden çıkarken kapıyı kilitliyorsak, dijital dünyada da hesaplarımızı 'kilitlemeli' (şifrelemek) ve tanımadığımız kişilere kapıyı açmamalıyız.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 13.47.18.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 13.47.18.jpeg",
             "points": [
               "İnternet sayesinde bilgiye ulaşabilir, oyun oynayabilir ve eğlenebiliriz",
               "Ancak bu ortamda siber zorbalık, kimlik hırsızlığı ve dolandırıcılık gibi riskler de vardır",
@@ -216,7 +216,7 @@ export const MODULE5_TR = {
           "2.1": {
             "title": "Zararlı Yazılımlar (Malware) Nedir?",
             "description": "Zararlı yazılımlar (Malware), bilgisayar, tablet veya telefonlarımıza gizlice giren ve zarar veren programlardır.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 13.48.11.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 13.48.11.jpeg",
             "points": [
               "Virüsler: Dosyalarınıza bulaşır ve onları bozar",
               "Casus Yazılımlar (Spyware): Sizin haberiniz olmadan ne yaptığınızı izler, şifrelerinizi çalar",
@@ -230,8 +230,8 @@ export const MODULE5_TR = {
               "✅ Güvenli: Resmi mağazalardan (App Store, Play Store) uygulama indirmek"
             ],
             "images": {
-              "Sahte Antivirüs Uyarısı": "/images/module4/WhatsApp Image 2025-12-28 at 13.49.15.jpeg",
-              "İndirme Uyarısı": "/images/module4/WhatsApp Image 2025-12-28 at 13.50.34.jpeg"
+              "Sahte Antivirüs Uyarısı": "/images/module5/WhatsApp Image 2025-12-28 at 13.49.15.jpeg",
+              "İndirme Uyarısı": "/images/module5/WhatsApp Image 2025-12-28 at 13.50.34.jpeg"
             },
             "quiz": [
               {
@@ -411,7 +411,7 @@ export const MODULE5_TR = {
           "2.2": {
             "title": "Virüs Belirtileri",
             "description": "Cihazınız aniden çok yavaşlarsa, çok ısınıyorsa veya kendi kendine uygulamalar açılıyorsa zararlı yazılım bulaşmış olabilir.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 13.51.34.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 13.51.34.jpeg",
             "points": [
               "Cihaz aniden çok yavaşlar",
               "Cihaz çok ısınır",
@@ -440,7 +440,7 @@ export const MODULE5_TR = {
           "3.1": {
             "title": "Ekran Kilidi",
             "description": "Tablet veya telefonda mutlaka PIN veya desen kilidi olmalıdır. Cihaz kaybolursa bilgileriniz korunur.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 13.55.23.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 13.55.23.jpeg",
             "points": [
               "PIN veya desen kilidi kullanın",
               "Cihaz kaybolursa bilgileriniz korunur",
@@ -641,7 +641,7 @@ export const MODULE5_TR = {
           "3.2": {
             "title": "Ortak Ağlar",
             "description": "Kafelerde veya AVM'lerdeki 'Ücretsiz Wi-Fi' ağları güvensiz olabilir. Bu ağlarda şifre girmemeli, bankacılık işlemi yapmamalıyız.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
             "points": [
               "Halka açık Wi-Fi ağları güvensiz olabilir",
               "Bu ağlarda şifre girmemeliyiz",
@@ -656,7 +656,7 @@ export const MODULE5_TR = {
           "3.3": {
             "title": "Oturum Kapatma",
             "description": "Okulda veya kütüphanede ortak bilgisayar kullandıktan sonra 'Çıkış Yap' (Log out) butonuna basmayı asla unutmamalıyız.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 14.00.24.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 14.00.24.jpeg",
             "points": [
               "Ortak bilgisayarlarda mutlaka çıkış yapmalıyız",
               "'Beni Hatırla' seçeneğini sadece kendi cihazımızda kullanmalıyız",
@@ -694,7 +694,7 @@ export const MODULE5_TR = {
           "4.1": {
             "title": "Uygulama İzinleri Nedir?",
             "description": "Bir uygulama yüklerken bizden bazı izinler ister (Kamera, Mikrofon, Konum, Rehber). Bilinçli kullanıcı şunu sorar: 'Bu uygulamanın bu izne gerçekten ihtiyacı var mı?' Örneğin; bir El Feneri uygulamasının 'Rehberinize' veya 'Konumunuza' erişmek istemesi şüphelidir. Çünkü fener yakmak için arkadaşlarınızın numarasına ihtiyaç yoktur. Gereksiz izinleri vermek, özel bilgilerimizin toplanmasına neden olur.",
-            "image": "/images/game_privacy_settings.png",
+            "image": "/images/module5/game_privacy_settings.png",
             "points": [
               "Uygulamalar bazen gereksiz izinler ister",
               "Her izne 'Evet' dememeliyiz",
@@ -895,7 +895,7 @@ export const MODULE5_TR = {
           "5.1": {
             "title": "Dijital Sorumluluk Nedir?",
             "description": "Dijital dünyada sadece kendimizi korumak yetmez; başkalarına karşı da sorumlu olmalıyız.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 14.01.08.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 14.01.08.jpeg",
             "points": [
               "Doğruluk: İnternette gördüğümüz bir haberi paylaşmadan önce doğruluğunu araştırmalıyız. Yalan haber yaymak (Fake News) sorumluluktur",
               "Saygı: Başkalarının fotoğraflarını izinsiz paylaşmamalı, kırıcı yorumlar yapmamalıyız",
@@ -1105,7 +1105,7 @@ export const MODULE5_TR = {
           "6.1": {
             "title": "Senaryo: Açık Kalan Tablet Vakası",
             "description": "Can (6. sınıf öğrencisi), teneffüste tabletini sırasında açık ve kilitsiz bırakıp kantine gider. Can'ın arkadaşı Mert, şaka yapmak amacıyla Can'ın tabletini alır. O sırada Mert'in dikkatini bir reklam çeker: 'Bedava Savaş Oyunu İndir - Sadece APK'. Mert, Can'a sürpriz yapmak için oyunu indirmeye çalışır. İndirme sırasında tablet; 'Bu dosya cihazınıza zarar verebilir, yine de indirilsin mi?' diye sorar. Mert 'Evet' der ve tüm izinleri (Rehber, Galeri, Konum) onaylar. Can geri döndüğünde tabletinin çok ısındığını ve ekranda sürekli reklam çıktığını görür.",
-            "image": "/images/module4/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
+            "image": "/images/module5/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
             "quiz": [
               {
                 "type": "true_false",
@@ -1217,7 +1217,7 @@ export const MODULE5_TR = {
           "7.1": {
             "title": "Senaryo: Bedava Elmas Tuzağı",
             "description": "Elif, en sevdiği oyunda ilerlemek istiyor. Instagram'da 'Buraya tıkla, kullanıcı adını ve şifreni gir, hesabına 10.000 elmas yüklensin!' diyen bir reklam görüyor. Site çok renkli ve gerçek oyunun logosunu kullanıyor.",
-            "image": "/images/module4/download_warning.png",
+            "image": "/images/module5/download_warning.png",
             "quiz": [
               {
                 "type": "multiple_choice",
@@ -1270,3 +1270,4 @@ export const MODULE5_TR = {
   }
 };
 export default MODULE5_TR;
+

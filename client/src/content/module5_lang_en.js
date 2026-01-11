@@ -4,20 +4,20 @@ export const MODULE5_EN = {
   module_5: {
     title: "Module 5: Digital Security & Responsible Technology Use",
     subtitle: "🛡️ Digital Shield: Protecting Yourself & Others",
-    hero_image: "/images/module4/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
+    hero_image: "/images/module5/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
     sections: [
       {
         id: 1,
         title: "🛡️ What is Digital Security?",
         intro: "Digital security is the ability to protect ourselves, our information, our money, and our reputation when using the internet and digital devices. We can think of it like locking our home's door.",
-        hero_image: "/images/module4/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
+        hero_image: "/images/module5/WhatsApp Image 2025-12-28 at 13.44.08.jpeg",
         activity_title: "📝 Quiz: Digital Security Basics",
         activity_desc: "Answer questions about digital security.",
         content: {
           "1.1": {
             title: "What is Digital Security?",
             description: "Digital security is the ability to protect ourselves, our information, our money, and our reputation when using the internet and digital devices. We can think of it like locking our home's door. Just as we lock the door when leaving home, we should also 'lock' (secure) our accounts in the digital world and not open the door to people we don't know.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 13.47.18.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 13.47.18.jpeg",
             points: [
               "Thanks to the internet, we can access information, play games, and have fun",
               "However, this environment also has risks such as cyberbullying, identity theft, and fraud",
@@ -146,7 +146,7 @@ export const MODULE5_EN = {
           "2.1": {
             title: "What is Malicious Software (Malware)?",
             description: "Malicious software (Malware) are programs that secretly enter our computers, tablets, or phones and cause harm.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 13.48.11.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 13.48.11.jpeg",
             points: [
               "Viruses: Infect your files and corrupt them",
               "Spyware: Monitors what you do without your knowledge, steals your passwords",
@@ -160,8 +160,8 @@ export const MODULE5_EN = {
               "✅ Safe: Downloading apps from official stores (App Store, Play Store)"
             ],
             images: {
-              "Fake Antivirus Warning": "/images/module4/WhatsApp Image 2025-12-28 at 13.49.15.jpeg",
-              "Download Warning": "/images/module4/WhatsApp Image 2025-12-28 at 13.50.34.jpeg"
+              "Fake Antivirus Warning": "/images/module5/WhatsApp Image 2025-12-28 at 13.49.15.jpeg",
+              "Download Warning": "/images/module5/WhatsApp Image 2025-12-28 at 13.50.34.jpeg"
             },
             quiz: [
               {
@@ -269,7 +269,7 @@ export const MODULE5_EN = {
           "2.2": {
             title: "Virus Symptoms",
             description: "If your device suddenly slows down very much, gets very hot, or apps open by themselves, it may have been infected with malicious software.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 13.51.34.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 13.51.34.jpeg",
             points: [
               "Device suddenly slows down very much",
               "Device gets very hot",
@@ -298,7 +298,7 @@ export const MODULE5_EN = {
           "3.1": {
             title: "Screen Lock",
             description: "Tablets or phones must have a PIN or pattern lock. If the device is lost, your information is protected.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 13.55.23.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 13.55.23.jpeg",
             points: [
               "Use PIN or pattern lock",
               "If the device is lost, your information is protected",
@@ -427,7 +427,7 @@ export const MODULE5_EN = {
           "3.2": {
             title: "Public Networks",
             description: "'Free Wi-Fi' networks in cafes or shopping malls may be unsafe. We should not enter passwords or do banking on these networks.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
             points: [
               "Public Wi-Fi networks may be unsafe",
               "We should not enter passwords on these networks",
@@ -442,7 +442,7 @@ export const MODULE5_EN = {
           "3.3": {
             title: "Logging Out",
             description: "We should never forget to press the 'Log Out' button after using a shared computer at school or the library.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 14.00.24.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 14.00.24.jpeg",
             points: [
               "We must always log out on shared computers",
               "We should only use the 'Remember Me' option on our own device",
@@ -480,7 +480,7 @@ export const MODULE5_EN = {
           "4.1": {
             title: "What are App Permissions?",
             description: "When installing an app, it asks us for some permissions (Camera, Microphone, Location, Contacts). A conscious user asks: 'Does this app really need this permission?' For example, a Flashlight app wanting to access your 'Contacts' or 'Location' is suspicious. Because you don't need your friends' numbers to turn on a flashlight. Giving unnecessary permissions causes our private information to be collected.",
-            image: "/images/game_privacy_settings.png",
+            image: "/images/module5/game_privacy_settings.png",
             points: [
               "Apps sometimes ask for unnecessary permissions",
               "We should not say 'Yes' to every permission",
@@ -609,7 +609,7 @@ export const MODULE5_EN = {
           "5.1": {
             title: "What is Digital Responsibility?",
             description: "In the digital world, it's not enough to just protect ourselves; we must also be responsible towards others.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 14.01.08.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 14.01.08.jpeg",
             points: [
               "Accuracy: We should research the accuracy of a news story we see on the internet before sharing it. Spreading fake news is irresponsible",
               "Respect: We should not share others' photos without permission, and we should not make hurtful comments",
@@ -747,7 +747,7 @@ export const MODULE5_EN = {
           "6.1": {
             title: "Scenario: The Unlocked Tablet Case",
             description: "Can (6th grade student) leaves his tablet open and unlocked on his desk during recess and goes to the cafeteria. Can's friend Mert takes Can's tablet to play a joke. At that moment, an advertisement catches Mert's attention: 'Download Free War Game - APK Only'. Mert tries to download the game to surprise Can. During the download, the tablet asks: 'This file may harm your device, do you still want to download it?' Mert says 'Yes' and approves all permissions (Contacts, Gallery, Location). When Can returns, he sees that his tablet is very hot and constant advertisements are appearing on the screen.",
-            image: "/images/module4/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
+            image: "/images/module5/WhatsApp Image 2025-12-28 at 13.57.04.jpeg",
             quiz: [
               {
                 type: "true_false",
@@ -814,7 +814,7 @@ export const MODULE5_EN = {
           "7.1": {
             title: "Scenario: The Free Diamonds Trap",
             description: "Elif wants to progress in her favorite game. On Instagram, she sees an advertisement saying 'Click here, enter your username and password, have 10,000 diamonds loaded to your account!' The site is very colorful and uses the real game's logo.",
-            image: "/images/module4/download_warning.png",
+            image: "/images/module5/download_warning.png",
             quiz: [
               {
                 type: "multiple_choice",
@@ -848,3 +848,4 @@ export const MODULE5_EN = {
     ],
   },
 };
+

@@ -1,4 +1,4 @@
-// Modül 4: Dijital Güvenlik ve Bilinçli Teknoloji Kullanımı - Türkçe Dil Dosyası
+﻿// Modül 4: Dijital Güvenlik ve Bilinçli Teknoloji Kullanımı - Türkçe Dil Dosyası
 
 export const MODULE4_TR = {
   module_4: {
@@ -142,6 +142,12 @@ export const MODULE4_TR = {
               explanation: "Detaylar sahte uygulamayı yakalamaya yardım eder."
             }
           ]
+        },
+        game: {
+          type: "word_puzzle",
+          title: "Kelime Oyunu: Güvenli İndirme Terimleri",
+          description: "Aşağıdaki güvenlik kelimelerini bularak bulmacayı çöz.",
+          words: ["GUVEN", "VIRUS", "YEDEK", "SIFRE", "BULUT", "SIBER", "TUZLA"]
         }
       },
       {
@@ -200,6 +206,16 @@ export const MODULE4_TR = {
               back: "Düzenleme için mantıklıdır."
             }
           ]
+        },
+        game: {
+          type: "password_game",
+          title: "Etkinlik: Güçlü Parola Oluştur",
+          description: "Parolanı yaz ve ne kadar güçlü olduğunu gör.",
+          tips: [
+            "En az 8-12 karakter kullan.",
+            "Büyük/küçük harf ve rakam karıştır.",
+            "Tahmin edilebilir kelimelerden kaçın."
+          ]
         }
       },
       {
@@ -250,11 +266,23 @@ export const MODULE4_TR = {
             { id: "wifi3", text: "Paylaşılan bilgisayarda çıkış yapmak", correctCategory: "safe" },
             { id: "wifi4", text: "Kafe bilgisayarına şifre kaydetmek", correctCategory: "risky" }
           ]
+        },
+        game: {
+          type: "card_match",
+          title: "Eşleştir: Tehdit ve Korunma",
+          description: "Tehditleri doğru korunma yöntemiyle eşleştir.",
+          pairs: [
+            { term: "Açık Wi-Fi", def: "Şifre ve ödeme girişi yapmamak" },
+            { term: "Paylaşılan Bilgisayar", def: "Oturumu kapatmak" },
+            { term: "Kaydedilmiş Şifre", def: "Tarayıcıdan kaldırmak" },
+            { term: "Otomatik Bağlan", def: "Kapatmak" },
+            { term: "Şüpheli Ağ Adı", def: "Bağlanmamak" }
+          ]
         }
       },
       {
         id: 5,
-        title: "Dijital Vatandaşlık, Siber Zorbalık ve Yardım Alma",
+        title: "Dijital Vatanda?l?k ve Yard?m Alma",
         intro:
           "Güvende olmak sadece cihazla ilgili değildir. Nasıl davrandığımız da önemlidir.",
         content: [

@@ -7,8 +7,9 @@ import LoadingScreen from '../components/LoadingScreen';
 import { useLanguage } from '../contexts/LanguageContext';
 import InteractiveQuiz from '../components/InteractiveQuiz';
 import '../modules.css';
+import './module5.css';
 
-// Her bölüm için genel bir bile�xen
+// Her bölüm için genel bir bileşen
 const SectionComponent = ({ section, isTurkish }) => {
   const renderActivity = () => {
     const activityType = section.activity_type;
@@ -40,7 +41,7 @@ const SectionComponent = ({ section, isTurkish }) => {
         return (
           <div className="activity-placeholder">
             <p className="activity-placeholder-text">
-              {isTurkish ? 'Aktivite bile�xeni yükleniyor...' : 'Loading activity component...'}
+              {isTurkish ? 'Aktivite bileşeni yükleniyor...' : 'Loading activity component...'}
             </p>
           </div>
         );
@@ -100,7 +101,7 @@ const SectionComponent = ({ section, isTurkish }) => {
 
               {contentItem.examples && Array.isArray(contentItem.examples) && (
                 <div className="content-examples">
-                  <h4>{isTurkish ? '�rnekler:' : 'Examples:'}</h4>
+                  <h4>{isTurkish ? 'Örnekler:' : 'Examples:'}</h4>
                   <ul>
                     {contentItem.examples.map((example, idx) => (
                       <li key={idx}>{example}</li>
@@ -127,7 +128,7 @@ const SectionComponent = ({ section, isTurkish }) => {
   );
 };
 
-// Ana Module5 Bile�xeni
+// Ana Module5 Bileşeni
 function Module5() {
   const { language } = useLanguage();
   const isTurkish = language === 'tr';
@@ -162,8 +163,8 @@ function Module5() {
         // Show completion message
         setTimeout(() => {
           alert(isTurkish 
-            ? 'x�0 Tebrikler! Modül 5\'i tamamladın! Artık Modül 6\'ya geçebilirsin!'
-            : 'x�0 Congratulations! You completed Module 5! You can now access Module 6!');
+            ? 'Tebrikler! Modül 5\'i tamamladın! Artık Modül 6\'ya geçebilirsin!'
+            : 'Congratulations! You completed Module 5! You can now access Module 6!');
         }, 500);
       }
     }
@@ -179,13 +180,13 @@ function Module5() {
   }
 
   return (
-    <div className="module-container">
+    <div className="module-container module-page">
       <div className="module-layout">
         {/* Sol Menu */}
         <div className="module-sidebar">
           <div className="sidebar-header">
             <Link href="/" className="back-home-btn">
-              � � {isTurkish ? 'Ana Sayfa' : 'Home'}
+              {'<-'} {isTurkish ? 'Ana Sayfa' : 'Home'}
             </Link>
             <h2>{moduleData.title}</h2>
             <p>{moduleData.subtitle}</p>
@@ -233,7 +234,7 @@ function Module5() {
                   disabled={completedSections.includes(activeSection)}
                 >
                   {completedSections.includes(activeSection) 
-                    ? (isTurkish ? 'Tamamlandı �S' : 'Completed �S')
+                    ? (isTurkish ? 'Tamamlandı' : 'Completed')
                     : (isTurkish ? 'Tamamla' : 'Complete')}
                 </button>
               </div>
@@ -246,10 +247,13 @@ function Module5() {
           <div className="section-navigation">
             <button 
               className="nav-btn prev"
-              onClick={() => setActiveSection(prev => Math.max(1, prev - 1))}
+              onClick={() => {
+                setActiveSection(prev => Math.max(1, prev - 1));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               disabled={activeSection === 1}
             >
-              � � {isTurkish ? '�nceki' : 'Previous'}
+              {'<-'} {isTurkish ? 'Önceki' : 'Previous'}
             </button>
             
             <button 
@@ -257,10 +261,11 @@ function Module5() {
               onClick={() => {
                 handleSectionComplete(activeSection);
                 setActiveSection(prev => Math.min(sections.length, prev + 1));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               disabled={activeSection === sections.length}
             >
-              {isTurkish ? 'Sonraki' : 'Next'} � 
+              {isTurkish ? 'Sonraki' : 'Next'} {'->'}
             </button>
           </div>
         </div>

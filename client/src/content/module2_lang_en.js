@@ -9,8 +9,6 @@ export const MODULE2_EN = {
         id: 1,
         title: "🔍 What Is a Digital Footprint?",
         intro: "You leave a trace in every digital action. Sometimes intentionally, sometimes unintentionally. Understanding and managing these traces is very important!",
-        activity_title: "🎮 Activity: Packet Delivery",
-        activity_desc: "Play this interactive game to learn how digital footprints are created.",
         content: {
           "1.1": {
             title: "What Is a Digital Footprint?",
@@ -75,7 +73,6 @@ export const MODULE2_EN = {
             ]
           }
         },
-        activity_type: "packet_delivery"
       },
       {
         id: 2,
@@ -273,7 +270,7 @@ export const MODULE2_EN = {
           "4.1": {
             title: "Digital Reputation",
             description: "When applying to a good university or your dream job in the future, officials may look at your 'digital reputation.' Digital reputation is how you appear online.",
-            image: "/images/module2/digital_reputation.png",
+            image: "/images/module2/digital_reputation_tr.png",
             points: [
               "Can be checked in university applications",
               "Can be researched in job applications",

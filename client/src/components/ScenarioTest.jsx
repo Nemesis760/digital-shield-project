@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import { Gamepad2, Target } from 'lucide-react';
@@ -15,6 +15,8 @@ const ScenarioTest = ({ isTurkish = true }) => {
   const [showFeedback, setShowFeedback] = useState(false);
   const [score, setScore] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState(new Set());
+  const autoAdvanceRef = useRef(null);
+  const AUTO_ADVANCE_MS = 2600;
 
   const questions = [
     {
@@ -104,9 +106,22 @@ const ScenarioTest = ({ isTurkish = true }) => {
     }
 
     setAnsweredQuestions(prev => new Set([...prev, currentQuestionIndex]));
+
+    if (currentQuestionIndex < questions.length - 1) {
+      if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
+      autoAdvanceRef.current = setTimeout(() => {
+        setCurrentQuestionIndex((prev) => Math.min(prev + 1, questions.length - 1));
+        setSelectedAnswer(null);
+        setShowFeedback(false);
+      }, AUTO_ADVANCE_MS);
+    }
   };
 
   const handleNext = () => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current);
+      autoAdvanceRef.current = null;
+    }
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
       setSelectedAnswer(null);
@@ -115,6 +130,10 @@ const ScenarioTest = ({ isTurkish = true }) => {
   };
 
   const handlePrev = () => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current);
+      autoAdvanceRef.current = null;
+    }
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(prev => prev - 1);
       setSelectedAnswer(null);
@@ -123,6 +142,10 @@ const ScenarioTest = ({ isTurkish = true }) => {
   };
 
   const handleReset = () => {
+    if (autoAdvanceRef.current) {
+      clearTimeout(autoAdvanceRef.current);
+      autoAdvanceRef.current = null;
+    }
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
     setShowFeedback(false);
@@ -142,6 +165,10 @@ const ScenarioTest = ({ isTurkish = true }) => {
       });
     }
   }, [isComplete, score, questions.length]);
+
+  useEffect(() => () => {
+    if (autoAdvanceRef.current) clearTimeout(autoAdvanceRef.current);
+  }, []);
 
   return (
     <div className="scenario-test-container">
@@ -209,10 +236,10 @@ const ScenarioTest = ({ isTurkish = true }) => {
                 <span className="option-letter">{String.fromCharCode(65 + index)}</span>
                 <span className="option-text">{option}</span>
                 {showResult && isCorrect && (
-                  <span className="result-icon">✓</span>
+                  <span className="result-icon">OK</span>
                 )}
                 {showResult && isSelected && !isCorrect && (
-                  <span className="result-icon">✕</span>
+                  <span className="result-icon">X</span>
                 )}
               </motion.button>
             );
@@ -300,10 +327,10 @@ const ScenarioTest = ({ isTurkish = true }) => {
       <style jsx>{`
         .scenario-test-container {
           width: 100%;
-          padding: 2rem;
+          padding: 1.5rem 2rem;
           background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
           border-radius: 16px;
-          min-height: 600px;
+          min-height: 100vh;
         }
 
         .test-header {
@@ -664,4 +691,3 @@ const ScenarioTest = ({ isTurkish = true }) => {
 };
 
 export default ScenarioTest;
-

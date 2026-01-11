@@ -8,7 +8,7 @@ import { useLanguage } from '../contexts/LanguageContext';
 import CyberCrisisSimulation from '../components/CyberCrisisSimulation';
 import FlappyBirdGame from '../components/FlappyBirdGame';
 import '../modules.css';
-import './module5.css';
+import './module6.css';
 
 /* ======================================================
    ADVANCED HOTSPOT CYBER QUIZ
@@ -19,7 +19,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
   const scenarios = [
     {
       title: isTurkish ? 'Gizemli Link' : 'Mystery Link',
-      image: '/images/game_first_post.png',
+      image: '/images/module6/game_first_post.png',
       question: isTurkish
         ? 'Efe hangisine tıklamalı?'
         : 'Where should Efe click?',
@@ -28,32 +28,32 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         { id: 2, correct: true, style: { top: '72%', left: '65%' } }
       ],
       correctText: isTurkish
-        ? 'Harika! Bilinmeyen linkler silinmelidir x:�️'
-        : 'Great! Unknown links should be deleted x:�️',
+        ? 'Harika! Bilinmeyen linkler silinmelidir.'
+        : 'Great! Unknown links should be deleted.',
       wrongText: isTurkish
         ? 'Bu tehlikeli olabilir. Tekrar dene!'
         : 'This could be dangerous. Try again!'
     },
     {
-      title: isTurkish ? 'Şifre Tuza�xı' : 'Password Trap',
-      image: '/images/game_password_creation.png',
+      title: isTurkish ? 'Şifre Tuzağı' : 'Password Trap',
+      image: '/images/module6/game_password_creation.png',
       question: isTurkish
-        ? 'Do�xru davranı�x hangisi?'
+        ? 'Doğru davranış hangisi?'
         : 'Which is the right action?',
       hotspots: [
         { id: 1, correct: false, style: { top: '55%', left: '42%' } },
         { id: 2, correct: true, style: { top: '78%', left: '68%' } }
       ],
       correctText: isTurkish
-        ? 'Süper! Şifreler gizli tutulur x�'
-        : 'Well done! Passwords are private x�',
+        ? 'Süper! Şifreler gizli tutulur.'
+        : 'Well done! Passwords are private.',
       wrongText: isTurkish
-        ? 'Yanlı�x seçim! Şifre payla�xılmaz.'
+        ? 'Yanlış seçim! Şifre paylaşılmaz.'
         : 'Wrong choice! Passwords are not shared.'
     },
     {
       title: isTurkish ? 'Tanımadık Mesaj' : 'Unknown Message',
-      image: '/images/game_friend_request.png',
+      image: '/images/module6/game_friend_request.png',
       question: isTurkish
         ? 'Efe ne yapmalı?'
         : 'What should Efe do?',
@@ -62,15 +62,15 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         { id: 2, correct: true, style: { top: '75%', left: '70%' } }
       ],
       correctText: isTurkish
-        ? 'Do�xru! Tanımadı�xın ki�xilerle konu�xma xa�'
-        : 'Correct! Do not talk to strangers xa�',
+        ? 'Doğru! Tanımadığın kişilerle konuşma.'
+        : 'Correct! Do not talk to strangers.',
       wrongText: isTurkish
-        ? 'Bu güvenli de�xil. Tekrar dene.'
+        ? 'Bu güvenli değil. Tekrar dene.'
         : 'This is not safe. Try again.'
     },
     {
       title: isTurkish ? 'Acil E-posta' : 'Urgent Email',
-      image: '/images/game_privacy_settings.png',
+      image: '/images/module6/game_privacy_settings.png',
       question: isTurkish
         ? 'En güvenli seçim hangisi?'
         : 'What is the safest choice?',
@@ -79,8 +79,8 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         { id: 2, correct: true, style: { top: '80%', left: '65%' } }
       ],
       correctText: isTurkish
-        ? 'Harika! �nce bir büyü�xüne danı�xmalısın x�⬍x�⬍x�'
-        : 'Great! Ask an adult first x�⬍x�⬍x�',
+        ? 'Harika! Önce bir büyüğüne danışmalısın.'
+        : 'Great! Ask an adult first.',
       wrongText: isTurkish
         ? 'Acele etmek risklidir!'
         : 'Rushing can be risky!'
@@ -128,10 +128,10 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
         initial={{ scale: 0.7, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
       >
-        <h3>x�  {isTurkish ? 'Tüm Görevler Tamamlandı!' : 'All Missions Completed!'}</h3>
+        <h3>{isTurkish ? 'Tüm Görevler Tamamlandı!' : 'All Missions Completed!'}</h3>
         <p>
           {isTurkish
-            ? 'Artık bilinçli bir dijital vatanda�xsın!'
+            ? 'Artık bilinçli bir dijital vatandaşsın!'
             : 'You are now a responsible digital citizen!'}
         </p>
       </motion.div>
@@ -143,7 +143,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
   return (
     <div className="hotspot-quiz-container">
       <div className="hotspot-quiz-header">
-        <h3>x"�️ {current.title}</h3>
+        <h3>{current.title}</h3>
         <p className="hotspot-quiz-question">{current.question}</p>
         <div className="hotspot-quiz-progress">
           {isTurkish ? 'Görev' : 'Mission'} {step + 1}/{scenarios.length}
@@ -180,7 +180,7 @@ function AdvancedHotspotCyberQuiz({ isTurkish }) {
   );
 }
 
-// Her bölüm için genel bir bile�xen
+// Her bölüm için genel bir bileşen
 const SectionComponent = ({ section, isTurkish }) => {
   const renderActivity = () => {
     const activityType = section.activity_type;
@@ -196,7 +196,7 @@ const SectionComponent = ({ section, isTurkish }) => {
         return (
           <div className="activity-placeholder">
             <p className="activity-placeholder-text">
-              {isTurkish ? 'Aktivite bile�xeni yükleniyor...' : 'Loading activity component...'}
+              {isTurkish ? 'Aktivite bileşeni yükleniyor...' : 'Loading activity component...'}
             </p>
           </div>
         );
@@ -256,7 +256,7 @@ const SectionComponent = ({ section, isTurkish }) => {
 
               {contentItem.examples && Array.isArray(contentItem.examples) && (
                 <div className="content-examples">
-                  <h4>{isTurkish ? '�rnekler:' : 'Examples:'}</h4>
+                  <h4>{isTurkish ? 'Örnekler:' : 'Examples:'}</h4>
                   <ul>
                     {contentItem.examples.map((example, idx) => (
                       <li key={idx}>{example}</li>
@@ -279,7 +279,7 @@ const SectionComponent = ({ section, isTurkish }) => {
   );
 };
 
-// Ana Module6 Bile�xeni
+// Ana Module6 Bileşeni
 function Module6() {
   const { language } = useLanguage();
   const isTurkish = language === 'tr';
@@ -314,8 +314,8 @@ function Module6() {
         // Show completion message
         setTimeout(() => {
           alert(isTurkish 
-            ? 'x�0 Tebrikler! Modül 6\'yı tamamladın! Tüm modülleri bitirdin!'
-            : 'x�0 Congratulations! You completed Module 6! You finished all modules!');
+            ? 'Tebrikler! Modül 6\'yı tamamladın! Tüm modülleri bitirdin!'
+            : 'Congratulations! You completed Module 6! You finished all modules!');
         }, 500);
       }
     }
@@ -331,13 +331,13 @@ function Module6() {
   }
 
   return (
-    <div className="module-container">
+    <div className="module-container module-page">
       <div className="module-layout">
         {/* Sol Menu */}
         <div className="module-sidebar">
           <div className="sidebar-header">
             <Link href="/" className="back-home-btn">
-              � � {isTurkish ? 'Ana Sayfa' : 'Home'}
+              {'<-'} {isTurkish ? 'Ana Sayfa' : 'Home'}
             </Link>
             <h2>{moduleData.title}</h2>
             <p>{moduleData.subtitle}</p>
@@ -385,7 +385,7 @@ function Module6() {
                   disabled={completedSections.includes(activeSection)}
                 >
                   {completedSections.includes(activeSection) 
-                    ? (isTurkish ? 'Tamamlandı �S' : 'Completed �S')
+                    ? (isTurkish ? 'Tamamlandı' : 'Completed')
                     : (isTurkish ? 'Tamamla' : 'Complete')}
                 </button>
               </div>
@@ -398,10 +398,13 @@ function Module6() {
           <div className="section-navigation">
             <button 
               className="nav-btn prev"
-              onClick={() => setActiveSection(prev => Math.max(1, prev - 1))}
+              onClick={() => {
+                setActiveSection(prev => Math.max(1, prev - 1));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               disabled={activeSection === 1}
             >
-              � � {isTurkish ? '�nceki' : 'Previous'}
+              {'<-'} {isTurkish ? 'Önceki' : 'Previous'}
             </button>
             
             <button 
@@ -409,10 +412,11 @@ function Module6() {
               onClick={() => {
                 handleSectionComplete(activeSection);
                 setActiveSection(prev => Math.min(sections.length, prev + 1));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               disabled={activeSection === sections.length}
             >
-              {isTurkish ? 'Sonraki' : 'Next'} � 
+              {isTurkish ? 'Sonraki' : 'Next'} {'->'}
             </button>
           </div>
         </div>
@@ -422,5 +426,6 @@ function Module6() {
 }
 
 export default Module6;
+
 
 

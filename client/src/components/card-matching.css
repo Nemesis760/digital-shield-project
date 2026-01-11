@@ -32,6 +32,15 @@
   font-weight: 500;
 }
 
+.card-matching-instructions {
+  margin: 1rem auto 0;
+  padding-left: 1.2rem;
+  color: #475569;
+  text-align: left;
+  max-width: 520px;
+  line-height: 1.5;
+}
+
 .scenarios-container {
   display: flex;
   flex-direction: column;
@@ -118,6 +127,17 @@
 
 .passive-btn:hover {
   background: #06b6d4;
+  color: white;
+  transform: scale(1.05);
+}
+
+.option-btn {
+  border-color: #0ea5e9;
+  color: #0ea5e9;
+}
+
+.option-btn:hover {
+  background: #0ea5e9;
   color: white;
   transform: scale(1.05);
 }
@@ -224,4 +244,3 @@
     width: 100%;
   }
 }
-

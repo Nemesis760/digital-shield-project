@@ -278,6 +278,27 @@ function GameUI({
     return wordCells.get(selectedWord.id) ?? [];
   }, [selectedWord, wordCells]);
 
+  const isCellLocked = (cell) => {
+    const sol = solution[cell.r][cell.c];
+    if (!sol) return false;
+    return sol.wordIds.some((id) => solved.has(id));
+  };
+
+  const findNextEditableIndex = (start) => {
+    for (let i = Math.max(start, 0); i < selectedCoords.length; i += 1) {
+      if (!isCellLocked(selectedCoords[i])) return i;
+    }
+    return -1;
+  };
+
+  const findPrevEditableIndex = (start) => {
+    for (let i = Math.min(start, selectedCoords.length - 1); i >= 0; i -= 1) {
+      if (!isCellLocked(selectedCoords[i])) return i;
+    }
+    return -1;
+  };
+
+
   const activeCell = useMemo(() => {
     if (!selectedCoords.length) return null;
     const idx = clamp(cursorIndex, 0, selectedCoords.length - 1);
@@ -287,10 +308,11 @@ function GameUI({
   const rootRef = useRef(null);
 
   useEffect(() => {
-    setCursorIndex(0);
+    const firstEditable = findNextEditableIndex(0);
+    setCursorIndex(firstEditable >= 0 ? firstEditable : 0);
     setCheckStatus(null);
     if (selectedWordId) setMode("type");
-  }, [selectedWordId]);
+  }, [selectedWordId, selectedCoords]);
 
   useEffect(() => {
     if (mode === "type") {
@@ -396,24 +418,33 @@ function GameUI({
 
     if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
       e.preventDefault();
-      setCursorIndex((i) => clamp(i - 1, 0, selectedCoords.length - 1));
+      const prevIdx = findPrevEditableIndex(cursorIndex - 1);
+      if (prevIdx >= 0) setCursorIndex(prevIdx);
       return;
     }
     if (e.key === "ArrowRight" || e.key === "ArrowDown") {
       e.preventDefault();
-      setCursorIndex((i) => clamp(i + 1, 0, selectedCoords.length - 1));
+      const nextIdx = findNextEditableIndex(cursorIndex + 1);
+      if (nextIdx >= 0) setCursorIndex(nextIdx);
       return;
     }
 
     if (e.key === "Backspace") {
       e.preventDefault();
-      const k = keyOf(cell.r, cell.c);
+      const prevIdx = findPrevEditableIndex(cursorIndex);
+      if (prevIdx < 0) return;
+      const prevCell = selectedCoords[prevIdx];
+      const k = keyOf(prevCell.r, prevCell.c);
       if (entries[k]) {
-        clearCharAt(cell.r, cell.c);
+        clearCharAt(prevCell.r, prevCell.c);
+        setCursorIndex(prevIdx);
       } else {
-        setCursorIndex((i) => clamp(i - 1, 0, selectedCoords.length - 1));
-        const prev = selectedCoords[clamp(cursorIndex - 1, 0, selectedCoords.length - 1)];
-        if (prev) clearCharAt(prev.r, prev.c);
+        const prevIdx2 = findPrevEditableIndex(prevIdx - 1);
+        if (prevIdx2 >= 0) {
+          const prevCell2 = selectedCoords[prevIdx2];
+          clearCharAt(prevCell2.r, prevCell2.c);
+          setCursorIndex(prevIdx2);
+        }
       }
       return;
     }
@@ -552,12 +583,10 @@ function GameUI({
               Soldaki sorulardan birini seç veya gridde numaralı kutuya tıkla.
             </span>
           ) : (
-            <>
-              <span className="opacity-75">İpucu:</span>{" "}
+            <span className="hidden md:inline"><span className="opacity-75">İpucu:</span>{" "}
               <span className="font-extrabold text-white">{selectedWord?.clueTr}</span>
               <span className="opacity-70"> — </span>
-              <span className="opacity-95">Enter = kontrol, Backspace = sil</span>
-            </>
+              <span className="opacity-95">Enter = kontrol, Backspace = sil</span></span>
           )}
         </div>
 

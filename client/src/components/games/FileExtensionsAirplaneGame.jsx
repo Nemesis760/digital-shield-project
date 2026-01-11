@@ -165,16 +165,6 @@ export default function FileExtensionsAirplaneGame() {
       for (let x = drawOffset; x < ASPECT_W + width; x += width) {
         ctx.drawImage(img, x, y, width, height);
       }
-
-      ctx.globalAlpha = 0.3;
-      for (let x = drawOffset; x < ASPECT_W + width; x += width) {
-        const seamX = x + width - 8;
-        const grad = ctx.createLinearGradient(seamX, 0, seamX + 16, 0);
-        grad.addColorStop(0, "rgba(255,255,255,0.12)");
-        grad.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = grad;
-        ctx.fillRect(seamX, y, 16, height);
-      }
       ctx.globalAlpha = 1;
       return drawOffset;
     };
@@ -233,7 +223,7 @@ export default function FileExtensionsAirplaneGame() {
         ctx.fill();
         ctx.fillStyle = "white";
         ctx.font = "bold 16px sans-serif";
-        ctx.fillText("✓", x + 34, y - 22);
+                        ctx.fillText("OK", x + 34, y - 22);
       }
 
       if (result === "bad") {
@@ -243,7 +233,7 @@ export default function FileExtensionsAirplaneGame() {
         ctx.fill();
         ctx.fillStyle = "white";
         ctx.font = "bold 16px sans-serif";
-        ctx.fillText("✕", x + 34, y - 22);
+        ctx.fillText("X", x + 34, y - 22);
       }
 
       ctx.restore();
@@ -439,6 +429,8 @@ export default function FileExtensionsAirplaneGame() {
       canvas.height = rect.height * dpr;
       canvas.style.width = `${rect.width}px`;
       canvas.style.height = `${rect.height}px`;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = "high";
       ctx.setTransform((rect.width / ASPECT_W) * dpr, 0, 0, (rect.height / ASPECT_H) * dpr, 0, 0);
     };
 

@@ -1,56 +1,69 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import confetti from 'canvas-confetti';
 import soundManager from '../utils/soundEffects';
 
 /**
  * Data Factory Game - Module 1
- * Kitchen metaphor for IPOS (Input-Process-Output-Storage)
- * Users drag items to correct kitchen stations
+ * Custom drag with Pointer Events (works with scroll + mobile)
+ * + Edge auto-scroll while dragging
+ * + Select & Tap fallback (mobile friendly)
+ * + Ghost offset (not under finger)
+ * + Better confetti
+ * + Slightly shorter station boxes on large screens
  */
 
 const DataFactoryGame = ({ isTurkish = true }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [draggedItem, setDraggedItem] = useState(null);
+
   const [stations, setStations] = useState({
     input: [],
     process: [],
     output: [],
     storage: [],
   });
+
+  const [availableItems, setAvailableItems] = useState([]);
   const [feedback, setFeedback] = useState(null);
   const [gameComplete, setGameComplete] = useState(false);
   const [score, setScore] = useState(0);
 
-  // Items to categorize (memo so reset works correctly across renders)
+  const [selectedItem, setSelectedItem] = useState(null);
+
+  // Custom drag state
+  const [dragState, setDragState] = useState({
+    active: false,
+    item: null,
+    x: 0,
+    y: 0,
+    offsetX: 0,
+    offsetY: 0,
+  });
+
+  const scrollAreaRef = useRef(null);
+  const feedbackTimeoutRef = useRef(null);
+  const dragStateRef = useRef(dragState);
+  const dropHandledRef = useRef(false);
+
+  // Ghost should be slightly above the pointer (so finger doesn't cover it)
+  const GHOST_LIFT_Y = 36; // px
+
   const items = useMemo(
     () => [
       { id: 1, name: isTurkish ? 'Klavye' : 'Keyboard', category: 'input', emoji: '⌨️' },
       { id: 2, name: isTurkish ? 'Fare' : 'Mouse', category: 'input', emoji: '🖱️' },
       { id: 3, name: isTurkish ? 'Mikrofon' : 'Microphone', category: 'input', emoji: '🎤' },
-      { id: 4, name: isTurkish ? 'CPU' : 'CPU', category: 'process', emoji: '💻' },
+      { id: 4, name: 'CPU', category: 'process', emoji: '💻' },
       { id: 5, name: isTurkish ? 'İşlemci' : 'Processor', category: 'process', emoji: '⚙️' },
       { id: 6, name: isTurkish ? 'Monitör' : 'Monitor', category: 'output', emoji: '🖥️' },
       { id: 7, name: isTurkish ? 'Hoparlör' : 'Speaker', category: 'output', emoji: '🔊' },
       { id: 8, name: isTurkish ? 'Yazıcı' : 'Printer', category: 'output', emoji: '🖨️' },
       { id: 9, name: isTurkish ? 'Sabit Disk' : 'Hard Drive', category: 'storage', emoji: '💾' },
       { id: 10, name: isTurkish ? 'USB Bellek' : 'USB Drive', category: 'storage', emoji: '💿' },
-      { id: 11, name: isTurkish ? 'RAM' : 'RAM', category: 'storage', emoji: '🧠' },
+      { id: 11, name: 'RAM', category: 'storage', emoji: '🧠' },
     ],
     [isTurkish]
   );
-
-  const [availableItems, setAvailableItems] = useState([...items]);
-
-  useEffect(() => {
-    // language changes -> refresh available items
-    setAvailableItems([...items]);
-    setStations({ input: [], process: [], output: [], storage: [] });
-    setScore(0);
-    setFeedback(null);
-    setGameComplete(false);
-    setDraggedItem(null);
-  }, [items]);
 
   const stationsConfig = {
     input: {
@@ -79,74 +92,251 @@ const DataFactoryGame = ({ isTurkish = true }) => {
     },
   };
 
-  const handleDragStart = (item) => {
-    setDraggedItem(item);
-  };
+  // Reset on language change
+  useEffect(() => {
+    setAvailableItems([...items]);
+    setStations({ input: [], process: [], output: [], storage: [] });
+    setScore(0);
+    setFeedback(null);
+    setGameComplete(false);
+    setSelectedItem(null);
+    setDragState({ active: false, item: null, x: 0, y: 0, offsetX: 0, offsetY: 0 });
+  }, [items]);
 
-  const handleDragOver = (e) => {
-    e.preventDefault();
-  };
+  // Cleanup feedback timeout
+  useEffect(() => {
+    return () => {
+      if (feedbackTimeoutRef.current) clearTimeout(feedbackTimeoutRef.current);
+    };
+  }, []);
 
-  const handleDrop = (stationKey) => {
-    if (!draggedItem) return;
+  useEffect(() => {
+    dragStateRef.current = dragState;
+  }, [dragState]);
 
-    const isCorrect = draggedItem.category === stationKey;
-
-    if (isCorrect) {
-      setStations((prev) => ({
-        ...prev,
-        [stationKey]: [...prev[stationKey], draggedItem],
-      }));
-
-      setAvailableItems((prev) => prev.filter((item) => item.id !== draggedItem.id));
-
-      setScore((prev) => prev + 10);
-
-      setFeedback({
-        type: 'success',
-        message: isTurkish ? `🎉 Harika! ${draggedItem.name} doğru yerde!` : `🎉 Great! ${draggedItem.name} is correct!`,
-      });
-
-      soundManager.playCorrect();
-      confetti({
-        particleCount: 50,
-        spread: 60,
-        origin: { y: 0.6 },
-        colors: ['#10b981', '#059669', '#34d399', '#fbbf24'],
-      });
-
-      if (availableItems.length === 1) {
-        setTimeout(() => {
-          setGameComplete(true);
-          soundManager.playSuccess();
-          confetti({
-            particleCount: 200,
-            spread: 100,
-            origin: { y: 0.6 },
-            colors: ['#10b981', '#059669', '#34d399', '#fbbf24', '#f59e0b', '#6366f1'],
-          });
-        }, 500);
-      }
-    } else {
-      soundManager.playWrong();
-      setFeedback({
-        type: 'error',
-        message: isTurkish ? `❌ ${draggedItem.name} buraya ait değil! Tekrar dene.` : `❌ ${draggedItem.name} doesn't belong here! Try again.`,
-      });
-    }
-
-    setDraggedItem(null);
-    setTimeout(() => setFeedback(null), 2000);
+  const clearFeedbackLater = () => {
+    if (feedbackTimeoutRef.current) clearTimeout(feedbackTimeoutRef.current);
+    feedbackTimeoutRef.current = setTimeout(() => setFeedback(null), 2000);
   };
 
   const handleReset = () => {
-    setStations({ input: [], process: [], output: [], storage: [] });
     setAvailableItems([...items]);
-    setGameComplete(false);
+    setStations({ input: [], process: [], output: [], storage: [] });
     setScore(0);
     setFeedback(null);
-    setDraggedItem(null);
+    setGameComplete(false);
+    setSelectedItem(null);
+    setDragState({ active: false, item: null, x: 0, y: 0, offsetX: 0, offsetY: 0 });
   };
+
+  // Better confetti: 2 waves
+  const confettiSuccess = () => {
+    confetti({
+      particleCount: 70,
+      spread: 85,
+      startVelocity: 42,
+      gravity: 0.9,
+      ticks: 220,
+      origin: { y: 0.65 },
+      scalar: 1.05,
+    });
+
+    setTimeout(() => {
+      confetti({
+        particleCount: 55,
+        spread: 120,
+        startVelocity: 34,
+        gravity: 1.05,
+        ticks: 240,
+        origin: { y: 0.62 },
+        scalar: 0.95,
+      });
+    }, 120);
+  };
+
+  // Final confetti: short "rain"
+  const confettiFinale = () => {
+    const duration = 900;
+    const end = Date.now() + duration;
+
+    const frame = () => {
+      confetti({
+        particleCount: 14,
+        spread: 120,
+        startVelocity: 48,
+        gravity: 0.95,
+        ticks: 260,
+        origin: { x: Math.random(), y: 0.6 },
+        scalar: 1.05,
+      });
+
+      if (Date.now() < end) requestAnimationFrame(frame);
+    };
+
+    frame();
+  };
+
+  const showSuccess = (activeItem) => {
+    setFeedback({
+      type: 'success',
+      message: isTurkish ? `${activeItem.name} doğru yerde!` : `${activeItem.name} is correct!`,
+    });
+
+    soundManager.playCorrect();
+    confettiSuccess();
+    clearFeedbackLater();
+  };
+
+  const showError = (activeItem) => {
+    soundManager.playWrong();
+    setFeedback({
+      type: 'error',
+      message: isTurkish
+        ? `${activeItem.name} buraya ait değil! Tekrar dene.`
+        : `${activeItem.name} doesn't belong here! Try again.`,
+    });
+    clearFeedbackLater();
+  };
+
+  const completeGame = () => {
+    setTimeout(() => {
+      setGameComplete(true);
+      soundManager.playSuccess();
+      confettiFinale();
+    }, 350);
+  };
+
+  const placeItemToStation = (stationKey, activeItem) => {
+    const isCorrect = activeItem.category === stationKey;
+
+    if (!isCorrect) {
+      showError(activeItem);
+      return;
+    }
+
+    setStations((prev) => ({
+      ...prev,
+      [stationKey]: [...prev[stationKey], activeItem],
+    }));
+
+    setAvailableItems((prev) => {
+      const next = prev.filter((it) => it.id !== activeItem.id);
+      if (next.length === 0) completeGame();
+      return next;
+    });
+
+    setScore((prev) => prev + 10);
+    showSuccess(activeItem);
+
+    setSelectedItem(null);
+  };
+
+  const handleItemSelect = (item) => {
+    setSelectedItem((prev) => (prev?.id === item.id ? null : item));
+  };
+
+  // Edge auto-scroll while dragging
+  const autoScrollIfNeeded = (clientY) => {
+    const el = scrollAreaRef.current;
+    if (!el) return;
+
+    const rect = el.getBoundingClientRect();
+    const edge = 90;
+    const speed = 22;
+
+    if (clientY < rect.top + edge) el.scrollBy({ top: -speed, behavior: 'auto' });
+    else if (clientY > rect.bottom - edge) el.scrollBy({ top: speed, behavior: 'auto' });
+  };
+
+  // Pointer drag start
+  const onPointerDownItem = (e, item) => {
+    if (e.pointerType === 'mouse') e.preventDefault();
+
+    const cardRect = e.currentTarget.getBoundingClientRect();
+    const offsetX = e.clientX - cardRect.left;
+    const offsetY = e.clientY - cardRect.top;
+
+    dropHandledRef.current = false;
+    const nextDragState = {
+      active: true,
+      item,
+      x: e.clientX,
+      y: e.clientY,
+      offsetX,
+      offsetY,
+    };
+
+    dragStateRef.current = nextDragState;
+    setDragState(nextDragState);
+
+    if (e.pointerType === 'mouse') {
+      try {
+        e.currentTarget.setPointerCapture(e.pointerId);
+      } catch {}
+    }
+  };
+
+  // Pointer move (inside scroll area)
+  const onPointerMove = (e) => {
+    if (!dragStateRef.current.active) return;
+
+    setDragState((prev) => ({
+      ...prev,
+      x: e.clientX,
+      y: e.clientY,
+    }));
+
+    autoScrollIfNeeded(e.clientY);
+  };
+
+  // Pointer up: decide drop target
+  const onPointerUp = (e) => {
+    const currentDrag = dragStateRef.current;
+    if (!currentDrag.active || !currentDrag.item || dropHandledRef.current) return;
+    dropHandledRef.current = true;
+
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    const stationEl = el?.closest?.('[data-station]');
+    const stationKey = stationEl?.getAttribute?.('data-station');
+
+    const activeItem = currentDrag.item;
+
+    // End drag first
+    const resetDragState = { active: false, item: null, x: 0, y: 0, offsetX: 0, offsetY: 0 };
+    dragStateRef.current = resetDragState;
+    setDragState(resetDragState);
+
+    if (stationKey) {
+      placeItemToStation(stationKey, activeItem);
+    } else {
+      setFeedback({
+        type: 'error',
+        message: isTurkish ? 'Bir istasyonun içine bırakmalısın!' : 'Drop it inside a station!',
+      });
+      clearFeedbackLater();
+    }
+  };
+
+  useEffect(() => {
+    if (!dragState.active) return;
+
+    const handlePointerCancel = () => {
+      const currentDrag = dragStateRef.current;
+      if (!currentDrag.active || dropHandledRef.current) return;
+      dropHandledRef.current = true;
+      const resetDragState = { active: false, item: null, x: 0, y: 0, offsetX: 0, offsetY: 0 };
+      dragStateRef.current = resetDragState;
+      setDragState(resetDragState);
+    };
+
+    window.addEventListener('pointerup', onPointerUp);
+    window.addEventListener('pointercancel', handlePointerCancel);
+
+    return () => {
+      window.removeEventListener('pointerup', onPointerUp);
+      window.removeEventListener('pointercancel', handlePointerCancel);
+    };
+  }, [dragState.active]);
 
   // ESC closes overlay
   useEffect(() => {
@@ -161,14 +351,13 @@ const DataFactoryGame = ({ isTurkish = true }) => {
   }, [isOverlayOpen]);
 
   const GameBody = ({ showFullscreenButton, showModal }) => (
-    // ✅ INLINE: max-h ile page şişmez | OVERLAY: full height
     <div
       className={[
         'data-factory-game w-full bg-slate-900 overflow-hidden flex flex-col rounded-2xl',
-        isOverlayOpen ? 'h-[100dvh]' : 'max-h-[720px]',
+        isOverlayOpen ? 'h-[100dvh]' : 'min-h-[520px]',
       ].join(' ')}
     >
-      {/* ✅ HEADER: sabit kalsın */}
+      {/* HEADER */}
       <div className="p-4 md:p-6 shrink-0">
         <div className="text-center mb-4 md:mb-6">
           <h3 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-yellow-400 to-orange-400">
@@ -176,8 +365,8 @@ const DataFactoryGame = ({ isTurkish = true }) => {
           </h3>
           <p className="text-slate-300 mb-4">
             {isTurkish
-              ? 'Cihazları doğru mutfak istasyonlarına sürükle! (IPOS: Input-Process-Output-Storage)'
-              : 'Drag devices to the correct kitchen stations! (IPOS: Input-Process-Output-Storage)'}
+              ? 'Cihazları doğru istasyonlara sürükle! (IPOS: Input-Process-Output-Storage)'
+              : 'Drag devices to the correct stations! (IPOS: Input-Process-Output-Storage)'}
           </p>
 
           <div className="flex items-center justify-center gap-4 flex-wrap">
@@ -210,13 +399,13 @@ const DataFactoryGame = ({ isTurkish = true }) => {
           </div>
         </div>
 
-        {/* Feedback Message */}
+        {/* Feedback */}
         <AnimatePresence>
           {feedback && (
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
+              initial={{ opacity: 0, y: -18 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              exit={{ opacity: 0, y: -18 }}
               className={`text-center p-3 md:p-4 rounded-lg font-semibold ${
                 feedback.type === 'success'
                   ? 'bg-green-500/20 text-green-400 border border-green-500/50'
@@ -229,46 +418,60 @@ const DataFactoryGame = ({ isTurkish = true }) => {
         </AnimatePresence>
       </div>
 
-      {/* ✅ Scroll sadece burada: flex child için min-h-0 şart */}
-      <div className="flex-1 min-h-0 overflow-y-auto px-4 md:px-6 pb-6">
+      {/* Scroll area */}
+      <div
+        ref={scrollAreaRef}
+        className="flex-1 min-h-0 overflow-y-auto px-4 md:px-6 pb-6 touch-pan-y"
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+      >
         {/* Stations */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-6 mb-6">
           {Object.entries(stationsConfig).map(([key, config]) => (
             <motion.div
               key={key}
+              data-station={key}
               className={[
-                `bg-gradient-to-br ${config.color} rounded-xl p-4 md:p-6 border-2 border-white/20`,
-                isOverlayOpen ? 'min-h-[200px]' : 'min-h-[150px]',
+                `bg-gradient-to-br ${config.color} rounded-xl border-2 border-white/20`,
+                // ✅ height slightly reduced on large screens (more compact)
+                // mobile/tablet still roomy; lg+ becomes shorter
+                isOverlayOpen
+                  ? 'min-h-[120px] md:min-h-[150px] xl:min-h-[180px] p-4 md:p-5'
+                  : 'min-h-[100px] md:min-h-[135px] xl:min-h-[170px] p-4 md:p-5',
               ].join(' ')}
-              onDragOver={handleDragOver}
-              onDrop={() => handleDrop(key)}
-              whileHover={{ scale: 1.02 }}
+              onClick={() => {
+                if (selectedItem) placeItemToStation(key, selectedItem);
+              }}
+              whileHover={{ scale: 1.01 }}
             >
-              <div className="text-center mb-3 md:mb-4">
+              <div className="text-center mb-3 md:mb-4 pointer-events-none">
                 <div className="text-4xl mb-2">{config.emoji}</div>
                 <h4 className="text-xl font-bold text-white mb-1">{config.title}</h4>
                 <p className="text-sm text-white/80">{config.description}</p>
               </div>
 
-              <div className="min-h-[100px] md:min-h-[120px] bg-white/10 rounded-lg p-3 md:p-4 backdrop-blur-sm">
+              <div className="min-h-[70px] md:min-h-[85px] xl:min-h-[105px] bg-white/10 rounded-lg p-3 md:p-4 backdrop-blur-sm">
                 <AnimatePresence>
                   {stations[key].map((item, index) => (
                     <motion.div
                       key={item.id}
-                      initial={{ opacity: 0, scale: 0, rotate: -180 }}
-                      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-                      exit={{ opacity: 0, scale: 0, rotate: 180 }}
-                      transition={{ delay: index * 0.08 }}
-                      className="inline-block bg-white/20 rounded-lg px-3 py-2 m-1 text-white font-semibold"
+                      initial={{ opacity: 0, scale: 0.9, y: 6 }}
+                      animate={{ opacity: 1, scale: 1, y: 0 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ delay: index * 0.06 }}
+                      className="inline-flex items-center gap-2 bg-white/20 rounded-lg px-3 py-2 m-1 text-white font-semibold"
                     >
-                      {item.emoji} {item.name}
+                      <span className="text-xl">{item.emoji}</span>
+                      <span>{item.name}</span>
                     </motion.div>
                   ))}
                 </AnimatePresence>
 
                 {stations[key].length === 0 && (
-                  <p className="text-white/50 text-center text-sm py-6 md:py-8">
-                    {isTurkish ? '✨ Öğe sürükle buraya! ✨' : '✨ Drag items here! ✨'}
+                  <p className="text-white/50 text-center text-sm py-6 lg:py-5">
+                    {isTurkish
+                      ? '✨ Buraya sürükle (veya seçip tıkla)! ✨'
+                      : '✨ Drag here (or select & tap)! ✨'}
                   </p>
                 )}
               </div>
@@ -279,35 +482,80 @@ const DataFactoryGame = ({ isTurkish = true }) => {
         {/* Available Items */}
         <div className="bg-slate-800 rounded-xl p-4 md:p-6">
           <h4 className="text-xl font-bold mb-4 text-center text-slate-200">
-            {isTurkish ? '📦 Sürüklenecek Öğeler' : '📦 Items to Drag'}
+            {isTurkish ? '📦 Öğeler' : '📦 Items'}
           </h4>
 
-          {/* ✅ Inline’da da taşma olmasın: içeride scroll */}
-          <div className="flex flex-wrap gap-3 justify-center max-h-[220px] overflow-y-auto pr-2">
+          <div className="flex flex-wrap gap-3 justify-center max-h-[240px] sm:max-h-[280px] overflow-y-auto pr-2">
             <AnimatePresence>
-              {availableItems.map((item) => (
-                <motion.div
-                  key={item.id}
-                  draggable
-                  onDragStart={() => handleDragStart(item)}
-                  className="bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg px-4 py-3 cursor-grab active:cursor-grabbing border-2 border-slate-600 hover:border-blue-500 transition-colors touch-none select-none"
-                  whileHover={{ scale: 1.06, rotate: 3 }}
-                  whileDrag={{ scale: 1.12, rotate: 7, zIndex: 1000 }}
-                  whileTap={{ scale: 0.98 }}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                >
-                  <span className="text-2xl">{item.emoji}</span>
-                  <span className="ml-2 text-white font-semibold">{item.name}</span>
-                </motion.div>
-              ))}
+              {availableItems.map((item) => {
+                const isActiveDraggingThis = dragState.active && dragState.item?.id === item.id;
+
+                return (
+                  <motion.div
+                    key={item.id}
+                    onClick={() => handleItemSelect(item)}
+                    onPointerDown={(e) => onPointerDownItem(e, item)}
+                    className={[
+                      'bg-gradient-to-br from-slate-700 to-slate-800 rounded-lg px-4 py-3',
+                      'border-2 border-slate-600 hover:border-blue-500 transition-colors',
+                      'select-none cursor-grab active:cursor-grabbing',
+                      'touch-pan-y',
+                      selectedItem?.id === item.id ? 'ring-2 ring-yellow-300' : '',
+                      // ✅ when dragging this item, keep it lightly visible (no “vanish” feeling)
+                      isActiveDraggingThis ? 'opacity-80' : '',
+                    ].join(' ')}
+                    whileHover={{ scale: 1.05, rotate: 2 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    <span className="inline-flex items-center gap-2 pointer-events-none">
+                      <span className="text-2xl">{item.emoji}</span>
+                      <span className="text-white font-semibold">{item.name}</span>
+                    </span>
+                  </motion.div>
+                );
+              })}
             </AnimatePresence>
           </div>
+
+          {selectedItem && (
+            <p className="text-center text-slate-300 text-sm mt-4">
+              {isTurkish
+                ? `Seçildi: ${selectedItem.name}. Bir istasyona dokun.`
+                : `Selected: ${selectedItem.name}. Tap a station.`}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Complete Modal: overlay açıkken de gösterilebilir */}
+      {/* Drag ghost (follows pointer) */}
+      <AnimatePresence>
+        {dragState.active && dragState.item && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="fixed z-[99999] pointer-events-none"
+            style={{
+              left: dragState.x - dragState.offsetX,
+              // ✅ lift ghost up so finger doesn’t cover it
+              top: dragState.y - dragState.offsetY - GHOST_LIFT_Y,
+              width: 240,
+            }}
+          >
+            <div className="bg-slate-800/95 border-2 border-yellow-300/60 rounded-xl px-4 py-3 shadow-2xl ring-4 ring-yellow-300/20">
+              <div className="flex items-center gap-2">
+                <span className="text-2xl">{dragState.item.emoji}</span>
+                <span className="text-white font-semibold">{dragState.item.name}</span>
+              </div>
+              <div className="text-xs text-slate-200/90 mt-1">
+                {isTurkish ? 'İstasyona bırak' : 'Drop into a station'}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Complete Modal */}
       {showModal && (
         <AnimatePresence>
           {gameComplete && (
@@ -319,10 +567,10 @@ const DataFactoryGame = ({ isTurkish = true }) => {
               onClick={handleReset}
             >
               <motion.div
-                initial={{ scale: 0.8, rotate: -10, opacity: 0 }}
-                animate={{ scale: 1, rotate: 0, opacity: 1 }}
-                exit={{ scale: 0.8, opacity: 0 }}
-                className="bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl p-8 max-w-md text-center"
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="bg-gradient-to-br from-yellow-500 to-orange-500 rounded-2xl p-8 max-w-md text-center mx-4"
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="text-6xl mb-4">🎉</div>
@@ -331,8 +579,8 @@ const DataFactoryGame = ({ isTurkish = true }) => {
                 </h3>
                 <p className="text-white/90 mb-6 text-lg">
                   {isTurkish
-                    ? 'Tüm cihazları doğru istasyonlara yerleştirdin! Dijital mutfak hazır!'
-                    : 'You placed all devices in the correct stations! Digital kitchen is ready!'}
+                    ? 'Tüm cihazları doğru istasyonlara yerleştirdin!'
+                    : 'You placed all devices in the correct stations!'}
                 </p>
                 <p className="text-2xl font-bold text-white mb-6">
                   {isTurkish ? 'Toplam Puan' : 'Total Score'}: {score}
@@ -355,10 +603,8 @@ const DataFactoryGame = ({ isTurkish = true }) => {
 
   return (
     <>
-      {/* Inline preview */}
       <GameBody showFullscreenButton showModal={!isOverlayOpen} />
 
-      {/* Fullscreen overlay */}
       <AnimatePresence>
         {isOverlayOpen && (
           <motion.div
@@ -368,7 +614,6 @@ const DataFactoryGame = ({ isTurkish = true }) => {
             className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm"
             onClick={() => setIsOverlayOpen(false)}
           >
-            {/* ✅ KERPİKSIZ: dış scroll yok */}
             <div
               className="w-screen h-[100dvh] bg-slate-900 overflow-hidden"
               onClick={(event) => event.stopPropagation()}
@@ -384,7 +629,6 @@ const DataFactoryGame = ({ isTurkish = true }) => {
                   ✕
                 </button>
 
-                {/* Overlay modda aynı component, h-[100dvh] devreye girer */}
                 <GameBody showFullscreenButton={false} showModal />
               </div>
             </div>

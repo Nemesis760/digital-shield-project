@@ -3,16 +3,30 @@
 export const MODULE1_EN = {
   module_1: {
     title: "Module 1: Exploring the Computer World",
-    subtitle: "🟢 Single Module - 5 Subtopics",
+   
     sections: [
       {
         id: 1,
-        title: "🟢 SUBTOPIC 1: WHAT IS A COMPUTER AND HOW DOES IT THINK?",
+        title: "💻 What is a computer and how does it think?",
         subtitle: "Introduction, Logic and Basic Definitions",
         intro: "A computer is an electronic machine that takes data as raw material, processes it, stores it, and presents the results to us as products. It works just like a factory!",
         video_links: [
-          { title: "Code.org: What Makes a Computer, a Computer?", url: "https://www.youtube.com/watch?v=mCq8-xTH7jA" },
-          { title: "Crash Course: Representing Numbers with Binary", url: "https://www.youtube.com/watch?v=1GSjbWt0c9M" }
+          {
+            title: "Code.org: What Makes a Computer, a Computer?",
+            url: "https://www.youtube.com/watch?v=mCq8-xTH7jA",
+            thumbnail: "/images/module3/video_en.png"
+          },
+          {
+            title: "Crash Course: Representing Numbers with Binary",
+            url: "https://www.youtube.com/watch?v=1GSjbWt0c9M",
+            thumbnail: "/images/module3/video_en.png"
+          },
+          {
+            title: "Inside your computer: How it works",
+            url: "https://youtu.be/AkFi90lZmXA?si=vI8fmHM7U0VHG-CT",
+            thumbnail: "/images/module3/video_en.png"
+          }
+
         ],
         content: {
           "1.1": {
@@ -23,7 +37,7 @@ export const MODULE1_EN = {
               "Process (Production Line): The processor calculates the data",
               "Output (Product): The image on the screen or paper from the printer"
             ],
-            image: "/images/module1_factory_analogy.png",
+            image: "/images/module1/bilgisayar\u0131n_tan\u0131m\u0131_en.png",
             examples: [
               "When you type on a keyboard, you're providing INPUT",
               "The CPU processes your typing and converts it to text (PROCESS)",
@@ -42,7 +56,7 @@ export const MODULE1_EN = {
           "1.3": {
             title: "Binary System (Computer's Language)",
             description: "Computers don't speak like we do with A, B, C. They only know the numbers 0 and 1 (Electricity on/off). This is called Binary Code.",
-            image: "/images/module1_binary_system.png",
+            image: "/images/module1/binary_en.png",
             examples: [
               "Letter 'A' in binary: 01000001",
               "Number '5' in binary: 00000101",
@@ -50,24 +64,30 @@ export const MODULE1_EN = {
             ]
           }
         },
-        activity_title: "🎮 Activity: Data Factory",
-        activity_desc: "An interactive animation where students drag 'Flour (Data)' bags into a machine, and 'Bread (Information)' comes out, demonstrating how data becomes information.",
-        activity_type: "data_factory"
+        activities: []
       },
       {
         id: 2,
-        title: "🔵 SUBTOPIC 2: HARDWARE (THE COMPUTER'S BODY)",
+        title: "🧩 Hardware (the computer's body)",
         subtitle: "Physical Parts and Their Functions",
         intro: "All the metal and plastic parts of a computer that can be touched and seen. Similar to the human body.",
         video_links: [
-          { title: "Code.org: Hardware and Software", url: "https://www.youtube.com/watch?v=xnyFYiK2rSY" },
-          { title: "Scratch Garden: Hardware vs Software", url: "https://www.youtube.com/watch?v=xZKMmk8JSUk" }
+          {
+            title: "Scratch Garden: Hardware vs Software",
+            url: "https://www.youtube.com/watch?v=xZKMmk8JSUk",
+            thumbnail: "/images/module3/video_en.png"
+          },
+          {
+            title: "What is Hardware? | All About Computers ",
+            url: "https://youtu.be/rjKQtY_fd7k?si=DC9Bd49fxE4f_sb_",
+            thumbnail: "/images/module3/video_en.png"
+          }
         ],
         content: {
           "2.1": {
             title: "What is Hardware?",
             description: "All the metal and plastic parts of a computer that can be touched and seen. Similar to the human body - just like we have bones, muscles, and organs, a computer has its physical components.",
-            image: "/images/module1_hardware_overview.png",
+            image: "/images/module1/concept_hardware_en.png",
             examples: [
               "Monitor - like our eyes (shows us information)",
               "Keyboard - like our mouth (lets us communicate)",
@@ -103,38 +123,62 @@ export const MODULE1_EN = {
               {
                 name: "Motherboard",
                 role: "Connects all components",
-                analogy: "Like the skeleton that holds everything together"
+                analogy: "Like the skeleton that holds everything together",
+                image: "/images/module1/hardware_motherboard.png"
+               
               },
               {
                 name: "CPU",
                 role: "Processes all calculations",
-                analogy: "The brain - makes all decisions"
+                analogy: "The brain - makes all decisions",
+                image: "/images/module1/hardware_cpu.png"
               },
               {
                 name: "RAM",
                 role: "Temporary storage while working",
-                analogy: "Like a workbench - cleared when you're done"
+                analogy: "Like a workbench - cleared when you're done",
+                image: "/images/module1/hardware_ram.png"
               },
               {
                 name: "Hard Drive/SSD",
                 role: "Permanent file storage",
-                analogy: "Like a library - keeps everything safe"
+                analogy: "Like a library - keeps everything safe",
+                image: "/images/module1/hardware_hdd.png"
               }
             ]
           }
         },
-        activity_title: "🎮 Activity: Hotspot Image",
-        activity_desc: "An open computer case is displayed on screen. Students click on parts and explanations like 'I'm the Processor, I'm the brain!' appear.",
-        activity_type: "hardware_hotspot"
+        activities: [
+          {
+            activity_title: "Data Factory",
+            activity_desc:
+              "Drag devices into Input-Process-Output-Storage stations to learn the IPOS flow.",
+            activity_type: "data_factory"
+          },
+          {
+            activity_title: "Activity: Hotspot Image",
+            activity_desc:
+              "An open computer case is displayed on screen. Click parts to see explanations.",
+            activity_type: "hardware_hotspot"
+          }
+        ]
       },
       {
         id: 3,
-        title: "🟠 SUBTOPIC 3: SOFTWARE (THE COMPUTER'S SOUL)",
+        title: "💾 Software (the computer's soul)",
         subtitle: "Programs, Operating Systems and Licenses",
         intro: "Commands that tell hardware parts what to do. Without software, hardware is just a lifeless pile of metal.",
         video_links: [
-          { title: "Code.org: Hardware and Software", url: "https://www.youtube.com/watch?v=xnyFYiK2rSY" },
-          { title: "What are Hardware and Software?", url: "https://www.youtube.com/watch?v=YbARkFqcAWw" }
+          {
+            title: "Code.org: Hardware and Software",
+            url: "https://www.youtube.com/watch?v=xnyFYiK2rSY",
+            thumbnail: "/images/module3/video_en.png"
+          },
+          {
+            title: "What are Hardware and Software?",
+            url: "https://www.youtube.com/watch?v=YbARkFqcAWw",
+            thumbnail: "/images/module3/video_en.png"
+          }
         ],
         content: {
           "3.1": {
@@ -150,7 +194,7 @@ export const MODULE1_EN = {
           "3.2": {
             title: "Software Types (Ship Captain and Crew)",
             description: "System Software (Captain): The main software that manages the computer. (E.g., Windows, macOS, Linux, Android, iOS).\nApplication Software (Crew): Programs that do specific tasks. (E.g., Paint, Word, Scratch, Chrome).",
-            image: "/images/module1_software_types.png",
+            image: "/images/module1/software_types_en.png",
             system_software: [
               "Windows - Manages everything",
               "macOS - Apple's operating system",
@@ -200,12 +244,20 @@ export const MODULE1_EN = {
       },
       {
         id: 4,
-        title: "🟣 SUBTOPIC 4: MEMORY AND FILE MANAGEMENT",
+        title: "📁 Memory and file management",
         subtitle: "Capacity Units and Organization",
         intro: "We measure how much space files take up on the computer and store them in an organized way.",
         video_links: [
-          { title: "CS Basics: File extensions", url: "https://www.youtube.com/watch?v=68GD6oiqLL0" },
-          { title: "Different File Types (Extensions)", url: "https://www.youtube.com/watch?v=XS15VVPRqs0" }
+          {
+            title: "CS Basics: File extensions",
+            url: "https://www.youtube.com/watch?v=68GD6oiqLL0",
+            thumbnail: "/images/module3/video_en.png"
+          },
+          {
+            title: "Different File Types (Extensions)",
+            url: "https://www.youtube.com/watch?v=XS15VVPRqs0",
+            thumbnail: "/images/module3/video_en.png"
+          }
         ],
         content: {
           "4.1": {
@@ -247,18 +299,36 @@ export const MODULE1_EN = {
             ]
           }
         },
-        activity_title: "File Extensions Airplane Game",
-        activity_desc: "Fly through correct extension clouds and avoid wrong ones. Advances automatically.",
-        activity_type: "file_extensions_airplane"
+        activities: [
+          {
+            activity_title: "Data Units Crossword",
+            activity_desc: "Pick a clue and fill the letters (1024 byte = 1 KB, etc.).",
+            activity_type: "data_units_crossword_wordwall"
+          },
+          {
+            activity_title: "File Extensions Airplane Game",
+            activity_desc:
+              "Fly through correct extension clouds and avoid wrong ones. Advances automatically.",
+            activity_type: "file_extensions_airplane"
+          }
+        ]
       },
       {
         id: 5,
-        title: "🔴 SUBTOPIC 5: DIGITAL HEALTH, ETHICS AND SECURITY",
+        title: "🛡️ Digital health, ethics and security",
         subtitle: "Rules, Dangers and Protection",
         intro: "Using the computer safely and healthily is important to protect yourself from both physical and digital dangers.",
         video_links: [
-          { title: "Common Sense: 5 Internet Safety Tips for Kids", url: "https://www.commonsensemedia.org/videos/5-internet-safety-tips-for-kids" },
-          { title: "NetSmartzKids: The Password Rap", url: "https://www.youtube.com/watch?v=DE5xKaf4E9E" }
+          {
+            title: "Common Sense: 5 Internet Safety Tips for Kids",
+            url: "https://www.commonsensemedia.org/videos/5-internet-safety-tips-for-kids",
+            thumbnail: "/images/module3/video_en.png"
+          },
+          {
+            title: "NetSmartzKids: The Password Rap",
+            url: "https://www.youtube.com/watch?v=DE5xKaf4E9E",
+            thumbnail: "/images/module3/video_en.png"
+          }
         ],
         content: {
           "5.1": {

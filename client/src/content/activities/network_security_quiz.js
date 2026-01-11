@@ -31,6 +31,14 @@ export const NETWORK_SECURITY_QUIZ = {
       question_tr: "Halka açık Wi-Fi'de banka hesabıma girmek güvenlidir.",
       question_en: "It is safe to access my bank account on public Wi-Fi.",
       answer: false,
+      correctFeedback: {
+        tr: "Do?ru. Halka a??k Wi-Fi'de banka hesab?na girmek g?venli de?ildir.",
+        en: "Correct. Accessing your bank account on public Wi-Fi is not safe."
+      },
+      wrongFeedback: {
+        tr: "Yanl??. Halka a??k Wi-Fi'de banka hesab?na girmek g?venli de?ildir.",
+        en: "Incorrect. Accessing your bank account on public Wi-Fi is not safe."
+      },
       explanation_tr: "Yanlış! Halka açık Wi-Fi'de özel bilgilerini (banka hesabı, şifreler) paylaşmamalısın. Başkaları bu bilgileri görebilir.",
       explanation_en: "Wrong! You should not share private information (bank account, passwords) on public Wi-Fi. Others can see this information."
     },
@@ -39,6 +47,14 @@ export const NETWORK_SECURITY_QUIZ = {
       question_tr: "Ev ağında güçlü bir Wi-Fi şifresi kullanmak önemlidir.",
       question_en: "Using a strong Wi-Fi password on home network is important.",
       answer: true,
+      correctFeedback: {
+        tr: "Do?ru. G??l? Wi-Fi ?ifresi a??n? korur.",
+        en: "Correct. A strong Wi-Fi password protects your network."
+      },
+      wrongFeedback: {
+        tr: "Yanl??. G??l? Wi-Fi ?ifresi a??n? korur.",
+        en: "Incorrect. A strong Wi-Fi password protects your network."
+      },
       explanation_tr: "Doğru! Güçlü bir Wi-Fi şifresi, başkalarının ağına bağlanmasını engeller ve verilerini korur.",
       explanation_en: "Correct! A strong Wi-Fi password prevents others from connecting to your network and protects your data."
     },
@@ -68,6 +84,14 @@ export const NETWORK_SECURITY_QUIZ = {
           correct: false
         }
       ],
+      correctFeedback: {
+        tr: "Do?ru. ?zel bilgileri sadece ev a??nda payla?mal?s?n.",
+        en: "Correct. Share private information only on your home network."
+      },
+      wrongFeedback: {
+        tr: "Yanl??. ?zel bilgileri sadece ev a??nda payla?mal?s?n.",
+        en: "Incorrect. Share private information only on your home network."
+      },
       explanation_tr: "Doğru cevap B! Ev ağı en güvenli ağ türüdür. Sadece sen ve ailen erişebilirsiniz, bu yüzden özel bilgilerini paylaşabilirsin.",
       explanation_en: "Correct answer is B! Home network is the safest network type. Only you and your family can access it, so you can share your private information."
     },
@@ -97,6 +121,14 @@ export const NETWORK_SECURITY_QUIZ = {
           correct: false
         }
       ],
+      correctFeedback: {
+        tr: "Do?ru. A? g?venli?i ki?isel bilgilerin ?al?nmas?n? ?nler.",
+        en: "Correct. Network security prevents theft of personal information."
+      },
+      wrongFeedback: {
+        tr: "Yanl??. A? g?venli?i ki?isel bilgilerin ?al?nmas?n? ?nler.",
+        en: "Incorrect. Network security prevents theft of personal information."
+      },
       explanation_tr: "Doğru cevap B! Ağ güvenliği, kişisel bilgilerinin (şifreler, banka bilgileri) çalınmasını önler ve seni korur.",
       explanation_en: "Correct answer is B! Network security prevents theft of your personal information (passwords, bank information) and protects you."
     },
@@ -105,6 +137,14 @@ export const NETWORK_SECURITY_QUIZ = {
       question_tr: "Şifresiz ağlara bağlanmak güvenlidir.",
       question_en: "Connecting to password-free networks is safe.",
       answer: false,
+      correctFeedback: {
+        tr: "Do?ru. ?ifresiz a?lar g?venli de?ildir.",
+        en: "Correct. Password-free networks are not safe."
+      },
+      wrongFeedback: {
+        tr: "Yanl??. ?ifresiz a?lar g?venli de?ildir.",
+        en: "Incorrect. Password-free networks are not safe."
+      },
       explanation_tr: "Yanlış! Şifresiz ağlar güvenli değildir. Başkaları bu ağa bağlanabilir ve verilerinizi görebilir.",
       explanation_en: "Wrong! Password-free networks are not safe. Others can connect to this network and see your data."
     },
@@ -134,6 +174,14 @@ export const NETWORK_SECURITY_QUIZ = {
           correct: false
         }
       ],
+      correctFeedback: {
+        tr: "Do?ru. Halka a??k Wi-Fi'de banka hesab?na girmek risklidir.",
+        en: "Correct. Accessing a bank account on public Wi-Fi is risky."
+      },
+      wrongFeedback: {
+        tr: "Yanl??. Halka a??k Wi-Fi'de banka hesab?na girmek risklidir.",
+        en: "Incorrect. Accessing a bank account on public Wi-Fi is risky."
+      },
       explanation_tr: "Doğru cevap C! Halka açık Wi-Fi'de özel bilgiler gerektiren işlemler (banka hesabı, şifre girişi) yapmamalısın.",
       explanation_en: "Correct answer is C! You should not do operations that require private information (bank account, password entry) on public Wi-Fi."
     },
@@ -142,6 +190,14 @@ export const NETWORK_SECURITY_QUIZ = {
       question_tr: "Güvenli ağlar kullanmak ve güvenlik önlemlerini almak önemlidir.",
       question_en: "Using secure networks and taking security measures is important.",
       answer: true,
+      correctFeedback: {
+        tr: "Do?ru. G?venli a?lar ki?isel bilgilerini korur.",
+        en: "Correct. Secure networks protect your personal information."
+      },
+      wrongFeedback: {
+        tr: "Yanl??. G?venli a?lar ki?isel bilgilerini korur.",
+        en: "Incorrect. Secure networks protect your personal information."
+      },
       explanation_tr: "Doğru! Güvenli ağlar kullanmak ve güvenlik önlemlerini almak, kişisel bilgilerini korur.",
       explanation_en: "Correct! Using secure networks and taking security measures protects your personal information."
     }
@@ -160,4 +216,3 @@ export const NETWORK_SECURITY_QUIZ = {
     completion_bonus: 30
   }
 };
-

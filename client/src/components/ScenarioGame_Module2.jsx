@@ -6,6 +6,14 @@ function ScenarioGame({ isTurkish, isModule2 = false }) {
   const [gameState, setGameState] = useState('start');
   const [feedback, setFeedback] = useState('');
   const [correctChoices, setCorrectChoices] = useState(0);
+  const fallbackImage = isModule2
+    ? '/images/game_social_media_setup.png'
+    : '/images/game_start.png';
+
+  const handleImageError = (event) => {
+    event.currentTarget.onerror = null;
+    event.currentTarget.src = fallbackImage;
+  };
 
   // MODÜL 2 OYUN METİNLERİ
   const module2Texts = {
@@ -18,7 +26,7 @@ function ScenarioGame({ isTurkish, isModule2 = false }) {
       btn: isTurkish ? 'Başla' : 'Start'
     },
     step1: {
-      image: '/images/game_username_choice.png',
+      image: '/images/password_security_hero.png',
       title: isTurkish ? 'Adım 1: Kullanıcı Adı Seç' : 'Step 1: Choose a Username',
       desc: isTurkish
         ? 'Sosyal medya hesabın için bir kullanıcı adı seçmelisin. Hangi kullanıcı adı daha güvenli?'
@@ -259,7 +267,12 @@ function ScenarioGame({ isTurkish, isModule2 = false }) {
             exit={{ opacity: 0, scale: 1.1 }}
             className="game-card start-screen"
           >
-            <img src={currentText.image} alt="Start" className="game-image" />
+            <img
+              src={currentText.image}
+              alt="Start"
+              className="game-image"
+              onError={handleImageError}
+            />
             <h2>{currentText.title}</h2>
             <p>{currentText.desc}</p>
             <button 
@@ -280,7 +293,12 @@ function ScenarioGame({ isTurkish, isModule2 = false }) {
             className="game-card scene-screen"
           >
             <div className="scene-header">
-              <img src={currentText.image} alt="Step" className="game-image scene-img" />
+              <img
+                src={currentText.image}
+                alt="Step"
+                className="game-image scene-img"
+                onError={handleImageError}
+              />
               <span className="scene-badge">{currentText.title}</span>
             </div>
             <p className="scene-desc">{currentText.desc}</p>
@@ -318,7 +336,12 @@ function ScenarioGame({ isTurkish, isModule2 = false }) {
             className="game-card scene-screen"
           >
             <div className="scene-header">
-              <img src={currentText.image} alt="Scene" className="game-image scene-img" />
+              <img
+                src={currentText.image}
+                alt="Scene"
+                className="game-image scene-img"
+                onError={handleImageError}
+              />
               <span className="scene-badge">{currentText.title}</span>
             </div>
             <p className="scene-desc">{currentText.desc}</p>
@@ -354,7 +377,12 @@ function ScenarioGame({ isTurkish, isModule2 = false }) {
             animate={{ opacity: 1, scale: 1 }}
             className="game-card success-screen"
           >
-            <img src={currentText.image} alt="Success" className="game-image" />
+            <img
+              src={currentText.image}
+              alt="Success"
+              className="game-image"
+              onError={handleImageError}
+            />
             <h2>{currentText.title}</h2>
             <p>{currentText.desc}</p>
             <button className="game-btn success-btn" onClick={resetGame}>

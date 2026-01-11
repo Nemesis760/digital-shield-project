@@ -1,10 +1,13 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { Link } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLanguage } from "../contexts/LanguageContext";
 import LoadingScreen from "../components/LoadingScreen";
 import Module4MiniQuiz from "../components/Module4MiniQuiz";
 import Module4ScenarioQuiz from "../components/Module4ScenarioQuiz";
+import StrongPasswordGame from "../components/StrongPasswordGame";
+import WordPuzzleGame from "../components/WordPuzzleGame";
+import CardMatchGame from "../components/CardMatchGame";
 import { MODULE4_TR } from "../content/module4_lang_tr";
 import { MODULE4_EN } from "../content/module4_lang_en";
 
@@ -25,7 +28,13 @@ function Module4() {
 
   const moduleData = useMemo(() => (isTurkish ? MODULE4_TR.module_4 : MODULE4_EN.module_4), [isTurkish]);
   const sections = moduleData.sections;
-  const currentSection = sections.find((s) => s.id === activeSection) || sections[0];
+  const currentSection = sections[activeSection - 1] || sections[0];
+  const mainImage = Array.isArray(currentSection.images) && currentSection.images.length > 0 ? currentSection.images[0] : null;
+  const mainCaption = mainImage
+    ? isTurkish
+      ? mainImage.alt_tr || mainImage.alt_en || ""
+      : mainImage.alt_en || mainImage.alt_tr || ""
+    : "";
 
   if (isLoading) {
     return <LoadingScreen onComplete={() => setIsLoading(false)} isTurkish={isTurkish} />;
@@ -44,11 +53,11 @@ function Module4() {
           </div>
 
           <div className="sections-nav">
-            {sections.map((section) => (
+            {sections.map((section, index) => (
               <button
                 key={section.id}
-                className={`nav-item ${activeSection === section.id ? "active" : ""}`}
-                onClick={() => setActiveSection(section.id)}
+                className={`nav-item ${activeSection === index + 1 ? "active" : ""}`}
+                onClick={() => setActiveSection(index + 1)}
               >
                 {section.title}
               </button>
@@ -71,52 +80,64 @@ function Module4() {
               </div>
 
               <div className="section-content">
-                <img
-                  src={moduleData.hero_image}
-                  alt={isTurkish ? "Dijital güvenlik görseli" : "Digital safety visual"}
-                  className="section-hero-image"
-                  onError={(e) => {
-                    e.currentTarget.style.display = "none";
-                  }}
-                />
-
-                <div className="section-intro">
-                  <p>{currentSection.intro}</p>
-                </div>
-
-                <div className="m4-paragraphs">
-                  {currentSection.content.map((paragraph, idx) => (
-                    <p key={`${currentSection.id}-p-${idx}`}>{paragraph}</p>
-                  ))}
-                </div>
-
-                <div className="m4-image-note">
-                  {isTurkish
-                    ? "Not: Görseller placeholder olarak eklendi. Dosyalar eklendiğinde otomatik görünecek."
-                    : "Note: Images are placeholders. They will appear automatically once added."}
-                </div>
-
-                <div className="m4-image-grid">
-                  {currentSection.images.map((img, idx) => (
-                    <figure key={`${currentSection.id}-img-${idx}`} className="m4-image-card">
+                <div className="m4-visual-block">
+                  {mainImage && (
+                    <div className="m4-image-wrapper">
                       <img
-                        src={img.src}
-                        alt={isTurkish ? img.alt_tr : img.alt_en}
+                        src={mainImage.src}
+                        alt={mainCaption}
+                        className="m4-section-image"
                         loading="lazy"
                         onError={(e) => {
                           e.currentTarget.style.display = "none";
                         }}
                       />
-                      <figcaption>{isTurkish ? img.alt_tr : img.alt_en}</figcaption>
-                    </figure>
-                  ))}
+                      {mainCaption && <div className="m4-image-caption">{mainCaption}</div>}
+                    </div>
+                  )}
+
+                  <div className="m4-text-block">
+                    {currentSection.subtitle && <p className="m4-subtitle">{currentSection.subtitle}</p>}
+
+                    <div className="section-intro">
+                      <p>{currentSection.intro}</p>
+                    </div>
+
+                    <div className="m4-paragraphs">
+                      {currentSection.content.map((paragraph, idx) => (
+                        <p key={`${currentSection.id}-p-${idx}`}>{paragraph}</p>
+                      ))}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="activity-box">
-                  <h3>{currentSection.activity.title}</h3>
-                  <p>{currentSection.activity.description}</p>
-                  <ActivityRenderer activity={currentSection.activity} isTurkish={isTurkish} />
-                </div>
+                {currentSection.activity && (
+                  <div className="activity-box">
+                    <h3>{currentSection.activity.title}</h3>
+                    <p>{currentSection.activity.description}</p>
+                    <ActivityRenderer activity={currentSection.activity} isTurkish={isTurkish} />
+                  </div>
+                )}
+
+                {currentSection.game && (
+                  <div className="activity-box">
+                    <h3>{currentSection.game.title}</h3>
+                    <p>{currentSection.game.description}</p>
+                    <GameRenderer game={currentSection.game} isTurkish={isTurkish} />
+                    {currentSection.game.type === "password_game" && Array.isArray(currentSection.game.tips) && (
+                      <div className="m4-game-notes">
+                        <p className="m4-game-notes-title">
+                          {isTurkish ? "Güçlü parola için ipuçları:" : "Tips for a strong password:"}
+                        </p>
+                        <ul className="m4-game-tips">
+                          {currentSection.game.tips.map((tip, idx) => (
+                            <li key={`tip-${idx}`}>{tip}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
+                )}
 
                 {activeSection === sections.length && (
                   <div className="activity-box">
@@ -171,6 +192,24 @@ function ActivityRenderer({ activity, isTurkish }) {
       {isTurkish ? "Aktivite yüklenemedi." : "Activity could not be loaded."}
     </div>
   );
+}
+
+function GameRenderer({ game, isTurkish }) {
+  if (!game) return null;
+
+  if (game.type === "password_game") {
+    return <StrongPasswordGame isTurkish={isTurkish} />;
+  }
+
+  if (game.type === "word_puzzle") {
+    return <WordPuzzleGame isTurkish={isTurkish} words={game.words} />;
+  }
+
+  if (game.type === "card_match") {
+    return <CardMatchGame isTurkish={isTurkish} pairs={game.pairs} />;
+  }
+
+  return null;
 }
 
 function Flashcards({ cards = [] }) {

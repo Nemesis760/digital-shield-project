@@ -9,14 +9,21 @@ export default function VideoLinks({ videoLinks = [] }) {
       <div className="video-links-list">
         {videoLinks.map((video) => (
           <div key={video.url} className="video-link-card">
-            <div className="video-link-title">{video.title}</div>
+            {video.thumbnail && (
+              <div className="video-link-thumb">
+                <img src={video.thumbnail} alt={video.title} loading="lazy" />
+              </div>
+            )}
+            <div className="video-link-body">
+              <div className="video-link-title">{video.title}</div>
+            </div>
             <a
               className="video-link-cta"
               href={video.url}
               target="_blank"
               rel="noreferrer"
             >
-              Videoyu Aç
+              Videoyu Ac
             </a>
           </div>
         ))}

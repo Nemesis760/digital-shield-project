@@ -1,398 +1,444 @@
 export const MODULE3_TR = {
-  "module_3": {
-    "title": "Modül 3: Bilgisayar Ağları ve Dijital İletişim",
-    "subtitle": "🌐 Veri Yolculuğu ve Ağ Güvenliği",
-    "hero_image": "/images/module_networks/hero.png",
-    "sections": [
+  module_3: {
+    title: "Modül 3: Bilgisayar Ağları ve Dijital İletişim",
+    subtitle: "Veri Yolculuğu - Ağ Cihazları - Güvenlik",
+    hero_image: "/images/module3/module3_hero_tr.png",
+    sections: [
       {
-        "id": 1,
-        "title": "🌐 İnternet Nedir ve Veri Paketleri Nasıl Yolculuk Eder?",
-        "subtitle": "Dijital Dünyanın Otoyolları",
-        "intro": "İnternet, dünyadaki milyarlarca bilgisayarın birbirine bağlı olduğu dev bir ağdır. Tıpkı şehirler arası otoyollar gibi, veriler de bu ağ üzerinden yolculuk eder. Her mesaj, her fotoğraf, her video küçük paketlere bölünür ve hedefine ulaşır.",
-        "content": {
+        id: 1,
+        title: "Ağ Nedir? İletişimin Tarihsel Gelişimi",
+        subtitle: "Ağ kavramını günlük hayattan anlamak",
+        intro:
+          "Ağ, birbirine bağlı noktaların oluşturduğu yapıdır. Balık ağı ve örümcek ağı gibi. Bilgisayar ağında ise cihazlar kablolu veya kablosuz şekilde bağlanır ve bilgi alışverişi yapar.",
+        content: {
           "1.1": {
-            "title": "İnternet Nedir?",
-            "description": "İnternet, dünyadaki milyarlarca bilgisayarın, telefonun ve diğer cihazların birbirine bağlı olduğu dev bir ağdır. Tıpkı bir şehirdeki yollar gibi, veriler bu ağ üzerinden yolculuk eder. Bir arkadaşına mesaj gönderdiğinde, o mesaj binlerce kilometre uzaktaki bir sunucuya gider ve sonra arkadaşının telefonuna ulaşır.",
-            "image": "/images/module2/İnternet Nedir.png",
-            "points": [
-              "İnternet, dünyadaki tüm cihazları birbirine bağlayan dev bir ağdır",
-              "Milyarlarca bilgisayar, telefon ve tablet birbirine bağlıdır",
-              "Veriler bu ağ üzerinden saniyeler içinde dünyanın her yerine ulaşır",
-              "İnternet olmadan çevrimiçi oyun oynayamaz, video izleyemez veya mesaj gönderemezsin"
+            title: "Ağ (Network) Nedir?",
+            description:
+              "Bilgisayar ağı; bilgisayarlar, tabletler, yazıcılar gibi cihazların veri paylaşmak için birbirine bağlanmasıdır.",
+            image: "/images/module3/m3_network_definition_tr.png",
+            points: [
+              "Ağ: Bağlı cihazlar topluluğu",
+              "Amaç: Veri paylaşımı ve iletişim",
+              "Kablolu veya kablosuz olabilir",
+              "Her ağda internet olmak zorunda değildir"
             ],
-            "examples": [
-              "Bir video izlediğinde, o video binlerce kilometre uzaktaki bir sunucudan gelir",
-              "Arkadaşına mesaj gönderdiğinde, mesaj önce bir sunucuya gider, sonra arkadaşının telefonuna ulaşır",
-              "Bir web sitesine girdiğinde, o sitenin bilgileri dünyanın başka bir yerinden gelir"
+            examples: [
+              "Okulda bilgisayar laboratuvarındaki bilgisayarların aynı yazıcıya bağlanması",
+              "Evde telefon, tablet ve laptopun aynı Wi-Fi'ya bağlanması"
+            ],
+            video_links: [
+              {
+                title: "Bilgisayar ağları (çocuklar için)",
+                url: "https://www.youtube.com/watch?v=FD3BJUbvlF0",
+                thumbnail: "/images/module3/video_tr.png"
+              }
             ]
           },
           "1.2": {
-            "title": "Veri Paketleri Nasıl Yolculuk Eder?",
-            "description": "Büyük dosyalar (video, fotoğraf, mesaj) küçük parçalara bölünür. Bu parçalara 'paket' denir. Her paket, tıpkı bir mektup gibi, hedef adresini içerir. Paketler farklı yollardan gidebilir ama hepsi aynı hedefe ulaşır. Varış noktasında paketler tekrar birleştirilir ve orijinal dosya oluşturulur.",
-            "image": "/images/module_networks/packet_travel.png",
-            "points": [
-              "Büyük dosyalar küçük paketlere bölünür (tıpkı bir puzzle gibi)",
-              "Her paket hedef adresini içerir",
-              "Paketler farklı yollardan gidebilir ama hepsi aynı yere ulaşır",
-              "Varış noktasında paketler tekrar birleştirilir",
-              "Bu işlem saniyeler içinde gerçekleşir"
+            title: "İletişim Nasıl Gelişti?",
+            description:
+              "İletişim; mektup, telgraf, telefon, radyo/TV, uydu ve internet ile hızlandı.",
+            image: "/images/module3/m3_comm_timeline_tr.png",
+            points: [
+              "İletişim araçları zamanla hızlandı",
+              "İnternet: çok hızlı ve yaygın",
+              "Hız artarsa güvenlik ihtiyacı artar"
             ],
-            "examples": [
-              "Bir fotoğraf gönderdiğinde, fotoğraf 100 küçük pakete bölünür",
-              "Her paket farklı bir yoldan gidebilir",
-              "Tüm paketler arkadaşının telefonuna ulaşır ve fotoğraf tekrar oluşturulur"
-            ]
-          },
-          "1.3": {
-            "title": "İnternet Neden Önemlidir?",
-            "description": "İnternet sayesinde dünyanın her yerindeki insanlarla anında iletişim kurabiliriz. Bilgiye hızlıca ulaşabilir, oyun oynayabilir, video izleyebiliriz. Ancak bu büyük ağ, güvenlik açısından da dikkatli olmamızı gerektirir.",
-            "points": [
-              "İnternet bilgiye hızlı erişim sağlar",
-              "Dünyanın her yerindeki insanlarla iletişim kurmamızı sağlar",
-              "Eğitim, eğlence ve iş için vazgeçilmezdir",
-              "Ancak güvenlik konusunda dikkatli olmalıyız"
-            ]
-          }
-        },
-        "activity_title": "🎮 Aktivite: Paket Teslim Oyunu",
-        "activity_desc": "Veri paketlerini doğru hedefe ulaştırmaya çalış. Paketleri yönlendir ve ağ üzerindeki yolculuklarını izle!",
-        "activity_type": "packet_delivery"
-      },
-      {
-        "id": 2,
-        "title": "🏠 Ağ Türleri: Ev, Okul ve Halka Açık Wi-Fi",
-        "subtitle": "Farklı Ağlar, Farklı Güvenlik Seviyeleri",
-        "intro": "İnternete bağlanmak için farklı ağ türleri kullanırız. Her ağ türünün kendine özgü özellikleri ve güvenlik seviyeleri vardır. Bunları anlamak, güvenli bir şekilde çevrimiçi olmamıza yardımcı olur.",
-        "content": {
-          "2.1": {
-            "title": "Ev Ağı (Home Network)",
-            "description": "Ev ağı, evindeki tüm cihazları (bilgisayar, telefon, tablet, oyun konsolu) birbirine bağlayan ve onları internete bağlayan ağdır. Genellikle bir modem ve router ile oluşturulur. Ev ağı genellikle en güvenli ağ türüdür çünkü sadece sen ve ailen erişebilirsiniz.",
-            "image": "/images/module2/Ağ Türleri.png",
-            "points": [
-              "Evindeki tüm cihazları birbirine bağlar",
-              "Modem ve router ile oluşturulur",
-              "Şifre korumalıdır, sadece sen ve ailen erişebilirsiniz",
-              "En güvenli ağ türlerinden biridir"
-            ],
-            "examples": [
-              "Evde Wi-Fi şifren sadece ailen tarafından bilinir",
-              "Komşular senin ağına bağlanamaz (şifre olmasa bile)",
-              "Ev ağında özel bilgilerini paylaşmak daha güvenlidir"
-            ]
-          },
-          "2.2": {
-            "title": "Okul Ağı (School Network)",
-            "description": "Okul ağı, okuldaki tüm bilgisayarları ve cihazları birbirine bağlayan ağdır. Öğretmenler ve öğrenciler bu ağa bağlanabilir. Okul ağı genellikle filtreler içerir (zararlı sitelere erişimi engeller) ve kullanıcı aktivitelerini izleyebilir.",
-            "image": "/images/module2/Ağ Türleri.png",
-            "points": [
-              "Okuldaki tüm cihazları birbirine bağlar",
-              "Öğretmenler ve öğrenciler erişebilir",
-              "Zararlı sitelere erişimi engelleyen filtreler içerir",
-              "Kullanıcı aktiviteleri izlenebilir"
-            ],
-            "examples": [
-              "Okulda oyun sitelerine erişim engellenmiş olabilir",
-              "Öğretmenler hangi sitelere girdiğini görebilir",
-              "Okul ağında dikkatli olmalısın"
-            ]
-          },
-          "2.3": {
-            "title": "Halka Açık Wi-Fi (Public Wi-Fi)",
-            "description": "Halka açık Wi-Fi, kafeler, havaalanları, oteller gibi yerlerde bulunan ve herkesin kullanabileceği ağlardır. Bu ağlar genellikle şifresizdir veya herkese açık şifreleri vardır. Halka açık Wi-Fi'ler güvenli değildir çünkü başkaları da aynı ağa bağlıdır ve verilerinizi görebilir.",
-            "image": "/images/module2/Ağ Türleri.png",
-            "points": [
-              "Kafeler, havaalanları, oteller gibi yerlerde bulunur",
-              "Genellikle şifresizdir veya herkese açık şifreleri vardır",
-              "Herkes bağlanabilir, bu yüzden güvenli değildir",
-              "Özel bilgilerini (şifreler, banka bilgileri) paylaşmamalısın"
-            ],
-            "examples": [
-              "❌ Kafede halka açık Wi-Fi'de banka hesabına girmek",
-              "❌ Havaalanında şifrelerini girmek",
-              "✅ Sadece genel web sitelerine bakmak (haber, hava durumu)",
-              "✅ Önemli işlemleri ev ağında yapmak"
-            ]
-          }
-        },
-        "activity_title": "🎮 Aktivite: Ağ Türleri Eşleştirme",
-        "activity_desc": "Verilen durumları oku ve doğru ağ türü ile eşleştir. Hangi ağ türü daha güvenli?",
-        "activity_type": "card_matching"
-      },
-      {
-        "id": 3,
-        "title": "📡 Cihazlar Nasıl İletişim Kurar? (Modem, Router, Cihazlar)",
-        "subtitle": "Dijital İletişimin Mimarisi",
-        "intro": "Cihazların birbirleriyle iletişim kurması için özel cihazlar gerekir. Modem, router ve diğer ağ cihazları bu iletişimi sağlar. Her birinin farklı bir görevi vardır.",
-        "content": {
-          "3.1": {
-            "title": "Modem Nedir?",
-            "description": "Modem, evindeki ağı internete bağlayan cihazdır. Tıpkı bir kapı gibi, modem dış dünyaya (internete) açılan kapıdır. İnternet sağlayıcısından (Türk Telekom, Superonline gibi) gelen internet sinyalini alır ve evindeki cihazlara dağıtır.",
-            "image": "/images/module_networks/modem.png",
-            "points": [
-              "Ev ağını internete bağlar",
-              "İnternet sağlayıcısından sinyal alır",
-              "Dış dünyaya açılan kapı gibidir",
-              "Genellikle router ile birleşik olarak gelir"
-            ],
-            "examples": [
-              "Modem olmadan internete bağlanamazsın",
-              "İnternet sağlayıcısı modemi kurar",
-              "Modem, internete açılan kapıdır"
-            ]
-          },
-          "3.2": {
-            "title": "Router (Yönlendirici) Nedir?",
-            "description": "Router, evindeki cihazları birbirine bağlayan ve internete erişim sağlayan cihazdır. Wi-Fi sinyali yayar, böylece kablosuz olarak internete bağlanabilirsin. Router, evindeki cihazlar arasında trafiği yönetir - hangi cihazın hangi veriyi alacağını belirler.",
-            "image": "/images/module_networks/router.png",
-            "points": [
-              "Evindeki cihazları birbirine bağlar",
-              "Wi-Fi sinyali yayar",
-              "Cihazlar arası trafiği yönetir",
-              "Hangi cihazın hangi veriyi alacağını belirler"
-            ],
-            "examples": [
-              "Router sayesinde telefonun Wi-Fi ile internete bağlanır",
-              "Router, bilgisayarın ve telefonun aynı anda internete bağlanmasını sağlar",
-              "Router olmadan kablosuz bağlantı olmaz"
-            ]
-          },
-          "3.3": {
-            "title": "Cihazlar Nasıl İletişim Kurar?",
-            "description": "Cihazlar (telefon, bilgisayar, tablet) router'a bağlanır. Router, bu cihazların isteklerini alır ve internete iletir. İnternetten gelen cevapları da ilgili cihaza yönlendirir. Tıpkı bir postacı gibi, router doğru paketleri doğru adreslere ulaştırır.",
-            "image": "/images/module2/Cihazlar Nasıl Haberleşir.png",
-            "points": [
-              "Cihazlar router'a bağlanır",
-              "Router istekleri internete iletir",
-              "İnternetten gelen cevapları ilgili cihaza yönlendirir",
-              "Her cihaz kendi adresine sahiptir"
-            ],
-            "examples": [
-              "Telefonun bir video izlemek istediğinde, router bu isteği internete iletir",
-              "Video geldiğinde, router onu telefonuna yönlendirir",
-              "Aynı anda bilgisayarın da internete bağlanabilir, router her ikisini de yönetir"
-            ]
-          }
-        },
-        "activity_title": "🎮 Aktivite: Ağ Cihazları Hotspot",
-        "activity_desc": "Ağ cihazlarının üzerine tıkla ve her birinin görevini öğren. Modem, router ve diğer cihazlar nasıl çalışır?",
-        "activity_type": "network_hotspot"
-      },
-      {
-        "id": 4,
-        "title": "🔌 Kablolu vs Kablosuz İletişim",
-        "subtitle": "İki Farklı Yol, Aynı Hedef",
-        "intro": "Cihazlar internete iki şekilde bağlanabilir: kablolu (Ethernet) veya kablosuz (Wi-Fi). Her ikisinin de avantaj ve dezavantajları vardır.",
-        "content": {
-          "4.1": {
-            "title": "Kablolu İletişim (Ethernet)",
-            "description": "Kablolu bağlantı, cihazın router'a bir kablo ile bağlanmasıdır. Bu bağlantı türü genellikle daha hızlı ve daha güvenilirdir. Oyun oynarken veya video izlerken daha az kesinti olur. Ancak cihazın router'a yakın olması gerekir.",
-            "image": "/images/module2/Kablolu ve Kablosuz iletişim.png",
-            "points": [
-              "Daha hızlı ve güvenilir bağlantı",
-              "Oyun ve video için daha iyi performans",
-              "Daha az kesinti",
-              "Ancak cihaz router'a yakın olmalı"
-            ],
-            "examples": [
-              "✅ Oyun konsolu genellikle kablolu bağlantı kullanır (daha hızlı)",
-              "✅ Masaüstü bilgisayarlar kablolu bağlantı kullanabilir",
-              "❌ Telefon ve tablet kablolu bağlantı kullanamaz (pratik değil)"
-            ]
-          },
-          "4.2": {
-            "title": "Kablosuz İletişim (Wi-Fi)",
-            "description": "Kablosuz bağlantı, cihazın router'dan yayılan Wi-Fi sinyalini kullanarak internete bağlanmasıdır. Bu bağlantı türü daha esnektir çünkü cihazı istediğin yere taşıyabilirsin. Ancak kablolu bağlantıdan biraz daha yavaş olabilir ve sinyal gücüne bağlıdır.",
-            "image": "/images/module2/Kablolu ve Kablosuz iletişim.png",
-            "points": [
-              "Daha esnek, cihazı istediğin yere taşıyabilirsin",
-              "Kablo gerekmez",
-              "Ancak kablolu bağlantıdan biraz daha yavaş olabilir",
-              "Sinyal gücüne bağlıdır (router'a yakın olmak önemli)"
-            ],
-            "examples": [
-              "✅ Telefon ve tablet Wi-Fi kullanır",
-              "✅ Laptop'lar genellikle Wi-Fi kullanır",
-              "⚠️ Router'dan uzaklaştıkça sinyal zayıflar"
-            ]
-          },
-          "4.3": {
-            "title": "Hangisini Kullanmalıyım?",
-            "description": "Her iki bağlantı türünün de kendine özgü kullanım alanları vardır. Oyun oynuyorsan veya hızlı internet istiyorsan kablolu bağlantı daha iyidir. Ancak esneklik istiyorsan Wi-Fi kullanabilirsin.",
-            "points": [
-              "Oyun ve hızlı internet için: Kablolu bağlantı",
-              "Esneklik ve hareket için: Wi-Fi",
-              "Her ikisi de güvenlidir (ev ağında)",
-              "Halka açık Wi-Fi'de dikkatli ol"
-            ],
-            "examples": [
-              "Oyun konsolu → Kablolu bağlantı",
-              "Telefon → Wi-Fi",
-              "Masaüstü bilgisayar → Kablolu bağlantı (mümkünse)",
-              "Laptop → Wi-Fi (esneklik için)"
-            ]
-          }
-        },
-        "activity_title": "🎮 Aktivite: Doğru/Yanlış Quiz",
-        "activity_desc": "Kablolu ve kablosuz iletişim hakkındaki ifadeleri oku ve doğru mu yanlış mı olduğunu belirle.",
-        "activity_type": "truth_or_troll"
-      },
-      {
-        "id": 5,
-        "title": "🛡️ Neden Ağ Güvenliği Önemlidir?",
-        "subtitle": "Dijital Dünyada Kendini Korumak",
-        "intro": "Ağ güvenliği, dijital dünyada kendimizi korumak için çok önemlidir. Güvensiz ağlara bağlanmak veya güvenlik önlemlerini ihmal etmek, kişisel bilgilerimizin çalınmasına neden olabilir.",
-        "content": {
-          "5.1": {
-            "title": "Ağ Güvenliği Neden Önemlidir?",
-            "description": "Güvensiz ağlara bağlanmak, kişisel bilgilerimizin (şifreler, banka bilgileri, özel mesajlar) başkaları tarafından görülmesine neden olabilir. Kötü niyetli kişiler bu bilgileri çalabilir veya kötüye kullanabilir. Bu yüzden güvenli ağlar kullanmalı ve güvenlik önlemlerini almalıyız.",
-            "image": "/images/module2/Ağlarda güvenlik neden önemli.png",
-            "points": [
-              "Güvensiz ağlarda kişisel bilgilerin çalınabilir",
-              "Şifrelerin ve banka bilgilerin görülebilir",
-              "Kötü niyetli kişiler bu bilgileri kötüye kullanabilir",
-              "Güvenli ağlar kullanmalı ve güvenlik önlemlerini almalıyız"
-            ],
-            "examples": [
-              "❌ Halka açık Wi-Fi'de banka hesabına girmek",
-              "❌ Şifresiz ağlara bağlanmak",
-              "✅ Ev ağında özel bilgileri paylaşmak",
-              "✅ Güçlü Wi-Fi şifresi kullanmak"
-            ]
-          },
-          "5.2": {
-            "title": "Güvenli Ağ Kullanımı İpuçları",
-            "description": "Güvenli bir şekilde internete bağlanmak için bazı önemli ipuçları:",
-            "points": [
-              "Ev ağında güçlü bir Wi-Fi şifresi kullan",
-              "Halka açık Wi-Fi'de özel bilgilerini paylaşma",
-              "Tanımadığın ağlara bağlanma",
-              "Antivirüs yazılımı kullan",
-              "Şüpheli bağlantılardan kaçın"
-            ],
-            "examples": [
-              "✅ Wi-Fi şifren en az 12 karakter olsun",
-              "✅ Halka açık Wi-Fi'de sadece genel sitelere bak",
-              "❌ Tanımadığın 'Ücretsiz Wi-Fi' ağlarına bağlanma",
-              "✅ Önemli işlemleri ev ağında yap"
-            ]
-          },
-          "5.3": {
-            "title": "Ağ Güvenliği Senaryoları",
-            "description": "Farklı durumlarda nasıl davranmalıyız?",
-            "points": [
-              "Kafede halka açık Wi-Fi kullanırken: Sadece genel sitelere bak, şifre girme",
-              "Ev ağında: Güvenli, özel bilgilerini paylaşabilirsin",
-              "Okul ağında: Dikkatli ol, aktivitelerin izlenebilir",
-              "Tanımadığın ağlar: Asla bağlanma"
-            ],
-            "quiz": [
+            video_links: [
               {
-                "type": "true_false",
-                "question": "Halka açık Wi-Fi'de banka hesabıma girmek güvenlidir.",
-                "answer": false
-              },
-              {
-                "type": "true_false",
-                "question": "Ev ağında güçlü bir Wi-Fi şifresi kullanmak önemlidir.",
-                "answer": true
-              },
-              {
-                "type": "multiple_choice",
-                "question": "Hangi durumda özel bilgilerini paylaşabilirsin?",
-                "options": [
-                  {
-                    "text": "A) Halka açık Wi-Fi'de",
-                    "correct": false
-                  },
-                  {
-                    "text": "B) Ev ağında",
-                    "correct": true
-                  },
-                  {
-                    "text": "C) Tanımadığın bir ağda",
-                    "correct": false
-                  },
-                  {
-                    "text": "D) Şifresiz bir ağda",
-                    "correct": false
-                  }
-                ]
-              },
-              {
-                "type": "multiple_choice",
-                "question": "Ağ güvenliği neden önemlidir?",
-                "options": [
-                  {
-                    "text": "A) İnternet daha hızlı olur",
-                    "correct": false
-                  },
-                  {
-                    "text": "B) Kişisel bilgilerin çalınmasını önler",
-                    "correct": true
-                  },
-                  {
-                    "text": "C) Daha fazla oyun oynayabilirsin",
-                    "correct": false
-                  },
-                  {
-                    "text": "D) Daha fazla video izleyebilirsin",
-                    "correct": false
-                  }
-                ]
+                title: "İletişimin Tarihsel Gelişimi",
+                url: "https://youtu.be/k6iVvBPFlog?si=mG348fK6MHwf066e",
+                thumbnail: "/images/module3/video_tr.png"
               }
             ]
           }
         },
-        "activity_title": "📝 Quiz: Ağ Güvenliği",
-        "activity_desc": "Ağ güvenliği hakkındaki soruları cevapla ve bilgini test et.",
-        "activity_type": "interactive_quiz"
+        activity_title: "Mini Etkinlik: Ağ Örneklerini Seç",
+        activity_desc: "Hangileri bir bilgisayar ağına örnektir?",
+        activity_type: "interactive_quiz",
+        activity_key: "network_security"
+      },
+      {
+        id: 2,
+        title: "İnternet Nedir? Veri Paketleri Nasıl Yolculuk Eder?",
+        subtitle: "Dijital dünyanın otoyolları",
+        intro:
+          "İnternet, dünyadaki milyarlarca cihazın birbirine bağlı olduğu dev bir ağdır.",
+        content: {
+          "2.1": {
+            title: "İnternet Nedir?",
+            description:
+              "Bir siteye girdiğinde bilgi, farklı bir şehir/ülkedeki sunucudan sana gelir.",
+            image: "/images/module3/m3_internet_overview_tr.png",
+            points: [
+              "İnternet: Ağların ağı",
+              "Sunucular bilgiyi saklar ve gönderir",
+              "Veri saniyeler içinde taşınır"
+            ],
+            video_links: [
+              {
+                title: "İnternet nedir?",
+                url: "https://www.youtube.com/watch?v=hjjLnUMcJfs",
+                thumbnail: "/images/module3/video_tr.png"
+              }
+            ]
+          },
+          "2.2": {
+            title: "Paketler Nasıl Gider?",
+            description: "Büyük dosyalar küçük parçalara bölünür (paket).",
+            image: "/images/module3/m3_packets_travel_tr.png",
+            points: [
+              "Dosya paketlere bölünür",
+              "Her pakette hedef bilgisi bulunur",
+              "Hedefte tekrar birleştirilir"
+            ]
+          }
+        }
+      },
+      {
+        id: 3,
+        title: "Tarayıcı ve Arama Motoru",
+        subtitle: "Siteye girmek mi, aramak mı?",
+        intro:
+          "Web tarayıcı internette sayfaları açan programdır. Arama motoru ise bilgi bulmaya yardımcı olur.",
+        content: {
+          "3.1": {
+            title: "Web Tarayıcı Nedir?",
+            description:
+              "Tarayıcı; internet sayfalarını görüntüleyen programdır.",
+            image: "/images/module3/m3_browser_TR.jpg",
+            points: [
+              "Tarayıcı = sayfayı açan program",
+              "Adres çubuğu tarayıcıdadır",
+              "Sekmelerle birden çok sayfa açabilirsin"
+            ],
+            video_links: [
+              {
+                title: "Tarayıcı ve arama motoru farkı",
+                url: "https://www.youtube.com/watch?v=Rn9XcSTQl8A",
+                thumbnail: "/images/module3/video_tr.png"
+              }
+            ]
+          },
+          "3.2": {
+            title: "Arama Motoru Nedir?",
+            description:
+              "Arama motoru; internetteki sayfalar arasında arama yapar.",
+            image: "/images/module3/m3_search_engine_tr.png",
+            points: [
+              "Arama motoru = bilgi bulmaya yarar",
+              "Doğru anahtar kelime önemli",
+              "Her gördüğün bilgi doğru olmayabilir"
+            ]
+          },
+          "3.3": {
+            title: "Etkileşimli Uygulama",
+            description:
+              "Aşağıdaki etkileşimli uygulamayı açmak için bir web tarayıcısı kullanılır. Bu uygulama bir arama motoru değildir.",
+            external_link: {
+              title: "Tarayıcı mı, Arama Motoru mu? (LearningApps)",
+              url: "https://learningapps.org/11977064",
+              type: "browser_example"
+            }
+          }
+        },
+        activity_title: "Aktivite: Tarayıcı mı, Arama Motoru mu?",
+        activity_desc: "Örnekleri doğru kutuya eşleştir.",
+        activity_type: "card_matching",
+        activity_key: "browser_search"
+      },
+      {
+        id: 4,
+        title: "İnternet Adresi (URL) ve Uzantılar",
+        subtitle: "www.meb.gov.tr ne demek?",
+        intro: "Bir web sitesine girmek için adres (URL) kullanırız.",
+        content: {
+          "4.1": {
+            title: "URL Parçaları",
+            description:
+              "Örnek: www.meb.gov.tr -> www (servis), meb (alan adı), gov (kurum türü), tr (ülke).",
+            image: "/images/module3/m3_url_parts_tr.png",
+            points: [
+              "Alan adı: sitenin adı",
+              "Site uzantısı: tür (gov, com, org, edu)",
+              "Ülke uzantısı: tr"
+            ],
+            video_links: [
+              {
+                title: "URL nedir? alan adı ve uzantı",
+                url: "https://www.youtube.com/watch?v=ojuCsBIKyDY",
+                thumbnail: "/images/module3/video_tr.png"
+              }
+            ]
+          },
+          "4.2": {
+            title: "Uzantılar Ne Anlatır?",
+            description: "Uzantılar sitenin türünü anlatabilir.",
+            image: "/images/module3/m3_domain_extensions_tr.png",
+            points: [
+              ".edu.tr -> eğitim",
+              ".gov.tr -> devlet",
+              ".com.tr -> ticari",
+              ".org.tr -> organizasyon"
+            ]
+          }
+        },
+        activity_title: "Aktivite: URL Parçala",
+        activity_desc: "Bir adresi parçalarına ayır.",
+        activity_type: "interactive_quiz",
+        activity_key: "url_parts"
+      },
+      {
+        id: 5,
+        title: "Ağ Türleri: Ev, Okul ve Halka Açık Wi-Fi",
+        subtitle: "Farklı ağlar, farklı güvenlik",
+        intro:
+          "Ev, okul ve halka açik ağlar farklı güvenlik seviyelerine sahiptir.",
+        content: {
+          "5.1": {
+            title: "Ev Ağı",
+            description: "Ev ağı genelde şifrelidir.",
+            image: "/images/module3/m3_home_network_tr.png",
+            points: ["Şifreli olmalı", "Özel işlemler için daha güvenli"]
+          },
+          "5.2": {
+            title: "Okul Ağı",
+            description: "Okul ağında filtre ve kurallar olabilir.",
+            image: "/images/module3/m3_school_network_tr.png",
+            points: ["Kurallara uy", "Bazı siteler engelli olabilir"]
+          },
+          "5.3": {
+            title: "Halka Açık Wi-Fi",
+            description: "Halka açik Wi-Fi daha risklidir.",
+            image: "/images/module3/m3_public_wifi_tr.png",
+            points: ["Herkes bağlanabilir", "Şifre girmemek daha güvenli"],
+            video_links: [
+              {
+                title: "Wi-Fi güvenliği (çocuklar için)",
+                url: "https://www.youtube.com/watch?v=GgdK2rdJTrE",
+                thumbnail: "/images/module3/video_tr.png"
+              }
+            ]
+          }
+        },
+        activity_title: "Aktivite: Ağ Türleri Eşleştirme",
+        activity_desc: "Durumları doğru ağ türü ile eşleştir.",
+        activity_type: "card_matching",
+        activity_key: "network_types"
+      },
+      {
+        id: 6,
+        title: "Veri - İstemci - Sunucu",
+        subtitle: "Bilgi kimden kime gider?",
+        intro:
+          "İstemci istek gönderir, sunucu cevap verir. Veri ise taşınan bilgidir.",
+        content: {
+          "6.1": {
+            title: "Veri (Data)",
+            description: "Dosya, mesaj ve video birer veridir.",
+            image: "/images/module3/m3_data_tr.png",
+            points: ["Veri taşınır", "Paketlere bölünür"]
+          },
+          "6.2": {
+            title: "İstemci (Client)",
+            description: "İstek gönderen cihazlara istemci denir.",
+            image: "/images/module3/m3_client_tr.png",
+            points: ["Tarayıcı ile istek yapar", "Sunucudan cevap alır"],
+            video_links: [
+              {
+                title: "İstemci-sunucu nedir?",
+                url: "https://www.youtube.com/watch?v=TSDRE2J8Q70",
+                thumbnail: "/images/module3/video_tr.png"
+              }
+            ]
+          },
+          "6.3": {
+            title: "Sunucu (Server)",
+            description: "Sunucu, hizmet veren güclü bilgisayardır.",
+            image: "/images/module3/m3_server_tr.png",
+            points: ["Veriyi saklar", "Birçok istemciye cevap verir"]
+          }
+        },
+        activity_title: "Aktivite: İstemci mi Sunucu mu?",
+        activity_desc: "Örnekleri sınıflandır.",
+        activity_type: "card_matching",
+        activity_key: "client_server"
+      },
+      {
+        id: 7,
+        title: "Ağ Cihazları: Modem, Router, Switch, Ethernet",
+        subtitle: "Bağlantının parçaları",
+        intro: "Ağda modem, router, switch ve ethernet gibi parçalar vardır.",
+        content: {
+          "7.1": {
+            title: "Modem",
+            description: "Modem internet sinyalini ağa taşır.",
+            image: "/images/module3/matching/modem.png",
+            points: ["Internet sinyalini alır", "Ağa aktarır"]
+          },
+          "7.2": {
+            title: "Router",
+            description: "Router cihazları bağlar ve trafiği yönetir.",
+            image: "/images/module3/matching/router.png",
+            points: ["Wi-Fi yayar", "Paketleri yönlendirir"]
+          },
+          "7.3": {
+            title: "Switch",
+            description: "Birçok cihazı kabloyla aynı ağa bağlar.",
+            image: "/images/module3/matching/switch.png",
+            points: ["Kablolu bağlantıyı çoğaltır", "Okul labında kullanılır"]
+          },
+          "7.4": {
+            title: "Ethernet Kartı ve Ağ Kablosu",
+            description: "Ethernet kablosu veri taşır.",
+            image: "/images/module3/matching/ethernet_cable.png",
+            points: ["Kablolu bağlantı", "Daha kararlı olabilir"]
+          }
+        },
+        activity_title: "Aktivite: Ağ Cihazları Hotspot",
+        activity_desc: "Görselde cihazları bul.",
+        activity_type: "network_hotspot",
+        activity_key: "device_communication"
+      },
+      {
+        id: 8,
+        title: "Ağ Cihazlarını Eşleştir",
+        subtitle: "Görsel ve isimleri bağlayan çizgiler",
+        intro:
+          "Ağ cihazlarını tanımak için görselleri doğru isim kartlarıyla eşleştir.",
+        content: {
+          "8.1": {
+            title: "Ağ Cihazları",
+            description:
+              "Modem, router, switch ve bağlantı teknolojilerini ayırt edebilmek ağ kullanımını kolaylaştırır.",
+            image: "/images/module3/matching/network_arkaplan.png",
+            points: [
+              "Her cihazın görevi farklıdır",
+              "Doğru isimlendirme, doğru kullanım demektir"
+            ]
+          }
+        },
+        activity_title: "Aktivite: Ağ Cihazı Eşleştirme",
+        activity_desc: "Görselleri doğru isim kartlarıyla eşleştir.",
+        activity_type: "network_device_matching",
+        activity_key: "network_device_matching"
+      },
+      {
+        id: 9,
+        title: "Kablolu vs Kablosuz Bağlantı",
+        subtitle: "Hız mı, özgürlük mü?",
+        intro:
+          "Kablolu bağlantı genelde hızlı ve kararlıdır. Kablosuz bağlantı daha esnektir.",
+        content: {
+          "8.1": {
+            title: "Kablolu (Ethernet)",
+            description: "Kablo ile bağlanırsın.",
+            image: "/images/module3/m3_wired_vs_wireless_en_tr.png",
+            points: ["Daha hızlı", "Daha az kopma"]
+          },
+          "8.2": {
+            title: "Kablosuz (Wi-Fi)",
+            description: "Kablo olmadan bağlanırsın.",
+            image: "/images/module3/m3_wireless_en_tr.png",
+            points: ["Hareket kolay", "Sinyal etkiler"]
+          },
+          "8.3": {
+            title: "Hangi Durumda Hangisi?",
+            description:
+              "Oyun için kablolu, günlük mobil kullanım için Wi-Fi daha uygundur.",
+            image: "/images/module3/m3_wired_vs_wireless_en_tr.png",
+            points: ["Oyun -> kablolu", "Mobil -> Wi-Fi"],
+            quiz: [
+              {
+                type: "true_false",
+                question: "Router'dan uzaklaştıkça Wi-Fi sinyali zayıflar.",
+                answer: true
+              },
+              {
+                type: "true_false",
+                question: "Kablolu bağlantı her zaman daha güvensizdir.",
+                answer: false
+              }
+            ]
+          }
+        },
+        activity_title: "Aktivite: Doğru mu Yanlış mı?",
+        activity_desc: "Kablolu/kablosuz ifadelerini değerlendir.",
+        activity_type: "truth_or_troll",
+        activity_key: "wired_wireless"
+      },
+      {
+        id: 10,
+        title: "Ağ Güvenliği ve Ünite Değerlendirme",
+        subtitle: "Güvende kal, doğru seç",
+        intro: "Güvensiz ağlar kişisel bilgileri riske atabilir.",
+        content: {
+          "9.1": {
+            title: "Ağ Güvenliği Neden Önemli?",
+            description:
+              "Halka açik Wi-Fi gibi ortamlarda şifre girmek risklidir.",
+            image: "/images/module3/m3_network_security_en_tr.png",
+            points: [
+              "Şifre ve özel bilgi korunmalı",
+              "Önemli işlemleri ev ağında yap"
+            ]
+          },
+          "9.2": {
+            title: "Ünite Değerlendirme Testi",
+            description: "Kısa bir tekrar testi.",
+            image: "/images/module3/m3_network_security_en_tr.png",
+            quiz: [
+              {
+                type: "multiple_choice",
+                question: "Aşağıdakilerden hangisi web tarayıcıdır?",
+                options: [
+                  { text: "A) Chrome", correct: true },
+                  { text: "B) Google", correct: false },
+                  { text: "C) Yahoo", correct: false },
+                  { text: "D) Switch", correct: false }
+                ]
+              },
+              {
+                type: "true_false",
+                question: "Her ağ bağlantısında internet olmak zorunda değildir.",
+                answer: true
+              }
+            ]
+          }
+        },
+        activity_title: "Quiz: Güvenlik ve Tekrar",
+        activity_desc: "Soruları çoğunlukla doğru yapmaya çalış.",
+        activity_type: "interactive_quiz",
+        activity_key: "network_security"
       }
     ],
-    "scenario_assessment": {
-      "title": "🎯 Senaryo Bazlı Değerlendirme",
-      "description": "Aşağıdaki senaryoyu oku ve doğru kararları ver.",
-      "scenarios": [
+    scenario_assessment: {
+      activity_key: "lost_packet",
+      title: "Senaryo Bazlı Değerlendirme",
+      description: "Aşağıdaki senaryoyu oku ve doğru kararı ver.",
+      scenarios: [
         {
-          "id": 1,
-          "situation": "Ali bir kafede oturuyor ve halka açık Wi-Fi'ye bağlanmış. Arkadaşı ona bir video göndermiş ve Ali bu videoyu izlemek istiyor. Ayrıca ödevini kontrol etmek için okul hesabına girmesi gerekiyor.",
-          "question": "Ali ne yapmalı?",
-          "options": [
+          id: 1,
+          situation:
+            "Ali bir kafede halka açik Wi-Fi'ye bağlandı. Arkadaşi video gönderdi. Ali videoyu izlemek istiyor ve okul hesabına da giriş yapması gerekiyor.",
+          question: "Ali ne yapmalı?",
+          options: [
             {
-              "text": "A) Hem videoyu izleyebilir hem de okul hesabına girebilir, halka açık Wi-Fi güvenlidir.",
-              "correct": false,
-              "feedback": "Halka açık Wi-Fi'de özel bilgilerini (okul hesabı) paylaşmamalısın. Video izlemek genel bir aktivite olduğu için sorun olmayabilir, ancak şifre gerektiren işlemler güvenli değildir."
+              text: "A) Hem videoyu izler hem de okul hesabına girer, güvenlidir.",
+              correct: false,
+              feedback:
+                "Halka açik Wi-Fi'de şifre gerektiren işlemler risklidir. Video izlemek genel olabilir, ama hesap girişi yapma."
             },
             {
-              "text": "B) Sadece videoyu izleyebilir, okul hesabına girmek için ev ağına bağlanmayı beklemelidir.",
-              "correct": true,
-              "feedback": "Doğru! Halka açık Wi-Fi'de genel aktiviteler (video izleme) yapılabilir, ancak özel bilgiler gerektiren işlemler (okul hesabı) ev ağında yapılmalıdır."
+              text: "B) Videoyu izleyebilir ama okul hesabına girişi ev ağına bırakmalıdır.",
+              correct: true,
+              feedback: "Doğru! Şifre isteyen işlemleri güvenli ağda yap."
             },
             {
-              "text": "C) Hiçbir şey yapmamalı, halka açık Wi-Fi hiç güvenli değildir.",
-              "correct": false,
-              "feedback": "Halka açık Wi-Fi genel aktiviteler için kullanılabilir, ancak özel bilgiler gerektiren işlemler için güvenli değildir."
-            }
-          ]
-        },
-        {
-          "id": 2,
-          "situation": "Ayşe'nin evinde Wi-Fi şifresi yok. Komşuları ona şifresiz bir ağ olduğunu söylüyor ve Ayşe bu ağa bağlanmayı düşünüyor.",
-          "question": "Ayşe ne yapmalı?",
-          "options": [
-            {
-              "text": "A) Şifresiz ağa bağlanabilir, sorun olmaz.",
-              "correct": false,
-              "feedback": "Şifresiz ağlar güvenli değildir. Başkaları bu ağa bağlanabilir ve verilerinizi görebilir."
-            },
-            {
-              "text": "B) Şifresiz ağa bağlanmamalı, güvenli bir ağ bulmalı veya kendi ağını kurmalıdır.",
-              "correct": true,
-              "feedback": "Doğru! Şifresiz ağlar güvenli değildir. Ayşe güvenli bir ağ bulmalı veya kendi güvenli ağını kurmalıdır."
-            },
-            {
-              "text": "C) Sadece genel sitelere bakarsa sorun olmaz.",
-              "correct": false,
-              "feedback": "Şifresiz ağlarda bile genel aktiviteler yaparken dikkatli olmalısın. Mümkünse güvenli bir ağ kullan."
+              text: "C) Hiçbir şey yapmasın, Wi-Fi tamamen yasak olmalı.",
+              correct: false,
+              feedback:
+                "Genel gezinti yapılabilir; riskli olan şifre/özel bilgidir."
             }
           ]
         }
@@ -400,4 +446,5 @@ export const MODULE3_TR = {
     }
   }
 };
+
 export default MODULE3_TR;

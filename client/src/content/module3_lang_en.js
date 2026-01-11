@@ -1,377 +1,425 @@
-// Module 3: Computer Networks & Digital Communication - English Language File
-
 export const MODULE3_EN = {
   module_3: {
-    title: "Module 3: Computer Networks & Digital Communication",
-    subtitle: "🌐 Data Journey & Network Security",
-    hero_image: "/images/module_networks/hero.png",
+    title: "Module 3: Computer Networks and Digital Communication",
+    subtitle: "Data Journey - Network Devices - Security",
+    hero_image: "/images/module3/module3_hero_en.png",
     sections: [
       {
         id: 1,
-        title: "🌐 What is the Internet and How Do Data Packets Travel?",
-        subtitle: "The Highways of the Digital World",
-        intro: "The Internet is a huge network connecting billions of computers around the world. Just like highways between cities, data travels through this network. Every message, every photo, every video is broken into small packets and reaches its destination.",
+        title: "What is a Network? Communication Timeline",
+        subtitle: "Understanding networks from daily life",
+        intro:
+          "A network is a structure made of connected points. In computer networks, devices connect with cables or Wi-Fi to share information.",
         content: {
           "1.1": {
-            title: "What is the Internet?",
-            description: "The Internet is a huge network connecting billions of computers, phones, and other devices around the world. Just like roads in a city, data travels through this network. When you send a message to a friend, that message goes to a server thousands of kilometers away and then reaches your friend's phone.",
-            image: "/images/module_networks/internet_overview.png",
+            title: "What is a Network?",
+            description:
+              "A computer network is a group of connected devices that share data.",
+            image: "/images/module3/m3_network_definition_en.png",
             points: [
-              "The Internet is a huge network connecting all devices in the world",
-              "Billions of computers, phones, and tablets are connected to each other",
-              "Data reaches anywhere in the world in seconds through this network",
-              "Without the Internet, you cannot play online games, watch videos, or send messages"
+              "Network = connected devices",
+              "Goal: data sharing and communication",
+              "Wired or wireless",
+              "A network can exist without the Internet (LAN)"
             ],
             examples: [
-              "When you watch a video, that video comes from a server thousands of kilometers away",
-              "When you send a message to a friend, the message first goes to a server, then reaches your friend's phone",
-              "When you visit a website, the information from that site comes from another part of the world"
+              "School lab computers connected to the same printer",
+              "Phone, tablet, and laptop connected to the same Wi-Fi at home"
+            ],
+            video_links: [
+              {
+                title: "Computer networks for kids",
+                url: "https://www.youtube.com/watch?v=FD3BJUbvlF0",
+                thumbnail: "/images/module3/video_en.png"
+              }
             ]
           },
           "1.2": {
-            title: "How Do Data Packets Travel?",
-            description: "Large files (video, photo, message) are broken into small pieces. These pieces are called 'packets'. Each packet, like a letter, contains its destination address. Packets can take different routes but they all reach the same destination. At the destination, packets are reassembled and the original file is created.",
-            image: "/images/module_networks/packet_travel.png",
+            title: "How Communication Evolved",
+            description:
+              "Communication became faster with mail, telegraph, phone, radio/TV, satellites, and the Internet.",
+            image: "/images/module3/m3_comm_timeline_en.png",
             points: [
-              "Large files are broken into small packets (like a puzzle)",
-              "Each packet contains its destination address",
-              "Packets can take different routes but all reach the same place",
-              "At the destination, packets are reassembled",
-              "This process happens in seconds"
-            ],
-            examples: [
-              "When you send a photo, the photo is broken into 100 small packets",
-              "Each packet can take a different route",
-              "All packets reach your friend's phone and the photo is recreated"
-            ]
-          },
-          "1.3": {
-            title: "Why is the Internet Important?",
-            description: "Thanks to the Internet, we can communicate instantly with people all over the world. We can quickly access information, play games, and watch videos. However, this huge network also requires us to be careful about security.",
-            points: [
-              "The Internet provides fast access to information",
-              "It allows us to communicate with people all over the world",
-              "It is essential for education, entertainment, and work",
-              "However, we must be careful about security"
+              "Tools evolved and got faster",
+              "The Internet is very fast and widespread",
+              "More speed means more security needs"
             ]
           }
         },
-        activity_title: "🎮 Activity: Packet Delivery Game",
-        activity_desc: "Try to deliver data packets to the correct destination. Route the packets and watch their journey across the network!",
-        activity_type: "packet_delivery"
+        activity_title: "Mini Activity: Pick Network Examples",
+        activity_desc: "Which ones are network examples?",
+        activity_type: "interactive_quiz",
+        activity_key: "network_security",
       },
       {
         id: 2,
-        title: "🏠 Network Types: Home, School, and Public Wi-Fi",
-        subtitle: "Different Networks, Different Security Levels",
-        intro: "We use different types of networks to connect to the Internet. Each network type has its own characteristics and security levels. Understanding these helps us stay safe online.",
+        title: "What is the Internet? How Do Packets Travel?",
+        subtitle: "The highways of the digital world",
+        intro:
+          "The Internet is a huge network connecting billions of devices.",
         content: {
           "2.1": {
-            title: "Home Network",
-            description: "A home network connects all devices in your home (computer, phone, tablet, game console) to each other and to the Internet. It is usually created with a modem and router. Home networks are usually the safest type of network because only you and your family can access them.",
-            image: "/images/module_networks/home_network.png",
+            title: "What is the Internet?",
+            description:
+              "When you open a website, information comes from a server in another city or country.",
+            image: "/images/module3/m3_internet_overview_en.png",
             points: [
-              "Connects all devices in your home to each other",
-              "Created with a modem and router",
-              "Password protected, only you and your family can access",
-              "One of the safest types of networks"
+              "Internet = network of networks",
+              "Servers store and send data",
+              "Data moves in seconds"
             ],
-            examples: [
-              "Your home Wi-Fi password is only known by your family",
-              "Neighbors cannot connect to your network (even without a password)",
-              "It is safer to share private information on a home network"
+            video_links: [
+              {
+                title: "What is the Internet? (for kids)",
+                url: "https://www.youtube.com/watch?v=hjjLnUMcJfs",
+                thumbnail: "/images/module3/video_en.png"
+              }
             ]
           },
           "2.2": {
-            title: "School Network",
-            description: "A school network connects all computers and devices in the school to each other. Teachers and students can connect to this network. School networks usually contain filters (blocking access to harmful sites) and can monitor user activities.",
-            image: "/images/module_networks/school_network.png",
+            title: "How Packets Travel",
+            description:
+              "Large files are split into small parts (packets).",
+            image: "/images/module3/m3_packets_travel_en.png",
             points: [
-              "Connects all devices in the school to each other",
-              "Teachers and students can access",
-              "Contains filters that block access to harmful sites",
-              "User activities can be monitored"
-            ],
-            examples: [
-              "Access to game sites may be blocked at school",
-              "Teachers can see which sites you visit",
-              "You should be careful on school networks"
-            ]
-          },
-          "2.3": {
-            title: "Public Wi-Fi",
-            description: "Public Wi-Fi networks are found in places like cafes, airports, hotels and can be used by anyone. These networks are usually password-free or have public passwords. Public Wi-Fi networks are not safe because others are also connected to the same network and can see your data.",
-            image: "/images/module_networks/public_wifi.png",
-            points: [
-              "Found in cafes, airports, hotels, etc.",
-              "Usually password-free or have public passwords",
-              "Anyone can connect, so it's not safe",
-              "You should not share private information (passwords, bank information)"
-            ],
-            examples: [
-              "❌ Accessing your bank account on public Wi-Fi at a cafe",
-              "❌ Entering your passwords at an airport",
-              "✅ Just browsing general websites (news, weather)",
-              "✅ Doing important transactions on a home network"
+              "A file is split into packets",
+              "Each packet carries destination info",
+              "Packets are reassembled at the destination"
             ]
           }
-        },
-        activity_title: "🎮 Activity: Network Types Matching",
-        activity_desc: "Read the given situations and match them with the correct network type. Which network type is safer?",
-        activity_type: "card_matching"
+        }
       },
       {
         id: 3,
-        title: "📡 How Do Devices Communicate? (Modem, Router, Devices)",
-        subtitle: "The Architecture of Digital Communication",
-        intro: "Special devices are needed for devices to communicate with each other. Modem, router, and other network devices enable this communication. Each has a different task.",
+        title: "Browser and Search Engine",
+        subtitle: "Opening a site vs searching the web",
+        intro:
+          "A web browser opens web pages. A search engine helps you find information on the Internet.",
         content: {
           "3.1": {
-            title: "What is a Modem?",
-            description: "A modem is the device that connects your home network to the Internet. Just like a door, the modem is the door that opens to the outside world (Internet). It receives the Internet signal from your Internet service provider (like Türk Telekom, Superonline) and distributes it to devices in your home.",
-            image: "/images/module_networks/modem.png",
+            title: "What is a Web Browser?",
+            description:
+              "A browser displays web pages.",
+            image: "/images/module3/m3_browser_en.jpg",
             points: [
-              "Connects your home network to the Internet",
-              "Receives signal from Internet service provider",
-              "Like a door that opens to the outside world",
-              "Usually comes combined with a router"
+              "Browser opens pages",
+              "The address bar is in the browser",
+              "Tabs let you open multiple pages"
             ],
-            examples: [
-              "You cannot connect to the Internet without a modem",
-              "Internet service provider installs the modem",
-              "Modem is the door that opens to the Internet"
+            video_links: [
+              {
+                title: "Browser vs Search Engine",
+                url: "https://www.youtube.com/watch?v=Rn9XcSTQl8A",
+                thumbnail: "/images/module3/video_en.png"
+              }
             ]
           },
           "3.2": {
-            title: "What is a Router?",
-            description: "A router is a device that connects devices in your home to each other and provides Internet access. It broadcasts Wi-Fi signals, so you can connect to the Internet wirelessly. The router manages traffic between devices in your home - it determines which device will receive which data.",
-            image: "/images/module_networks/router.png",
+            title: "What is a Search Engine?",
+            description:
+              "A search engine searches web pages.",
+            image: "/images/module3/m3_search_engine_en.jpg",
             points: [
-              "Connects devices in your home to each other",
-              "Broadcasts Wi-Fi signals",
-              "Manages traffic between devices",
-              "Determines which device will receive which data"
-            ],
-            examples: [
-              "Thanks to the router, your phone connects to the Internet via Wi-Fi",
-              "The router allows your computer and phone to connect to the Internet at the same time",
-              "Without a router, there is no wireless connection"
-            ]
-          },
-          "3.3": {
-            title: "How Do Devices Communicate?",
-            description: "Devices (phone, computer, tablet) connect to the router. The router receives requests from these devices and forwards them to the Internet. It also routes responses from the Internet to the relevant device. Just like a postman, the router delivers the right packets to the right addresses.",
-            image: "/images/module_networks/device_communication.png",
-            points: [
-              "Devices connect to the router",
-              "Router forwards requests to the Internet",
-              "Routes responses from the Internet to the relevant device",
-              "Each device has its own address"
-            ],
-            examples: [
-              "When your phone wants to watch a video, the router forwards this request to the Internet",
-              "When the video arrives, the router routes it to your phone",
-              "Your computer can also connect to the Internet at the same time, the router manages both"
+              "Search engines help you find information",
+              "Choosing good keywords is important",
+              "Not everything you see online is true"
             ]
           }
         },
-        activity_title: "🎮 Activity: Network Devices Hotspot",
-        activity_desc: "Click on network devices and learn the task of each. How do modem, router, and other devices work?",
-        activity_type: "network_hotspot"
+        activity_title: "Activity: Browser or Search Engine?",
+        activity_desc: "Match the examples to the correct group.",
+        activity_type: "card_matching",
+        activity_key: "browser_search",
       },
       {
         id: 4,
-        title: "🔌 Wired vs Wireless Communication",
-        subtitle: "Two Different Paths, Same Destination",
-        intro: "Devices can connect to the Internet in two ways: wired (Ethernet) or wireless (Wi-Fi). Both have advantages and disadvantages.",
+        title: "Internet Address (URL) and Extensions",
+        subtitle: "What does www.meb.gov.tr mean?",
+        intro:
+          "You use an address (URL) to enter a website.",
         content: {
           "4.1": {
-            title: "Wired Communication (Ethernet)",
-            description: "Wired connection is when a device connects to the router with a cable. This type of connection is usually faster and more reliable. There is less interruption when playing games or watching videos. However, the device must be close to the router.",
-            image: "/images/module_networks/wired_connection.png",
+            title: "URL Parts",
+            description:
+              "Example: www.meb.gov.tr -> www (service), meb (domain), gov (type), tr (country).",
+            image: "/images/module3/m3_url_parts_en.png",
             points: [
-              "Faster and more reliable connection",
-              "Better performance for games and videos",
-              "Less interruption",
-              "However, device must be close to router"
+              "Domain name: the site name",
+              "Extension: type (gov, com, org, edu)",
+              "Country code: tr"
             ],
-            examples: [
-              "✅ Game consoles usually use wired connection (faster)",
-              "✅ Desktop computers can use wired connection",
-              "❌ Phones and tablets cannot use wired connection (not practical)"
+            video_links: [
+              {
+                title: "What is a URL? Domain and extension",
+                url: "https://www.youtube.com/watch?v=ojuCsBIKyDY",
+                thumbnail: "/images/module3/video_en.png"
+              }
             ]
           },
           "4.2": {
-            title: "Wireless Communication (Wi-Fi)",
-            description: "Wireless connection is when a device connects to the Internet using the Wi-Fi signal broadcast from the router. This type of connection is more flexible because you can move the device wherever you want. However, it may be slightly slower than wired connection and depends on signal strength.",
-            image: "/images/module_networks/wireless_connection.png",
+            title: "What Do Extensions Tell Us?",
+            description:
+              "Extensions can describe the type of the site.",
+            image: "/images/module3/m3_domain_extensions_en.png",
             points: [
-              "More flexible, you can move the device wherever you want",
-              "No cable needed",
-              "However, may be slightly slower than wired connection",
-              "Depends on signal strength (being close to router is important)"
-            ],
-            examples: [
-              "✅ Phones and tablets use Wi-Fi",
-              "✅ Laptops usually use Wi-Fi",
-              "⚠️ Signal weakens as you move away from router"
-            ]
-          },
-          "4.3": {
-            title: "Which Should I Use?",
-            description: "Both connection types have their own usage areas. If you're playing games or want fast Internet, wired connection is better. However, if you want flexibility, you can use Wi-Fi.",
-            points: [
-              "For games and fast Internet: Wired connection",
-              "For flexibility and movement: Wi-Fi",
-              "Both are safe (on home network)",
-              "Be careful on public Wi-Fi"
-            ],
-            examples: [
-              "Game console → Wired connection",
-              "Phone → Wi-Fi",
-              "Desktop computer → Wired connection (if possible)",
-              "Laptop → Wi-Fi (for flexibility)"
+              ".edu.tr -> education",
+              ".gov.tr -> government",
+              ".com.tr -> commercial",
+              ".org.tr -> organization"
             ]
           }
         },
-        activity_title: "🎮 Activity: True/False Quiz",
-        activity_desc: "Read statements about wired and wireless communication and determine if they are true or false.",
-        activity_type: "truth_or_troll"
+        activity_title: "Activity: Break Down a URL",
+        activity_desc: "Split a website address into its parts.",
+        activity_type: "interactive_quiz",
+        activity_key: "url_parts",
       },
       {
         id: 5,
-        title: "🛡️ Why is Network Security Important?",
-        subtitle: "Protecting Yourself in the Digital World",
-        intro: "Network security is very important for protecting ourselves in the digital world. Connecting to insecure networks or neglecting security measures can lead to theft of our personal information.",
+        title: "Network Types: Home, School, and Public Wi-Fi",
+        subtitle: "Different networks, different safety",
+        intro:
+          "Home, school, and public networks have different security levels.",
         content: {
           "5.1": {
-            title: "Why is Network Security Important?",
-            description: "Connecting to insecure networks can cause our personal information (passwords, bank information, private messages) to be seen by others. Malicious people can steal or misuse this information. That's why we should use secure networks and take security measures.",
-            image: "/images/module_networks/network_security.png",
-            points: [
-              "Personal information can be stolen on insecure networks",
-              "Your passwords and bank information can be seen",
-              "Malicious people can misuse this information",
-              "We should use secure networks and take security measures"
-            ],
-            examples: [
-              "❌ Accessing bank account on public Wi-Fi",
-              "❌ Connecting to password-free networks",
-              "✅ Sharing private information on home network",
-              "✅ Using a strong Wi-Fi password"
-            ]
+            title: "Home Network",
+            description: "Home networks are usually password protected.",
+            image: "/images/module3/m3_home_network_en.png",
+            points: ["Use a password", "Safer for private actions"]
           },
           "5.2": {
-            title: "Safe Network Usage Tips",
-            description: "Some important tips for connecting to the Internet safely:",
-            points: [
-              "Use a strong Wi-Fi password on home network",
-              "Don't share private information on public Wi-Fi",
-              "Don't connect to networks you don't know",
-              "Use antivirus software",
-              "Avoid suspicious connections"
-            ],
-            examples: [
-              "✅ Your Wi-Fi password should be at least 12 characters",
-              "✅ On public Wi-Fi, only browse general sites",
-              "❌ Don't connect to 'Free Wi-Fi' networks you don't know",
-              "✅ Do important transactions on home network"
-            ]
+            title: "School Network",
+            description: "School networks can have filters and rules.",
+            image: "/images/module3/m3_school_network_en.png",
+            points: ["Follow the rules", "Some sites may be blocked"]
           },
           "5.3": {
-            title: "Network Security Scenarios",
-            description: "How should we behave in different situations?",
-            points: [
-              "On public Wi-Fi at a cafe: Only browse general sites, don't enter passwords",
-              "On home network: Safe, you can share private information",
-              "On school network: Be careful, your activities can be monitored",
-              "Unknown networks: Never connect"
-            ],
-            quiz: [
+            title: "Public Wi-Fi",
+            description: "Public Wi-Fi is riskier.",
+            image: "/images/module3/m3_public_wifi_en.png",
+            points: ["Anyone can connect", "Avoid entering passwords"],
+            video_links: [
               {
-                type: "true_false",
-                question: "It is safe to access my bank account on public Wi-Fi.",
-                answer: false
-              },
-              {
-                type: "true_false",
-                question: "It is important to use a strong Wi-Fi password on home network.",
-                answer: true
-              },
-              {
-                type: "multiple_choice",
-                question: "In which situation can you share private information?",
-                options: [
-                  { text: "A) On public Wi-Fi", correct: false },
-                  { text: "B) On home network", correct: true },
-                  { text: "C) On a network you don't know", correct: false },
-                  { text: "D) On a password-free network", correct: false }
-                ]
-              },
-              {
-                type: "multiple_choice",
-                question: "Why is network security important?",
-                options: [
-                  { text: "A) Internet becomes faster", correct: false },
-                  { text: "B) Prevents theft of personal information", correct: true },
-                  { text: "C) You can play more games", correct: false },
-                  { text: "D) You can watch more videos", correct: false }
-                ]
+                title: "Wi-Fi safety (for kids)",
+                url: "https://www.youtube.com/watch?v=GgdK2rdJTrE",
+                thumbnail: "/images/module3/video_en.png"
               }
             ]
           }
         },
-        activity_title: "📝 Quiz: Network Security",
-        activity_desc: "Answer questions about network security and test your knowledge.",
-        activity_type: "interactive_quiz"
+        activity_title: "Activity: Match Network Types",
+        activity_desc: "Match situations with the correct network type.",
+        activity_type: "card_matching",
+        activity_key: "network_types",
+      },
+      {
+        id: 6,
+        title: "Data - Client - Server",
+        subtitle: "Who sends information to whom?",
+        intro:
+          "The client sends a request and the server replies. Data is the information that moves.",
+        content: {
+          "6.1": {
+            title: "Data",
+            description: "Files, messages, and videos are data.",
+            image: "/images/module3/m3_data_en.png",
+            points: ["Data moves", "It can be split into packets"]
+          },
+          "6.2": {
+            title: "Client",
+            description: "Devices that send requests are called clients.",
+            image: "/images/module3/m3_client_en.png",
+            points: ["Makes requests via a browser", "Receives responses from the server"],
+            video_links: [
+              {
+                title: "What is client-server?",
+                url: "https://www.youtube.com/watch?v=TSDRE2J8Q70",
+                thumbnail: "/images/module3/video_en.png"
+              }
+            ]
+          },
+          "6.3": {
+            title: "Server",
+            description: "A server is a powerful computer that provides services.",
+            image: "/images/module3/m3_server_tr.png",
+            points: ["Stores data", "Responds to many clients"]
+          }
+        },
+        activity_title: "Activity: Client or Server?",
+        activity_desc: "Classify the examples.",
+        activity_type: "card_matching",
+        activity_key: "client_server",
+      },
+      {
+        id: 7,
+        title: "Network Devices: Modem, Router, Switch, Ethernet",
+        subtitle: "Parts of a connection",
+        intro: "A network uses devices like a modem, router, switch, and ethernet.",
+        content: {
+          "7.1": {
+            title: "Modem",
+            description: "A modem brings the internet signal into the network.",
+            image: "/images/module3/matching/modem.png",
+            points: ["Receives the internet signal", "Transfers it to the network"]
+          },
+          "7.2": {
+            title: "Router",
+            description: "A router connects devices and manages traffic.",
+            image: "/images/module3/matching/router.png",
+            points: ["Broadcasts Wi-Fi", "Routes data packets"]
+          },
+          "7.3": {
+            title: "Switch",
+            description: "A switch connects many devices in the same wired network.",
+            image: "/images/module3/matching/switch.png",
+            points: ["Expands wired connections", "Used in school labs"]
+          },
+          "7.4": {
+            title: "Ethernet Card and Cable",
+            description: "Ethernet cables carry data.",
+            image: "/images/module3/matching/ethernet_cable.png",
+            points: ["Wired connection", "More stable in many cases"]
+          }
+        },
+        activity_title: "Activity: Find Network Devices",
+        activity_desc: "Find the devices in the picture.",
+        activity_type: "network_hotspot",
+        activity_key: "device_communication",
+      },
+      {
+        id: 8,
+        title: "Match Network Devices",
+        subtitle: "Connect pictures to their names",
+        intro:
+          "Match each device picture with the correct name card.",
+        content: {
+          "8.1": {
+            title: "Network Devices",
+            description:
+              "Being able to tell devices and connection technologies apart makes network use easier.",
+            image: "/images/module3/matching/network_arkaplan.png",
+            points: [
+              "Each device has a different job",
+              "Correct names mean correct use"
+            ]
+          }
+        },
+        activity_title: "Activity: Network Device Matching",
+        activity_desc: "Match the pictures with the correct name cards.",
+        activity_type: "network_device_matching",
+        activity_key: "network_device_matching",
+      },
+      {
+        id: 9,
+        title: "Wired vs Wireless Connection",
+        subtitle: "Speed or freedom?",
+        intro: "Wired connections are usually fast and stable. Wireless connections are more flexible.",
+        content: {
+          "9.1": {
+            title: "Wired (Ethernet)",
+            description: "You connect with a cable.",
+            image: "/images/module3/m3_wired_vs_wireless_en_tr.png",
+            points: ["Faster", "Less interruption"]
+          },
+          "9.2": {
+            title: "Wireless (Wi-Fi)",
+            description: "You connect without a cable.",
+            image: "/images/module3/m3_wireless_en_tr.png",
+            points: ["Easy movement", "Signal can be affected"]
+          },
+          "9.3": {
+            title: "Which One When?",
+            description: "For games, wired is better; for daily mobile use, Wi-Fi is better.",
+            image: "/images/module3/m3_wired_vs_wireless_en_tr.png",
+            points: ["Games -> wired", "Mobile -> Wi-Fi"],
+            quiz: [
+              {
+                type: "true_false",
+                question: "Wi-Fi signal gets weaker as you move away from the router.",
+                answer: true
+              },
+              {
+                type: "true_false",
+                question: "A wired connection is always less secure.",
+                answer: false
+              }
+            ]
+          }
+        },
+        activity_title: "Activity: True or False?",
+        activity_desc: "Evaluate wired/wireless statements.",
+        activity_type: "truth_or_troll",
+        activity_key: "wired_wireless",
+      },
+      {
+        id: 10,
+        title: "Network Security and Unit Review",
+        subtitle: "Stay safe, choose right",
+        intro: "Unsafe networks can put personal information at risk.",
+        content: {
+          "10.1": {
+            title: "Why Is Network Security Important?",
+            description: "Entering passwords on public Wi-Fi can be risky.",
+            image: "/images/module3/m3_network_security_en_tr.png",
+            points: ["Protect passwords and private info", "Do important tasks on a home network"]
+          },
+          "10.2": {
+            title: "Unit Review Quiz",
+            description: "A short review test.",
+            image: "/images/module3/m3_network_security_en_tr.png",
+            quiz: [
+              {
+                type: "multiple_choice",
+                question: "Which of the following is a web browser?",
+                options: [
+                  { text: "A) Chrome", correct: true },
+                  { text: "B) Google", correct: false },
+                  { text: "C) Yahoo", correct: false },
+                  { text: "D) Switch", correct: false }
+                ]
+              },
+              {
+                type: "true_false",
+                question: "A network connection does not always require the Internet.",
+                answer: true
+              }
+            ]
+          }
+        },
+        activity_title: "Quiz: Security and Review",
+        activity_desc: "Try to answer most questions correctly.",
+        activity_type: "interactive_quiz",
+        activity_key: "network_security",
       }
     ],
-    // Scenario-based assessment
     scenario_assessment: {
-      title: "🎯 Scenario-Based Assessment",
-      description: "Read the following scenario and make the right decisions.",
+      activity_key: "lost_packet",
+      title: "Scenario-Based Assessment",
+      description: "Read the scenario and choose the correct decision.",
       scenarios: [
         {
           id: 1,
-          situation: "Ali is sitting in a cafe and connected to public Wi-Fi. His friend sent him a video and Ali wants to watch it. He also needs to log into his school account to check his homework.",
+          situation:
+            "Ali connects to public Wi-Fi at a cafe. A friend sends a video. Ali wants to watch it and also log into his school account.",
           question: "What should Ali do?",
           options: [
             {
-              text: "A) He can both watch the video and log into his school account, public Wi-Fi is safe.",
+              text: "A) Watch the video and log into the school account; it is safe.",
               correct: false,
-              feedback: "You should not share private information (school account) on public Wi-Fi. Watching videos is a general activity so it may not be a problem, but operations requiring passwords are not safe."
+              feedback:
+                "Password-required actions are risky on public Wi-Fi. Watching a video is OK, but avoid logging in."
             },
             {
-              text: "B) He can only watch the video, he should wait to connect to home network to log into his school account.",
+              text: "B) Watch the video, but save the school login for home network.",
               correct: true,
-              feedback: "Correct! General activities (watching videos) can be done on public Wi-Fi, but operations requiring private information (school account) should be done on home network."
+              feedback:
+                "Correct. Do password-required actions on a secure network."
             },
             {
-              text: "C) He should not do anything, public Wi-Fi is not safe at all.",
+              text: "C) Do nothing at all; Wi-Fi should always be forbidden.",
               correct: false,
-              feedback: "Public Wi-Fi can be used for general activities, but it is not safe for operations requiring private information."
-            }
-          ]
-        },
-        {
-          id: 2,
-          situation: "Ayşe doesn't have a Wi-Fi password at home. Her neighbors tell her there is a password-free network and Ayşe is thinking of connecting to this network.",
-          question: "What should Ayşe do?",
-          options: [
-            {
-              text: "A) She can connect to the password-free network, no problem.",
-              correct: false,
-              feedback: "Password-free networks are not safe. Others can connect to this network and see your data."
-            },
-            {
-              text: "B) She should not connect to the password-free network, she should find a secure network or set up her own network.",
-              correct: true,
-              feedback: "Correct! Password-free networks are not safe. Ayşe should find a secure network or set up her own secure network."
-            },
-            {
-              text: "C) It's okay if she only browses general sites.",
-              correct: false,
-              feedback: "Even on password-free networks, you should be careful when doing general activities. Use a secure network if possible."
+              feedback:
+                "General browsing is okay; the risky part is passwords and private data."
             }
           ]
         }

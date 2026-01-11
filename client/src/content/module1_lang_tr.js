@@ -1,23 +1,23 @@
 export const MODULE1_TR = {
   "module_1": {
     "title": "Modül 1: Bilgisayar Dünyasını Keşfediyorum",
-    "subtitle": "🟢 Tek Modül - 5 Alt Başlık (Genişletilmiş ve Düzenlenmiş İçerik)",
+  
     "sections": [
       {
         "id": 1,
-        "title": "🟢 ALT BAŞLIK 1: BİLGİSAYAR NEDİR VE NASIL DÜŞÜNÜR?",
+        "title": "💻 Bilgisayar nedir ve nasıl düşünür?",
         "subtitle": "Giriş, Mantık, IPOS Döngüsü ve Temel Tanımlar",
         "intro": "Bilgisayar; verileri hammadde olarak alan, onları işlemcisinde inanılmaz bir hızla işleyen, ihtiyaç duyduğumuzda saklayan ve sonuçları bize bilgi olarak sunan akıllı bir elektronik makinedir. Tıpkı durmaksızın çalışan dev ve akıllı bir fabrika gibi!",
         "video_links": [
           {
             "title": "Khan Academy: İkili Sayı Sistemi (Bilgisayarlar ve İnternet)",
             "url": "https://www.youtube.com/watch?v=c-KcEvYJzPQ",
-            "thumbnail": "https://img.youtube.com/vi/c-KcEvYJzPQ/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           },
           {
             "title": "Khan Academy: İkili Sayı Sistemi ve Veri",
             "url": "https://www.youtube.com/watch?v=uErAI2_g0Ws",
-            "thumbnail": "https://img.youtube.com/vi/uErAI2_g0Ws/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           }
         ],
         "content": {
@@ -30,7 +30,7 @@ export const MODULE1_TR = {
               "Çıkış (Output/Ürün): İşlenen verinin ekrandaki görüntü, hoparlörden çıkan ses veya yazıcıdan alınan kağıt olarak bize sunulması.",
               "Depolama (Storage/Depo): Bilgilerin daha sonra kullanılmak üzere sabit disk, USB veya bulut sisteminde saklanması."
             ],
-            "image": "/images/module1_factory_analogy.png",
+            "image": "/images/module1/bilgisayar\u0131n_tan\u0131m\u0131_tr.png",
             "examples": [
               "Klavyede 'Merhaba' yazdığında GİRİŞ yapıyorsun.",
               "Bilgisayar harfleri tanıyıp ekrana yansıtacak şekle getirir (İŞLEM).",
@@ -51,7 +51,7 @@ export const MODULE1_TR = {
           "1.3": {
             "title": "İkili Sistem (Bilgisayarın Dili - Binary)",
             "description": "Bilgisayarlar insanlar gibi kelimelerle veya onluk sayı sistemiyle (0-9) düşünmezler. Onlar sadece elektrik sinyallerini anlar: Elektrik VAR (1) veya Elektrik YOK (0). Buna Binary (İkili) Kod sistemi denir.",
-            "image": "/images/module1_binary_system.png",
+            "image": "/images/module1/binary_tr.png",
             "examples": [
               "'A' harfi bilgisayar için aslında: 01000001 dizisidir.",
               "'5' sayısı ikili sistemde: 00000101 demektir.",
@@ -60,44 +60,25 @@ export const MODULE1_TR = {
             ]
           }
         },
-        "activities": [
-          {
-            "activity_title": "Veri Fabrikası",
-            "activity_desc": "Veriyi girdi-işlem-çıktı-depolama adımlarında eşleştir; IPOS mantığını günlük hayat örneğiyle pekiştir.",
-            "activity_type": "data_factory"
-          },
-          {
-            "activity_title": "Veri Birimleri Bulmacası",
-            "activity_desc": "İpucunu seç, harfleri yaz ve bulmacayı tamamla! (1024 byte = 1 KB vb.)",
-            "activity_type": "data_units_crossword_wordwall"
-          }
-        ],
-        "activity_title": "🎮 Aktivite: Veri Fabrikası",
-        "activity_desc": "Öğrenci 'Un (Veri)' çuvalını makineye sürükler, makineden 'Ekmek (Bilgi)' çıkar. Verinin bilgiye nasıl dönüştüğünü gösteren etkileşimli animasyon.",
-        "activity_type": "data_factory"
+        "activities": []
       },
       {
         "id": 2,
-        "title": "🔵 ALT BAŞLIK 2: DONANIM (BİLGİSAYARIN VÜCUDU)",
+        "title": "🧩 Donanım (bilgisayarın vücudu)",
         "subtitle": "Fiziksel Parçalar, Çevre Birimleri ve Görevleri",
         "intro": "Bilgisayarın elle tutulabilen, gözle görülebilen, kırılabilen tüm metal, plastik ve elektronik parçalarına donanım denir. İnsan vücuduna benzer; tıpkı bizim iskeletimiz, organlarımız olduğu gibi, bilgisayarın da çalışmasını sağlayan fiziksel bileşenleri vardır.",
         "video_links": [
           {
-            "title": "5. Sınıf: Bilgisayar Sistemleri (Donanım-Yazılım)",
-            "url": "https://www.youtube.com/watch?v=FawDtMN4WKM",
-            "thumbnail": "https://img.youtube.com/vi/FawDtMN4WKM/mqdefault.jpg"
-          },
-          {
             "title": "Donanım ve Yazılım Nedir? (Animasyon)",
             "url": "https://www.youtube.com/watch?v=YbvWEd0q5YU",
-            "thumbnail": "https://img.youtube.com/vi/YbvWEd0q5YU/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           }
         ],
         "content": {
           "2.1": {
             "title": "Donanım (Hardware) Nedir?",
             "description": "Kısaca bilgisayarın 'sert' kısımlarıdır. Kasayı açtığımızda gördüğümüz devreler, kablolar ve masanın üzerindeki cihazların hepsi donanımdır.",
-            "image": "/images/concept_hardware_software.png",
+            "image": "/images/module1/concept_hardware_tr.png",
             "examples": [
               "Monitör - Gözlerimiz gibidir (bize dünyayı/veriyi gösterir).",
               "Klavye - Dilimiz gibidir (düşüncelerimizi aktarmamızı sağlar).",
@@ -114,8 +95,8 @@ export const MODULE1_TR = {
                 "örnekler": "Klavye, Fare, Mikrofon, Web Kamerası, Tarayıcı (Scanner), Oyun Kolu (Gamepad)",
                 "image": "/images/module1_input_devices.png",
                 "images": {
-                  "klavye": "/images/hardware_keyboard.png",
-                  "fare": "/images/hardware_mouse.png"
+                  "klavye": "/images/module1/hardware_keyboard.png",
+                  "fare": "/images/module1/hardware_mouse.png"
                 }
               },
               "Çıkış Birimleri (Output Devices)": {
@@ -123,9 +104,9 @@ export const MODULE1_TR = {
                 "örnekler": "Monitör, Yazıcı, Hoparlör, Kulaklık, Projeksiyon Cihazı, 3D Yazıcı",
                 "image": "/images/module1_output_devices.png",
                 "images": {
-                  "monitör": "/images/hardware_monitor.png",
-                  "yazıcı": "/images/hardware_printer.png",
-                  "kulaklık": "/images/hardware_headphones.png"
+                  "monitör": "/images/module1/hardware_monitor.png",
+                  "yazıcı": "/images/module1/hardware_printer.png",
+                  "kulaklık": "/images/module1/hardware_headphones.png"
                 }
               },
               "Giriş/Çıkış Birimleri (I/O Devices)": {
@@ -144,55 +125,64 @@ export const MODULE1_TR = {
                 "name": "Anakart (Mainboard)",
                 "role": "Tüm donanım birimlerinin (işlemci, RAM, ekran kartı) üzerine takıldığı ve birbirleriyle haberleşmesini sağlayan elektronik karttır.",
                 "analogy": "Vücudumuzdaki iskelet ve sinir sistemi gibidir. Şehrin altyapısı ve yolları gibidir.",
-                "image": "/images/hardware_motherboard.png"
+                "image": "/images/module1/hardware_motherboard.png"
               },
               {
                 "name": "İşlemci (CPU)",
                 "role": "Bilgisayarın beynidir. Tüm mantıksal ve matematiksel işlemleri yapar. Bilgisayarın hızını belirleyen en önemli parçadır.",
                 "analogy": "Çok hızlı soru çözen bir matematik profesörü veya orkestra şefi.",
-                "image": "/images/hardware_cpu.png"
+                "image": "/images/module1/hardware_cpu.png"
               },
               {
                 "name": "RAM (Rastgele Erişimli Bellek)",
                 "role": "Bilgilerin geçici olarak tutulduğu çalışma alanıdır. Bilgisayar kapatılınca veya elektrik kesilince içindeki bilgiler SİLİNİR (Uçucu Bellek).",
                 "analogy": "Çalışma masası. Masa ne kadar genişse o kadar çok kitabı aynı anda açabilirsin, ama işin bitince masayı temizlersin.",
-                "image": "/images/hardware_ram.png"
+                "image": "/images/module1/hardware_ram.png"
               },
               {
                 "name": "Sabit Disk (HDD) / SSD",
                 "role": "Bilgilerin kalıcı olarak saklandığı yerdir. Fotoğraflar, oyunlar, Windows burada durur. Elektrik kesilse bile veriler silinmez.",
                 "analogy": "Kütüphane rafları veya depo. Dosyalar burada yıllarca güvenle saklanır.",
-                "image": "/images/hardware_hdd.png"
+                "image": "/images/module1/hardware_hdd.png"
               }
             ]
           }
         },
-        "activity_title": "🎮 Aktivite: Hotspot Görseli",
-        "activity_desc": "Açık bir bilgisayar kasası ekranda görüntülenir. Öğrenci parçaların üzerine tıkladıkça 'Ben İşlemciyim, beynim! Çok ısınırım bu yüzden üzerimde fan vardır' gibi açıklamalar çıkar.",
-        "activity_type": "hardware_hotspot"
+        "activities": [
+          {
+            "activity_title": "Veri Fabrikas\u0131",
+            "activity_desc": "Veriyi girdi-i\u015flem-\u00e7\u0131kt\u0131-depolama ad\u0131mlar\u0131nda e\u015fle\u015ftir; IPOS mant\u0131\u011f\u0131n\u0131 peki\u015ftir.",
+            "activity_type": "data_factory"
+          },
+          {
+            "activity_title": "Aktivite: Hotspot G\u00f6rseli",
+            "activity_desc": "A\u00e7\u0131k bir bilgisayar kasas\u0131 ekranda g\u00f6r\u00fcnt\u00fclenir. \u00d6\u011frenci par\u00e7alar\u0131n \u00fczerine t\u0131klad\u0131k\u00e7a a\u00e7\u0131klamalar \u00e7\u0131kar.",
+            "activity_type": "hardware_hotspot"
+          }
+        ]
       },
       {
         "id": 3,
-        "title": "🟠 ALT BAŞLIK 3: YAZILIM (BİLGİSAYARIN RUHU)",
+        "title": "💾 Yazılım (bilgisayarın ruhu)",
         "subtitle": "Programlar, İşletim Sistemleri, Kodlama ve Lisanslar",
         "intro": "Donanım parçalarına ne yapması gerektiğini söyleyen, bilgisayarı yöneten komutlar dizisidir. Yazılım olmadan en pahalı bilgisayar bile çalışmayan siyah bir ekrandan ibarettir. Yazılım, bilgisayara hayat veren ruhtur!",
         "video_links": [
           {
             "title": "İşletim Sistemi Nedir?",
             "url": "https://www.youtube.com/watch?v=Ox5trKYGXZ0",
-            "thumbnail": "https://img.youtube.com/vi/Ox5trKYGXZ0/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           },
           {
             "title": "İşletim Sistemi ve Türleri (5. Sınıf Animasyon)",
             "url": "https://www.youtube.com/watch?v=Y1gxRHcWz_o",
-            "thumbnail": "https://img.youtube.com/vi/Y1gxRHcWz_o/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           }
         ],
         "content": {
           "3.1": {
             "title": "Yazılım (Software) Nedir?",
             "description": "Kullanıcının bilgisayara komut vermesini sağlayan programların tümüdür. Elle tutulamazlar ama monitörde etkilerini görürüz.",
-            "image": "/images/concept_hardware_software.png",
+            "image": "/images/module1_software_concept.png",
             "examples": [
               "Windows, bilgisayarı açtığında seni karşılayan sistem yazılımıdır.",
               "Minecraft veya Roblox birer oyun yazılımıdır.",
@@ -202,7 +192,7 @@ export const MODULE1_TR = {
           "3.2": {
             "title": "Yazılım Türleri (Gemi Kaptanı ve Tayfalar)",
             "description": "Yazılımları görevlerine göre iki ana gruba ayırırız:",
-            "image": "/images/concept_os.png",
+            "image": "/images/module1/software_types_tr.png",
             "system_software": [
               "**İşletim Sistemi (Sistem Yazılımı):** Bilgisayarı yöneten, donanımları tanıyan ana kaptandır.",
               "Windows (En yaygın masaüstü sistemi)",
@@ -253,19 +243,19 @@ export const MODULE1_TR = {
       },
       {
         "id": 4,
-        "title": "🟣 ALT BAŞLIK 4: HAFIZA VE DOSYA YÖNETİMİ",
+        "title": "📁 Hafıza ve dosya yönetimi",
         "subtitle": "Kapasite Birimleri, Dosya Uzantıları ve Klasör Düzeni",
         "intro": "Bilgisayardaki verilerin ne kadar yer kapladığını ölçmek için özel birimler kullanırız. Ayrıca aradığımızı kolayca bulabilmek için dosyalarımızı düzenli klasörlerde saklarız.",
         "video_links": [
           {
             "title": "Dosya ve Klasör Yönetimi – Dosya Uzantıları (5. Sınıf)",
             "url": "https://www.youtube.com/watch?v=mJ2aDEV7zrA",
-            "thumbnail": "https://img.youtube.com/vi/mJ2aDEV7zrA/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           },
           {
             "title": "Dosya ve Klasör Kavramı (5. Sınıf)",
             "url": "https://www.youtube.com/watch?v=zgeMy2T-tFY",
-            "thumbnail": "https://img.youtube.com/vi/zgeMy2T-tFY/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           }
         ],
         "content": {
@@ -367,25 +357,34 @@ export const MODULE1_TR = {
             ]
           }
         },
-        "activity_title": "Dosya Uzant\u0131lar\u0131 U\u00e7ak Oyunu",
-        "activity_desc": "Do\u011fru uzant\u0131 bulutlar\u0131ndan ge\u00e7, yanl\u0131\u015f bulutlardan ka\u00e7\u0131n. Tamamlay\u0131nca otomatik ilerler.",
-        "activity_type": "file_extensions_airplane"
+        "activities": [
+          {
+            "activity_title": "Veri Birimleri Bulmacas?",
+            "activity_desc": "?pucu se? ve harfleri doldur (1024 byte = 1 KB, vb.).",
+            "activity_type": "data_units_crossword_wordwall"
+          },
+          {
+            "activity_title": "Dosya Uzant?lar? U?ak Oyunu",
+            "activity_desc": "Do?ru uzant? bulutlar?ndan ge?, yanl?? bulutlardan ka??n. Tamamlay?nca otomatik ilerler.",
+            "activity_type": "file_extensions_airplane"
+          }
+        ]
       },
       {
         "id": 5,
-        "title": "🔴 ALT BAŞLIK 5: DİJİTAL SAĞLIK, ETİK VE GÜVENLİK",
-        "subtitle": "Ergonomi, Siber Zorbalık, Virüsler ve Güçlü Şifreler",
+        "title": "🛡️ Dijital sağlık, etik ve güvenlik",
+        "subtitle": "Ergonomi, Vir\u00fcsler ve G\u00fc\u00e7l\u00fc \u015eifreler",
         "intro": "Teknolojiyi kullanırken hem vücut sağlığımızı (ergonomi) korumalı hem de dijital dünyadaki kötü niyetli kişilerden/yazılımlardan korunmayı öğrenmeliyiz.",
         "video_links": [
           {
             "title": "ASELSAN Tekno Macera: Siber Güvenlik (Çocukça Anlatım)",
             "url": "https://www.youtube.com/watch?v=qjQ6mU7NiSc",
-            "thumbnail": "https://img.youtube.com/vi/qjQ6mU7NiSc/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           },
           {
             "title": "Çocuklar İçin: Güçlü Şifre Nasıl Oluşturulur?",
             "url": "https://www.youtube.com/watch?v=ZRI6pw7hz8Y",
-            "thumbnail": "https://img.youtube.com/vi/ZRI6pw7hz8Y/mqdefault.jpg"
+            "thumbnail": "/images/module3/video_tr.png"
           }
         ],
         "content": {
@@ -463,13 +462,7 @@ export const MODULE1_TR = {
                 "situation": "İnternetten bulduğun bir resmi ödevinde 'ben çizdim' diyerek kullanmak.",
                 "wrong": "İntihaldir (Bilgi hırsızlığı).",
                 "right": "Resmin altına 'Kaynak: ... sitesinden alınmıştır' yazmak."
-              },
-              {
-                "situation": "Siber Zorbalık: Arkadaşınla dalga geçen bir mesaj atmak.",
-                "wrong": "Karşıdaki kişiyi üzer ve psikolojisini bozar. Dijital ayak izi olarak kalır.",
-                "right": "Yüzüne söyleyemeyeceğin hiçbir şeyi internetten yazma."
-              }
-            ]
+              }]
           }
         },
         "activity_title": "🎮 Aktivite: Senaryo Bazlı Test",
@@ -480,3 +473,7 @@ export const MODULE1_TR = {
   }
 };
 export default MODULE1_TR;
+
+
+
+

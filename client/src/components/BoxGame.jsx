@@ -16,6 +16,7 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(180); // 3 dakika
   const [gameComplete, setGameComplete] = useState(false);
+  const [isStarted, setIsStarted] = useState(false);
 
   // Default questions if none provided
   const defaultQuestions = isTurkish ? [
@@ -46,15 +47,20 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
 
   // Timer
   useEffect(() => {
-    if (timeLeft > 0 && !gameComplete) {
+    if (!isStarted || gameComplete) return;
+
+    if (timeLeft > 0) {
       const timer = setTimeout(() => setTimeLeft(timeLeft - 1), 1000);
       return () => clearTimeout(timer);
-    } else if (timeLeft === 0 && !gameComplete) {
+    }
+
+    if (timeLeft === 0) {
       setGameComplete(true);
     }
-  }, [timeLeft, gameComplete]);
+  }, [timeLeft, gameComplete, isStarted]);
 
   const handleBoxClick = (boxId) => {
+    if (!isStarted) return;
     if (answeredBoxes.has(boxId) || gameComplete) return;
     
     // Eğer zaten açıksa ve cevaplanmamışsa, soruyu göster
@@ -118,6 +124,12 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
     setScore(0);
     setTimeLeft(180);
     setGameComplete(false);
+    setIsStarted(false);
+  };
+
+  const handleStart = () => {
+    setIsStarted(true);
+    if (timeLeft <= 0) setTimeLeft(180);
   };
 
   const getBoxColor = (boxId) => {
@@ -158,12 +170,20 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
       </div>
 
       <div className="instruction-text">
-        {isTurkish 
-          ? 'Açmak için birine dokunun'
-          : 'Touch one to open'}
+        {isTurkish
+          ? (isStarted ? 'Açmak için birine dokunun' : 'Başlatmak için butona dokunun')
+          : (isStarted ? 'Touch one to open' : 'Tap the button to start')}
       </div>
 
-      <div className="boxes-grid">
+      {!isStarted && !gameComplete && (
+        <div className="start-area">
+          <button className="start-btn" onClick={handleStart}>
+            {isTurkish ? 'Başlat' : 'Start'}
+          </button>
+        </div>
+      )}
+
+      <div className={`boxes-grid ${currentBox ? 'has-current' : ''} ${!isStarted ? 'disabled' : ''}`}>
         {gameQuestions.map((question, index) => {
           const isOpen = openedBoxes.has(question.id);
           const isAnswered = answeredBoxes.has(question.id);
@@ -325,11 +345,35 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
         }
 
         .instruction-text {
-          text-align: center;
+          text-align: left;
           font-size: 1.2rem;
           color: #0369a1;
           font-weight: 600;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
+        }
+
+        .start-area {
+          display: flex;
+          justify-content: center;
+          margin-bottom: 1.5rem;
+        }
+
+        .start-btn {
+          background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+          color: white;
+          border: none;
+          padding: 0.8rem 1.6rem;
+          border-radius: 12px;
+          font-weight: 700;
+          font-size: 1rem;
+          cursor: pointer;
+          box-shadow: 0 6px 16px rgba(99, 102, 241, 0.4);
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .start-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 8px 20px rgba(99, 102, 241, 0.5);
         }
 
         .boxes-grid {
@@ -338,6 +382,15 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
           gap: 1rem;
           max-width: 1000px;
           margin: 0 auto;
+        }
+
+        .boxes-grid.disabled {
+          opacity: 0.6;
+          pointer-events: none;
+        }
+
+        .boxes-grid.has-current .game-box:not(.current) {
+          pointer-events: none;
         }
 
         .game-box {
@@ -377,6 +430,7 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
           border: 4px solid #f59e0b;
           box-shadow: 0 8px 24px rgba(245, 158, 11, 0.3);
           animation: boxOpen 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+          z-index: 20;
         }
 
         @keyframes boxOpen {
@@ -386,8 +440,8 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
         }
 
         .game-box.current {
-          transform: scale(1.15);
-          z-index: 10;
+          transform: scale(1.05);
+          z-index: 30;
           box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
           animation: currentPulse 1s ease-in-out infinite;
         }
@@ -395,6 +449,16 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
         @keyframes currentPulse {
           0%, 100% { box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25); }
           50% { box-shadow: 0 12px 32px rgba(99, 102, 241, 0.4); }
+        }
+
+        @media (min-width: 901px) {
+          .game-box.opened,
+          .game-box.current {
+            grid-column: span 2;
+            grid-row: span 2;
+            aspect-ratio: auto;
+            min-height: 200px;
+          }
         }
 
         .box-number {
@@ -426,9 +490,12 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
           padding: 1rem;
           display: flex;
           flex-direction: column;
+          gap: 0.75rem;
           justify-content: space-between;
           position: relative;
-          z-index: 5;
+          z-index: 30;
+          overflow-y: auto;
+          pointer-events: auto;
         }
 
         .question-text {
@@ -450,6 +517,7 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
           margin-top: auto;
           z-index: 10;
           position: relative;
+          pointer-events: auto;
         }
 
         .answer-feedback {
@@ -594,6 +662,19 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
         .reset-game-btn:hover {
           transform: translateY(-2px);
           box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
+        }
+
+        @media (max-width: 900px) {
+          .game-box.opened,
+          .game-box.current {
+            grid-column: 1 / -1;
+            aspect-ratio: auto;
+            min-height: 220px;
+          }
+
+          .box-content {
+            overflow-y: auto;
+          }
         }
 
         @media (max-width: 768px) {
