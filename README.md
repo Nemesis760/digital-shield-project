@@ -1,6 +1,6 @@
 # Digital Detective Academy
 
-This repository contains the **landing page and final report website** for the Digital Shield Project, prepared as part of the **CEIT 435 course**.
+This repository contains the **landing page and final report website** for the **Digital Detective Academy** project, prepared as part of the **CEIT 435 course**.
 
 The page is published as a **single HTML site** and is intended for presentation, evaluation, and public access.
 
@@ -9,10 +9,10 @@ The page is published as a **single HTML site** and is intended for presentation
 ## Live Page
 
 Landing page (GitHub Pages):  
-https://Nemesis760.github.io/digital-shield-project/
+https://Nemesis760.github.io/digital-detective-academy/
 
 Working prototype (interactive platform):  
-https://Nemesis760.github.io/digital-shield-working-prototype/
+https://Nemesis760.github.io/digital-detective-working-prototype/
 
 ---
 
@@ -32,7 +32,7 @@ The interactive learning platform itself is developed and published separately.
 
 ## Project Summary
 
-The Digital Shield Project is an educational web project designed for **middle school students (ages 11–13)**.
+Digital Detective Academy is an educational web project designed for **middle school students (ages 11–13)**.
 
 The aim of the project is to help students:
 - understand basic digital safety concepts,
