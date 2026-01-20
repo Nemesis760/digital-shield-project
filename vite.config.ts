@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import path from 'path'
+import path from 'node:path'
+
+
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
@@ -20,6 +22,3 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }))
-git add vite.config.ts
-git commit -m "Fix Vite base path for GitHub Pages"
-git push origin main
