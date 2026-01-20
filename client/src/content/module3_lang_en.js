@@ -1,7 +1,7 @@
 export const MODULE3_EN = {
   module_3: {
     title: "Module 3: Computer Networks and Digital Communication",
-    subtitle: "Data Journey - Network Devices - Security",
+    
     hero_image: "/images/module3/module3_hero_en.png",
     sections: [
       {

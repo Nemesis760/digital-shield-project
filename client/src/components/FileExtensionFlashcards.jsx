@@ -152,7 +152,7 @@ const FileExtensionFlashcards = ({ isTurkish = true }) => {
         </motion.div>
       )}
 
-      <style jsx>{`
+      <style>{`
         .flashcards-container {
           width: 100%;
           padding: 2rem;

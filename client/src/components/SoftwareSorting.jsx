@@ -223,7 +223,7 @@ const SoftwareSorting = ({ isTurkish = true }) => {
         {isTurkish ? '🔄 Sıfırla' : '🔄 Reset'}
       </button>
 
-      <style jsx>{`
+      <style>{`
         .software-sorting-container {
           width: 100%;
           padding: 2rem;

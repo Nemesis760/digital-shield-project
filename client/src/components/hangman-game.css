@@ -1,0 +1,390 @@
+.hangman-game {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+/* ---------------------------------------
+   TOP BAR
+---------------------------------------- */
+.hangman-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 14px;
+}
+
+/* compact mod: Module3 başlığı zaten bastığı için top alanı sade */
+.hangman-top.compact-top {
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+.hangman-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.hangman-desc {
+  margin: 6px 0 0 0;
+  opacity: 0.8;
+  line-height: 1.4;
+}
+
+.hangman-meta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.hangman-pill {
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.8);
+  border-radius: 999px;
+  padding: 8px 12px;
+  display: inline-flex;
+  gap: 8px;
+  align-items: baseline;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+.hangman-pill.danger {
+  border-color: rgba(220, 38, 38, 0.25);
+  background: rgba(254, 226, 226, 0.7);
+}
+
+.hangman-pill-label {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+.hangman-pill-value {
+  font-weight: 800;
+  font-size: 1.05rem;
+}
+
+/* ---------------------------------------
+   CARD
+---------------------------------------- */
+.hangman-card {
+  border-radius: 18px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(245, 247, 255, 0.9), rgba(255,255,255,0.9));
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 18px 60px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+.hangman-clue {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.hangman-clue-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(99, 102, 241, 0.12);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  font-weight: 800;
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.hangman-clue-text {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+/* ---------------------------------------
+   BOARD
+---------------------------------------- */
+.hangman-board {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 720px) {
+  .hangman-board {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------
+   GALLOW
+---------------------------------------- */
+.hangman-gallow {
+  position: relative;
+  height: 220px;
+  border-radius: 16px;
+  background: rgba(2, 6, 23, 0.92);
+  border: 1px solid rgba(255,255,255,0.08);
+  overflow: hidden;
+}
+
+/* ✅ g-line'lar artık aşamalı: on ile görünür */
+.g-line {
+  position: absolute;
+  background: rgba(255,255,255,0.85);
+  border-radius: 999px;
+
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.g-line.on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.g-line.v { width: 10px; height: 170px; left: 36px; top: 24px; }
+.g-line.h { width: 130px; height: 10px; left: 36px; top: 24px; }
+
+/* base çizgisi soft */
+.g-line.base { width: 160px; height: 10px; left: 22px; bottom: 18px; }
+.g-line.base.on { opacity: 0.6; }
+
+/* body parçaları */
+.g-part {
+  position: absolute;
+  opacity: 0;
+  transform: scale(0.98);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.g-part.on {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.g-part.head {
+  width: 44px; height: 44px;
+  border-radius: 999px;
+  border: 6px solid rgba(255,255,255,0.9);
+  left: 142px; top: 52px;
+}
+
+.g-part.body {
+  width: 8px; height: 70px;
+  background: rgba(255,255,255,0.9);
+  left: 164px; top: 96px;
+  border-radius: 999px;
+}
+
+.g-part.arm {
+  width: 56px; height: 8px;
+  background: rgba(255,255,255,0.9);
+  top: 118px;
+  border-radius: 999px;
+}
+
+.g-part.arm.left { left: 112px; transform-origin: right center; transform: rotate(-18deg); }
+.g-part.arm.right { left: 164px; transform-origin: left center; transform: rotate(18deg); }
+
+.g-part.leg {
+  width: 56px; height: 8px;
+  background: rgba(255,255,255,0.9);
+  top: 168px;
+  border-radius: 999px;
+}
+
+.g-part.leg.left { left: 112px; transform-origin: right center; transform: rotate(22deg); }
+.g-part.leg.right { left: 164px; transform-origin: left center; transform: rotate(-22deg); }
+
+.g-part.face {
+  left: 142px; top: 52px;
+  width: 44px; height: 44px;
+  display: grid;
+  place-items: center;
+}
+
+.g-part.face::before {
+  content: "× ×";
+  letter-spacing: 6px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 900;
+}
+
+/* ---------------------------------------
+   WORD AREA
+---------------------------------------- */
+.hangman-word {
+  border-radius: 16px;
+  padding: 12px;
+  background: rgba(255,255,255,0.82);
+  border: 1px solid rgba(0,0,0,0.07);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.05);
+}
+
+.hangman-word-label {
+  font-size: 0.85rem;
+  opacity: 0.7;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.hangman-word-value {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.hm-ch {
+  min-width: 18px;
+  text-align: center;
+  padding: 6px 6px;
+  border-bottom: 2px solid rgba(0,0,0,0.22);
+}
+
+.hm-ch.hidden {
+  opacity: 0.85;
+}
+
+/* ---------------------------------------
+   LETTERS
+---------------------------------------- */
+.hangman-letters {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 8px;
+}
+
+@media (max-width: 720px) {
+  .hangman-letters {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+}
+
+.hm-letter {
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: rgba(255,255,255,0.92);
+  padding: 10px 0;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 120ms ease, box-shadow 120ms ease, opacity 120ms ease;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.06);
+  user-select: none;
+}
+
+.hm-letter:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+}
+
+.hm-letter.used {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.hm-letter.good {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(209, 250, 229, 0.95);
+}
+
+.hm-letter.bad {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(254, 226, 226, 0.95);
+}
+
+/* ---------------------------------------
+   RESULT BOX
+---------------------------------------- */
+.hangman-result {
+  margin-top: 14px;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.88);
+}
+
+.hangman-result.won {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(209, 250, 229, 0.7);
+}
+
+.hangman-result.lost {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(254, 226, 226, 0.7);
+}
+
+.hangman-result-title {
+  font-weight: 900;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+
+.hangman-result-answer {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+
+.hangman-result-answer .label {
+  opacity: 0.75;
+  font-weight: 700;
+}
+
+.hangman-result-answer .value {
+  font-weight: 900;
+}
+
+/* ---------------------------------------
+   ACTIONS
+---------------------------------------- */
+.hangman-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.hm-btn {
+  border: none;
+  border-radius: 12px;
+  padding: 10px 14px;
+  font-weight: 900;
+  cursor: pointer;
+  background: rgba(99, 102, 241, 0.92);
+  color: white;
+  box-shadow: 0 14px 30px rgba(0,0,0,0.12);
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.hm-btn:hover {
+  transform: translateY(-1px);
+}
+
+.hm-btn.ghost {
+  background: rgba(2, 6, 23, 0.8);
+}
+
+.hm-btn.secondary {
+  background: rgba(15, 23, 42, 0.85);
+}
+
+/* ---------------------------------------
+   EMPTY STATE
+---------------------------------------- */
+.hangman-empty {
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(0,0,0,0.06);
+  background: rgba(255,255,255,0.85);
+}

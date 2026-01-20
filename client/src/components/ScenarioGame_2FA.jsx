@@ -411,7 +411,7 @@ function ScenarioGame_2FA({ isTurkish = true }) {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         .scenario-game-2fa-container {
           width: 100%;
           max-width: 800px;

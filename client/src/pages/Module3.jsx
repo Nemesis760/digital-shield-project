@@ -9,12 +9,18 @@ import { MODULE3_EN } from '../content/module3_lang_en';
 import LoadingScreen from '../components/LoadingScreen';
 import { useLanguage } from '../contexts/LanguageContext';
 
-import CardMatchingGame from '../components/CardMatchingGame';
+// ✅ REMOVED: TruthOrTrollGame (deleted)
 import HardwareHotspot from '../components/HardwareHotspot';
 import NetworkDeviceMatchingGame from '../components/NetworkDeviceMatchingGame';
-import TruthOrTrollGame from '../components/TruthOrTrollGame';
+
 import InteractiveQuiz from '../components/InteractiveQuiz';
 import ScenarioGame from '../components/ScenarioGame';
+
+// ✅ NEW: Hangman
+import HangmanGame from "../components/HangmanGame";
+
+import { NETWORK_SECURITY_HANGMAN } from "../content/activities/network_security_hangman";
+
 
 import { BROWSER_SEARCH_CARD_MATCHING } from '../content/activities/browser_search_card_matching';
 import { CLIENT_SERVER_CARD_MATCHING } from '../content/activities/client_server_card_matching';
@@ -22,7 +28,7 @@ import { URL_PARTS_QUIZ } from '../content/activities/url_parts_quiz';
 import { NETWORK_TYPES_CARD_MATCHING } from '../content/activities/network_types_card_matching';
 import { DEVICE_COMMUNICATION_HOTSPOT } from '../content/activities/device_communication_hotspot';
 import { NETWORK_DEVICE_MATCHING } from '../content/activities/network_device_matching';
-import { WIRED_WIRELESS_TRUTH_OR_TROLL } from '../content/activities/wired_wireless_truth_or_troll';
+// ✅ REMOVED: WIRED_WIRELESS_TRUTH_OR_TROLL (truth game removed)
 import { NETWORK_SECURITY_QUIZ } from '../content/activities/network_security_quiz';
 import { NETWORK_LOST_PACKET_SCENARIO } from '../content/activities/network_lost_packet_scenario';
 
@@ -87,9 +93,10 @@ const SectionComponent = ({ section, isTurkish }) => {
         return null;
       }
 
-      case 'truth_or_troll': {
+      // ✅ NEW: Hangman
+      case 'hangman': {
         const map = {
-          wired_wireless: WIRED_WIRELESS_TRUTH_OR_TROLL,
+          network_security_hangman: NETWORK_SECURITY_HANGMAN,
         };
         return map[activity_key] || null;
       }
@@ -108,10 +115,6 @@ const SectionComponent = ({ section, isTurkish }) => {
 
   const renderActivity = (activityData) => {
     switch (section.activity_type) {
-      case 'card_matching':
-        if (!activityData) return null;
-        return <CardMatchingGame isTurkish={isTurkish} data={activityData} />;
-
       case 'network_hotspot':
         if (!activityData) return null;
         return <HardwareHotspot isTurkish={isTurkish} data={activityData} />;
@@ -120,9 +123,10 @@ const SectionComponent = ({ section, isTurkish }) => {
         if (!activityData) return null;
         return <NetworkDeviceMatchingGame isTurkish={isTurkish} data={activityData} />;
 
-      case 'truth_or_troll':
+      // ✅ NEW: Hangman
+      case 'hangman':
         if (!activityData) return null;
-        return <TruthOrTrollGame isTurkish={isTurkish} data={activityData} />;
+        return <HangmanGame isTurkish={isTurkish} data={activityData} />;
 
       case 'interactive_quiz': {
         if (!activityData) return null;
@@ -271,6 +275,7 @@ const SectionComponent = ({ section, isTurkish }) => {
           </p>
         </div>
       )}
+
       {activityElement && (
         <div className="activity-box">
           <h3>{section.activity_title}</h3>

@@ -1,8 +1,11 @@
+// -*- coding: utf-8 -*-
+
 export const MODULE3_TR = {
   module_3: {
     title: "Modül 3: Bilgisayar Ağları ve Dijital İletişim",
-    subtitle: "Veri Yolculuğu - Ağ Cihazları - Güvenlik",
+    
     hero_image: "/images/module3/module3_hero_tr.png",
+
     sections: [
       {
         id: 1,
@@ -20,20 +23,21 @@ export const MODULE3_TR = {
               "Ağ: Bağlı cihazlar topluluğu",
               "Amaç: Veri paylaşımı ve iletişim",
               "Kablolu veya kablosuz olabilir",
-              "Her ağda internet olmak zorunda değildir"
+              "Her ağda internet olmak zorunda değildir",
             ],
             examples: [
               "Okulda bilgisayar laboratuvarındaki bilgisayarların aynı yazıcıya bağlanması",
-              "Evde telefon, tablet ve laptopun aynı Wi-Fi'ya bağlanması"
+              "Evde telefon, tablet ve laptopun aynı Wi-Fi'ye bağlanması",
             ],
             video_links: [
               {
-                title: "Bilgisayar ağları (çocuklar için)",
+                title: "Bilgisayar Ağları",
                 url: "https://www.youtube.com/watch?v=FD3BJUbvlF0",
-                thumbnail: "/images/module3/video_tr.png"
-              }
-            ]
+                thumbnail: "/images/module3/video_tr.png",
+              },
+            ],
           },
+
           "1.2": {
             title: "İletişim Nasıl Gelişti?",
             description:
@@ -42,22 +46,24 @@ export const MODULE3_TR = {
             points: [
               "İletişim araçları zamanla hızlandı",
               "İnternet: çok hızlı ve yaygın",
-              "Hız artarsa güvenlik ihtiyacı artar"
+              "Hız artarsa güvenlik ihtiyacı artar",
             ],
             video_links: [
               {
                 title: "İletişimin Tarihsel Gelişimi",
                 url: "https://youtu.be/k6iVvBPFlog?si=mG348fK6MHwf066e",
-                thumbnail: "/images/module3/video_tr.png"
-              }
-            ]
-          }
+                thumbnail: "/images/module3/video_tr.png",
+              },
+            ],
+          },
         },
+
         activity_title: "Mini Etkinlik: Ağ Örneklerini Seç",
         activity_desc: "Hangileri bir bilgisayar ağına örnektir?",
         activity_type: "interactive_quiz",
-        activity_key: "network_security"
+        activity_key: "network_security",
       },
+
       {
         id: 2,
         title: "İnternet Nedir? Veri Paketleri Nasıl Yolculuk Eder?",
@@ -73,16 +79,17 @@ export const MODULE3_TR = {
             points: [
               "İnternet: Ağların ağı",
               "Sunucular bilgiyi saklar ve gönderir",
-              "Veri saniyeler içinde taşınır"
+              "Veri saniyeler içinde taşınır",
             ],
             video_links: [
               {
                 title: "İnternet nedir?",
                 url: "https://www.youtube.com/watch?v=hjjLnUMcJfs",
-                thumbnail: "/images/module3/video_tr.png"
-              }
-            ]
+                thumbnail: "/images/module3/video_tr.png",
+              },
+            ],
           },
+
           "2.2": {
             title: "Paketler Nasıl Gider?",
             description: "Büyük dosyalar küçük parçalara bölünür (paket).",
@@ -90,11 +97,12 @@ export const MODULE3_TR = {
             points: [
               "Dosya paketlere bölünür",
               "Her pakette hedef bilgisi bulunur",
-              "Hedefte tekrar birleştirilir"
-            ]
-          }
-        }
+              "Hedefte tekrar birleştirilir",
+            ],
+          },
+        },
       },
+
       {
         id: 3,
         title: "Tarayıcı ve Arama Motoru",
@@ -104,22 +112,22 @@ export const MODULE3_TR = {
         content: {
           "3.1": {
             title: "Web Tarayıcı Nedir?",
-            description:
-              "Tarayıcı; internet sayfalarını görüntüleyen programdır.",
+            description: "Tarayıcı; internet sayfalarını görüntüleyen programdır.",
             image: "/images/module3/m3_browser_TR.jpg",
             points: [
               "Tarayıcı = sayfayı açan program",
               "Adres çubuğu tarayıcıdadır",
-              "Sekmelerle birden çok sayfa açabilirsin"
+              "Sekmelerle birden çok sayfa açabilirsin",
             ],
             video_links: [
               {
                 title: "Tarayıcı ve arama motoru farkı",
                 url: "https://www.youtube.com/watch?v=Rn9XcSTQl8A",
-                thumbnail: "/images/module3/video_tr.png"
-              }
-            ]
+                thumbnail: "/images/module3/video_tr.png",
+              },
+            ],
           },
+
           "3.2": {
             title: "Arama Motoru Nedir?",
             description:
@@ -128,25 +136,17 @@ export const MODULE3_TR = {
             points: [
               "Arama motoru = bilgi bulmaya yarar",
               "Doğru anahtar kelime önemli",
-              "Her gördüğün bilgi doğru olmayabilir"
-            ]
+              "Her gördüğün bilgi doğru olmayabilir",
+            ],
           },
-          "3.3": {
-            title: "Etkileşimli Uygulama",
-            description:
-              "Aşağıdaki etkileşimli uygulamayı açmak için bir web tarayıcısı kullanılır. Bu uygulama bir arama motoru değildir.",
-            external_link: {
-              title: "Tarayıcı mı, Arama Motoru mu? (LearningApps)",
-              url: "https://learningapps.org/11977064",
-              type: "browser_example"
-            }
-          }
         },
+
         activity_title: "Aktivite: Tarayıcı mı, Arama Motoru mu?",
         activity_desc: "Örnekleri doğru kutuya eşleştir.",
         activity_type: "card_matching",
-        activity_key: "browser_search"
+        activity_key: "browser_search",
       },
+
       {
         id: 4,
         title: "İnternet Adresi (URL) ve Uzantılar",
@@ -161,16 +161,17 @@ export const MODULE3_TR = {
             points: [
               "Alan adı: sitenin adı",
               "Site uzantısı: tür (gov, com, org, edu)",
-              "Ülke uzantısı: tr"
+              "Ülke uzantısı: tr",
             ],
             video_links: [
               {
                 title: "URL nedir? alan adı ve uzantı",
                 url: "https://www.youtube.com/watch?v=ojuCsBIKyDY",
-                thumbnail: "/images/module3/video_tr.png"
-              }
-            ]
+                thumbnail: "/images/module3/video_tr.png",
+              },
+            ],
           },
+
           "4.2": {
             title: "Uzantılar Ne Anlatır?",
             description: "Uzantılar sitenin türünü anlatabilir.",
@@ -179,53 +180,57 @@ export const MODULE3_TR = {
               ".edu.tr -> eğitim",
               ".gov.tr -> devlet",
               ".com.tr -> ticari",
-              ".org.tr -> organizasyon"
-            ]
-          }
+              ".org.tr -> organizasyon",
+            ],
+          },
         },
+
         activity_title: "Aktivite: URL Parçala",
         activity_desc: "Bir adresi parçalarına ayır.",
         activity_type: "interactive_quiz",
-        activity_key: "url_parts"
+        activity_key: "url_parts",
       },
+
       {
         id: 5,
         title: "Ağ Türleri: Ev, Okul ve Halka Açık Wi-Fi",
         subtitle: "Farklı ağlar, farklı güvenlik",
         intro:
-          "Ev, okul ve halka açik ağlar farklı güvenlik seviyelerine sahiptir.",
+          "Ev, okul ve halka açık ağlar farklı güvenlik seviyelerine sahiptir.",
         content: {
           "5.1": {
             title: "Ev Ağı",
             description: "Ev ağı genelde şifrelidir.",
             image: "/images/module3/m3_home_network_tr.png",
-            points: ["Şifreli olmalı", "Özel işlemler için daha güvenli"]
+            points: ["Şifreli olmalı", "Özel işlemler için daha güvenli"],
           },
           "5.2": {
             title: "Okul Ağı",
             description: "Okul ağında filtre ve kurallar olabilir.",
             image: "/images/module3/m3_school_network_tr.png",
-            points: ["Kurallara uy", "Bazı siteler engelli olabilir"]
+            points: ["Kurallara uy", "Bazı siteler engelli olabilir"],
           },
           "5.3": {
             title: "Halka Açık Wi-Fi",
-            description: "Halka açik Wi-Fi daha risklidir.",
+            description: "Halka açık Wi-Fi daha risklidir.",
             image: "/images/module3/m3_public_wifi_tr.png",
             points: ["Herkes bağlanabilir", "Şifre girmemek daha güvenli"],
             video_links: [
               {
                 title: "Wi-Fi güvenliği (çocuklar için)",
                 url: "https://www.youtube.com/watch?v=GgdK2rdJTrE",
-                thumbnail: "/images/module3/video_tr.png"
-              }
-            ]
-          }
+                thumbnail: "/images/module3/video_tr.png",
+              },
+            ],
+          },
         },
+
         activity_title: "Aktivite: Ağ Türleri Eşleştirme",
         activity_desc: "Durumları doğru ağ türü ile eşleştir.",
         activity_type: "card_matching",
-        activity_key: "network_types"
+        activity_key: "network_types",
       },
+
       {
         id: 6,
         title: "Veri - İstemci - Sunucu",
@@ -237,7 +242,7 @@ export const MODULE3_TR = {
             title: "Veri (Data)",
             description: "Dosya, mesaj ve video birer veridir.",
             image: "/images/module3/m3_data_tr.png",
-            points: ["Veri taşınır", "Paketlere bölünür"]
+            points: ["Veri taşınır", "Paketlere bölünür"],
           },
           "6.2": {
             title: "İstemci (Client)",
@@ -248,22 +253,24 @@ export const MODULE3_TR = {
               {
                 title: "İstemci-sunucu nedir?",
                 url: "https://www.youtube.com/watch?v=TSDRE2J8Q70",
-                thumbnail: "/images/module3/video_tr.png"
-              }
-            ]
+                thumbnail: "/images/module3/video_tr.png",
+              },
+            ],
           },
           "6.3": {
             title: "Sunucu (Server)",
-            description: "Sunucu, hizmet veren güclü bilgisayardır.",
+            description: "Sunucu, hizmet veren güçlü bilgisayardır.",
             image: "/images/module3/m3_server_tr.png",
-            points: ["Veriyi saklar", "Birçok istemciye cevap verir"]
-          }
+            points: ["Veriyi saklar", "Birçok istemciye cevap verir"],
+          },
         },
+
         activity_title: "Aktivite: İstemci mi Sunucu mu?",
         activity_desc: "Örnekleri sınıflandır.",
         activity_type: "card_matching",
-        activity_key: "client_server"
+        activity_key: "client_server",
       },
+
       {
         id: 7,
         title: "Ağ Cihazları: Modem, Router, Switch, Ethernet",
@@ -274,32 +281,34 @@ export const MODULE3_TR = {
             title: "Modem",
             description: "Modem internet sinyalini ağa taşır.",
             image: "/images/module3/matching/modem.png",
-            points: ["Internet sinyalini alır", "Ağa aktarır"]
+            points: ["İnternet sinyalini alır", "Ağa aktarır"],
           },
           "7.2": {
             title: "Router",
             description: "Router cihazları bağlar ve trafiği yönetir.",
             image: "/images/module3/matching/router.png",
-            points: ["Wi-Fi yayar", "Paketleri yönlendirir"]
+            points: ["Wi-Fi yayar", "Paketleri yönlendirir"],
           },
           "7.3": {
             title: "Switch",
             description: "Birçok cihazı kabloyla aynı ağa bağlar.",
             image: "/images/module3/matching/switch.png",
-            points: ["Kablolu bağlantıyı çoğaltır", "Okul labında kullanılır"]
+            points: ["Kablolu bağlantıyı çoğaltır", "Okul labında kullanılır"],
           },
           "7.4": {
             title: "Ethernet Kartı ve Ağ Kablosu",
             description: "Ethernet kablosu veri taşır.",
             image: "/images/module3/matching/ethernet_cable.png",
-            points: ["Kablolu bağlantı", "Daha kararlı olabilir"]
-          }
+            points: ["Kablolu bağlantı", "Daha kararlı olabilir"],
+          },
         },
+
         activity_title: "Aktivite: Ağ Cihazları Hotspot",
         activity_desc: "Görselde cihazları bul.",
         activity_type: "network_hotspot",
-        activity_key: "device_communication"
+        activity_key: "device_communication",
       },
+
       {
         id: 8,
         title: "Ağ Cihazlarını Eşleştir",
@@ -314,15 +323,17 @@ export const MODULE3_TR = {
             image: "/images/module3/matching/network_arkaplan.png",
             points: [
               "Her cihazın görevi farklıdır",
-              "Doğru isimlendirme, doğru kullanım demektir"
-            ]
-          }
+              "Doğru isimlendirme, doğru kullanım demektir",
+            ],
+          },
         },
+
         activity_title: "Aktivite: Ağ Cihazı Eşleştirme",
         activity_desc: "Görselleri doğru isim kartlarıyla eşleştir.",
         activity_type: "network_device_matching",
-        activity_key: "network_device_matching"
+        activity_key: "network_device_matching",
       },
+
       {
         id: 9,
         title: "Kablolu vs Kablosuz Bağlantı",
@@ -330,19 +341,19 @@ export const MODULE3_TR = {
         intro:
           "Kablolu bağlantı genelde hızlı ve kararlıdır. Kablosuz bağlantı daha esnektir.",
         content: {
-          "8.1": {
+          "9.1": {
             title: "Kablolu (Ethernet)",
             description: "Kablo ile bağlanırsın.",
             image: "/images/module3/m3_wired_vs_wireless_en_tr.png",
-            points: ["Daha hızlı", "Daha az kopma"]
+            points: ["Daha hızlı", "Daha az kopma"],
           },
-          "8.2": {
+          "9.2": {
             title: "Kablosuz (Wi-Fi)",
             description: "Kablo olmadan bağlanırsın.",
             image: "/images/module3/m3_wireless_en_tr.png",
-            points: ["Hareket kolay", "Sinyal etkiler"]
+            points: ["Hareket kolay", "Sinyal etkiler"],
           },
-          "8.3": {
+          "9.3": {
             title: "Hangi Durumda Hangisi?",
             description:
               "Oyun için kablolu, günlük mobil kullanım için Wi-Fi daha uygundur.",
@@ -352,38 +363,40 @@ export const MODULE3_TR = {
               {
                 type: "true_false",
                 question: "Router'dan uzaklaştıkça Wi-Fi sinyali zayıflar.",
-                answer: true
+                answer: true,
               },
               {
                 type: "true_false",
                 question: "Kablolu bağlantı her zaman daha güvensizdir.",
-                answer: false
-              }
-            ]
-          }
+                answer: false,
+              },
+            ],
+          },
         },
+
         activity_title: "Aktivite: Doğru mu Yanlış mı?",
         activity_desc: "Kablolu/kablosuz ifadelerini değerlendir.",
         activity_type: "truth_or_troll",
-        activity_key: "wired_wireless"
+        activity_key: "wired_wireless",
       },
+
       {
         id: 10,
         title: "Ağ Güvenliği ve Ünite Değerlendirme",
         subtitle: "Güvende kal, doğru seç",
         intro: "Güvensiz ağlar kişisel bilgileri riske atabilir.",
         content: {
-          "9.1": {
+          "10.1": {
             title: "Ağ Güvenliği Neden Önemli?",
             description:
-              "Halka açik Wi-Fi gibi ortamlarda şifre girmek risklidir.",
+              "Halka açık Wi-Fi gibi ortamlarda şifre girmek risklidir.",
             image: "/images/module3/m3_network_security_en_tr.png",
             points: [
               "Şifre ve özel bilgi korunmalı",
-              "Önemli işlemleri ev ağında yap"
-            ]
+              "Önemli işlemleri ev ağında yap",
+            ],
           },
-          "9.2": {
+          "10.2": {
             title: "Ünite Değerlendirme Testi",
             description: "Kısa bir tekrar testi.",
             image: "/images/module3/m3_network_security_en_tr.png",
@@ -395,23 +408,44 @@ export const MODULE3_TR = {
                   { text: "A) Chrome", correct: true },
                   { text: "B) Google", correct: false },
                   { text: "C) Yahoo", correct: false },
-                  { text: "D) Switch", correct: false }
-                ]
+                  { text: "D) Switch", correct: false },
+                ],
               },
               {
                 type: "true_false",
                 question: "Her ağ bağlantısında internet olmak zorunda değildir.",
-                answer: true
-              }
-            ]
-          }
+                answer: true,
+              },
+            ],
+          },
         },
+
         activity_title: "Quiz: Güvenlik ve Tekrar",
         activity_desc: "Soruları çoğunlukla doğru yapmaya çalış.",
         activity_type: "interactive_quiz",
-        activity_key: "network_security"
-      }
+        activity_key: "network_security",
+      },
+
+      // ✅ NEW: Adam Asmaca
+      {
+        id: 11,
+        title: "Adam Asmaca (Kolay)",
+        subtitle: "İpuçlarına bak, harfleri seç, kelimeyi bul!",
+        intro:
+          "Ağ güvenliği ve internet kavramlarını eğlenceli şekilde tekrar edelim.",
+        content: {
+          "11.1": {
+            title: "Oyun",
+            description: "Başla ve kelimeyi bul!",
+          },
+        },
+        activity_title: "Aktivite: Adam Asmaca (Kolay)",
+        activity_desc: "İpuçlarına bak, doğru harfleri seç ve kelimeyi bul!",
+        activity_type: "hangman",
+        activity_key: "network_security_hangman",
+      },
     ],
+
     scenario_assessment: {
       activity_key: "lost_packet",
       title: "Senaryo Bazlı Değerlendirme",
@@ -420,31 +454,31 @@ export const MODULE3_TR = {
         {
           id: 1,
           situation:
-            "Ali bir kafede halka açik Wi-Fi'ye bağlandı. Arkadaşi video gönderdi. Ali videoyu izlemek istiyor ve okul hesabına da giriş yapması gerekiyor.",
+            "Ali bir kafede halka açık Wi-Fi'ye bağlandı. Arkadaşı video gönderdi. Ali videoyu izlemek istiyor ve okul hesabına da giriş yapması gerekiyor.",
           question: "Ali ne yapmalı?",
           options: [
             {
               text: "A) Hem videoyu izler hem de okul hesabına girer, güvenlidir.",
               correct: false,
               feedback:
-                "Halka açik Wi-Fi'de şifre gerektiren işlemler risklidir. Video izlemek genel olabilir, ama hesap girişi yapma."
+                "Halka açık Wi-Fi'de şifre gerektiren işlemler risklidir. Video izlemek genel olabilir, ama hesap girişi yapma.",
             },
             {
               text: "B) Videoyu izleyebilir ama okul hesabına girişi ev ağına bırakmalıdır.",
               correct: true,
-              feedback: "Doğru! Şifre isteyen işlemleri güvenli ağda yap."
+              feedback: "Doğru! Şifre isteyen işlemleri güvenli ağda yap.",
             },
             {
               text: "C) Hiçbir şey yapmasın, Wi-Fi tamamen yasak olmalı.",
               correct: false,
               feedback:
-                "Genel gezinti yapılabilir; riskli olan şifre/özel bilgidir."
-            }
-          ]
-        }
-      ]
-    }
-  }
+                "Genel gezinti yapılabilir; riskli olan şifre/özel bilgidir.",
+            },
+          ],
+        },
+      ],
+    },
+  },
 };
 
 export default MODULE3_TR;

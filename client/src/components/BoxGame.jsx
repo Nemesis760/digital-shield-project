@@ -286,7 +286,7 @@ const BoxGame = ({ isTurkish = true, questions = [] }) => {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         .box-game-container {
           width: 100%;
           padding: 2rem;

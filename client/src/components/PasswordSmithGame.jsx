@@ -1,296 +1,567 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import confetti from 'canvas-confetti';
+import { useEffect, useMemo, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /**
- * Password Smith - Module 4
- * Interactive password strength game
- * As user types password, sword levels up (Rusty -> Iron -> Diamond)
+ * Password Smith (No Tailwind, No Confetti)
+ * - TR/EN via isTurkish
+ * - Optional tips[] to show teacher hints
+ * - Visual "forge" theme with sword tiers
  */
 
-const PasswordSmithGame = ({ isTurkish = true }) => {
-  const [password, setPassword] = useState('');
-  const [strength, setStrength] = useState(0);
-  const [swordLevel, setSwordLevel] = useState('rusty');
-  const [feedback, setFeedback] = useState([]);
+export default function PasswordSmithGame({ isTurkish = true, tips = [] }) {
+  const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [strength, setStrength] = useState(0);
+  const [level, setLevel] = useState("rusty"); // rusty | iron | steel | diamond
+  const [items, setItems] = useState([]);
 
-  const swordLevels = {
-    rusty: {
-      name: isTurkish ? 'Paslı Kılıç' : 'Rusty Sword',
-      emoji: '🗡️',
-      color: 'from-gray-400 to-gray-600',
-      minStrength: 0,
-      maxStrength: 25
-    },
-    iron: {
-      name: isTurkish ? 'Demir Kılıç' : 'Iron Sword',
-      emoji: '⚔️',
-      color: 'from-slate-400 to-slate-600',
-      minStrength: 25,
-      maxStrength: 50
-    },
-    steel: {
-      name: isTurkish ? 'Çelik Kılıç' : 'Steel Sword',
-      emoji: '🔪',
-      color: 'from-blue-400 to-blue-600',
-      minStrength: 50,
-      maxStrength: 75
-    },
-    diamond: {
-      name: isTurkish ? 'Elmas Kılıç' : 'Diamond Sword',
-      emoji: '💎',
-      color: 'from-purple-400 to-pink-600',
-      minStrength: 75,
-      maxStrength: 100
-    }
-  };
+  const t = useMemo(
+    () => ({
+      title: isTurkish ? "⚒️ Şifre Demircisi" : "⚒️ Password Smith",
+      subtitle: isTurkish
+        ? "Bir şifre yaz. Kuralları tamamla. Kılıcını güçlendir!"
+        : "Type a password. Complete the checklist. Forge your sword!",
+      inputLabel: isTurkish ? "Şifreni Yaz" : "Type a Password",
+      placeholder: isTurkish ? "Şifre yaz..." : "Type password...",
+      show: isTurkish ? "Göster" : "Show",
+      hide: isTurkish ? "Gizle" : "Hide",
+      meter: isTurkish ? "Şifre Gücü" : "Password Strength",
+      checklist: isTurkish ? "Kontrol Listesi" : "Checklist",
+      clear: isTurkish ? "🔄 Temizle" : "🔄 Clear",
+      tipsTitle: isTurkish ? "İpuçları" : "Tips",
+      legend:
+        isTurkish
+          ? "İpucu: Güçlü şifre = uzun + büyük/küçük harf + rakam + özel karakter."
+          : "Tip: Strong password = long + upper/lowercase + number + special character.",
+      finalTitle: isTurkish ? "🎉 Harika! Elmas kılıç!" : "🎉 Great! Diamond sword!",
+      finalDesc: isTurkish
+        ? "Güçlü bir şifreye benziyor. Yine de kimseyle paylaşma ve mümkünse 2FA kullan."
+        : "Looks strong. Still: never share it and enable 2FA when possible.",
+      labels: {
+        veryWeak: isTurkish ? "Çok Zayıf" : "Very Weak",
+        weak: isTurkish ? "Zayıf" : "Weak",
+        medium: isTurkish ? "Orta" : "Medium",
+        strong: isTurkish ? "Güçlü" : "Strong",
+        veryStrong: isTurkish ? "Çok Güçlü!" : "Very Strong!",
+      },
+      req: {
+        len8: isTurkish ? "En az 8 karakter" : "At least 8 characters",
+        upper: isTurkish ? "Büyük harf (A-Z)" : "Uppercase letter (A-Z)",
+        lower: isTurkish ? "Küçük harf (a-z)" : "Lowercase letter (a-z)",
+        num: isTurkish ? "Rakam (0-9)" : "Number (0-9)",
+        spec: isTurkish ? "Özel karakter (!@#...)" : "Special character (!@#...)",
+        len12: isTurkish ? "12+ karakter bonusu" : "12+ length bonus",
+      },
+    }),
+    [isTurkish]
+  );
+
+  const swordLevels = useMemo(
+    () => ({
+      rusty: {
+        name: isTurkish ? "Paslı Kılıç" : "Rusty Sword",
+        emoji: "🗡️",
+        badge: isTurkish ? "Seviye 1" : "Level 1",
+        bg: "ps-rusty",
+        min: 0,
+      },
+      iron: {
+        name: isTurkish ? "Demir Kılıç" : "Iron Sword",
+        emoji: "⚔️",
+        badge: isTurkish ? "Seviye 2" : "Level 2",
+        bg: "ps-iron",
+        min: 25,
+      },
+      steel: {
+        name: isTurkish ? "Çelik Kılıç" : "Steel Sword",
+        emoji: "🔪",
+        badge: isTurkish ? "Seviye 3" : "Level 3",
+        bg: "ps-steel",
+        min: 50,
+      },
+      diamond: {
+        name: isTurkish ? "Elmas Kılıç" : "Diamond Sword",
+        emoji: "💎",
+        badge: isTurkish ? "Seviye 4" : "Level 4",
+        bg: "ps-diamond",
+        min: 75,
+      },
+    }),
+    [isTurkish]
+  );
+
+  function calc(pwd) {
+    const list = [];
+
+    const hasLen8 = pwd.length >= 8;
+    const hasUpper = /[A-Z]/.test(pwd);
+    const hasLower = /[a-z]/.test(pwd);
+    const hasNum = /\d/.test(pwd);
+    const hasSpec = /[!@#$%^&*(),.?":{}|<>_\-+=/\\[\]`~;'|]/.test(pwd);
+    const hasLen12 = pwd.length >= 12;
+
+    // Score (max 100)
+    let s = 0;
+    if (hasLen8) s += 20;
+    if (hasUpper) s += 15;
+    if (hasLower) s += 15;
+    if (hasNum) s += 20;
+    if (hasSpec) s += 20;
+    if (hasLen12) s += 10;
+
+    // Checklist entries (show missing too)
+    list.push({ key: "len8", ok: hasLen8, text: t.req.len8 });
+    list.push({ key: "upper", ok: hasUpper, text: t.req.upper });
+    list.push({ key: "lower", ok: hasLower, text: t.req.lower });
+    list.push({ key: "num", ok: hasNum, text: t.req.num });
+    list.push({ key: "spec", ok: hasSpec, text: t.req.spec });
+    list.push({ key: "len12", ok: hasLen12, text: t.req.len12, optional: true });
+
+    setStrength(Math.min(100, s));
+    setItems(list);
+
+    if (s >= 75) setLevel("diamond");
+    else if (s >= 50) setLevel("steel");
+    else if (s >= 25) setLevel("iron");
+    else setLevel("rusty");
+  }
 
   useEffect(() => {
-    calculateStrength(password);
-  }, [password]);
+    calc(password);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [password, isTurkish]);
 
-  const calculateStrength = (pwd) => {
-    let strength = 0;
-    const feedbackList = [];
+  const currentSword = swordLevels[level];
 
-    // Length check
-    if (pwd.length >= 8) {
-      strength += 20;
-      feedbackList.push({ type: 'success', text: isTurkish ? '✓ En az 8 karakter' : '✓ At least 8 characters' });
-    } else if (pwd.length > 0) {
-      feedbackList.push({ type: 'warning', text: isTurkish ? '⚠ En az 8 karakter gerekli' : '⚠ At least 8 characters required' });
-    }
+  function strengthLabel() {
+    if (strength < 25) return t.labels.veryWeak;
+    if (strength < 50) return t.labels.weak;
+    if (strength < 75) return t.labels.medium;
+    if (strength < 100) return t.labels.strong;
+    return t.labels.veryStrong;
+  }
 
-    // Uppercase check
-    if (/[A-Z]/.test(pwd)) {
-      strength += 15;
-      feedbackList.push({ type: 'success', text: isTurkish ? '✓ Büyük harf var' : '✓ Contains uppercase' });
-    } else if (pwd.length > 0) {
-      feedbackList.push({ type: 'info', text: isTurkish ? '💡 Büyük harf ekle' : '💡 Add uppercase letter' });
-    }
+  function meterClass() {
+    if (strength < 25) return "ps-meter ps-red";
+    if (strength < 50) return "ps-meter ps-orange";
+    if (strength < 75) return "ps-meter ps-yellow";
+    return "ps-meter ps-green";
+  }
 
-    // Lowercase check
-    if (/[a-z]/.test(pwd)) {
-      strength += 15;
-      feedbackList.push({ type: 'success', text: isTurkish ? '✓ Küçük harf var' : '✓ Contains lowercase' });
-    } else if (pwd.length > 0) {
-      feedbackList.push({ type: 'info', text: isTurkish ? '💡 Küçük harf ekle' : '💡 Add lowercase letter' });
-    }
-
-    // Number check
-    if (/\d/.test(pwd)) {
-      strength += 20;
-      feedbackList.push({ type: 'success', text: isTurkish ? '✓ Rakam var' : '✓ Contains number' });
-    } else if (pwd.length > 0) {
-      feedbackList.push({ type: 'info', text: isTurkish ? '💡 Rakam ekle' : '💡 Add number' });
-    }
-
-    // Special character check
-    if (/[!@#$%^&*(),.?":{}|<>]/.test(pwd)) {
-      strength += 20;
-      feedbackList.push({ type: 'success', text: isTurkish ? '✓ Özel karakter var' : '✓ Contains special character' });
-    } else if (pwd.length > 0) {
-      feedbackList.push({ type: 'info', text: isTurkish ? '💡 Özel karakter ekle (!@#$% vb.)' : '💡 Add special character (!@#$% etc.)' });
-    }
-
-    // Length bonus
-    if (pwd.length >= 12) {
-      strength += 10;
-      feedbackList.push({ type: 'success', text: isTurkish ? '✓ Uzun şifre bonusu' : '✓ Long password bonus' });
-    }
-
-    setStrength(Math.min(100, strength));
-    setFeedback(feedbackList);
-
-    // Update sword level
-    if (strength >= 75) {
-      setSwordLevel('diamond');
-      if (strength === 100) {
-        confetti({
-          particleCount: 50,
-          spread: 60,
-          origin: { y: 0.6 }
-        });
-      }
-    } else if (strength >= 50) {
-      setSwordLevel('steel');
-    } else if (strength >= 25) {
-      setSwordLevel('iron');
-    } else {
-      setSwordLevel('rusty');
-    }
-  };
-
-  const getStrengthColor = () => {
-    if (strength < 25) return 'from-red-500 to-red-700';
-    if (strength < 50) return 'from-orange-500 to-orange-700';
-    if (strength < 75) return 'from-yellow-500 to-yellow-700';
-    return 'from-green-500 to-emerald-700';
-  };
-
-  const getStrengthLabel = () => {
-    if (strength < 25) return isTurkish ? 'Çok Zayıf' : 'Very Weak';
-    if (strength < 50) return isTurkish ? 'Zayıf' : 'Weak';
-    if (strength < 75) return isTurkish ? 'Orta' : 'Medium';
-    if (strength < 100) return isTurkish ? 'Güçlü' : 'Strong';
-    return isTurkish ? 'Çok Güçlü!' : 'Very Strong!';
-  };
-
-  const resetPassword = () => {
-    setPassword('');
+  function reset() {
+    setPassword("");
+    setShowPassword(false);
     setStrength(0);
-    setSwordLevel('rusty');
-    setFeedback([]);
-  };
+    setLevel("rusty");
+    setItems([]);
+  }
 
-  const currentSword = swordLevels[swordLevel];
+  const lvlIndex = Object.keys(swordLevels).indexOf(level) + 1;
 
   return (
-    <div className="password-smith-game p-6 bg-slate-900 rounded-2xl">
-      {/* Game Header */}
-      <div className="text-center mb-8">
-        <h3 className="text-3xl font-bold mb-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-400">
-          {isTurkish ? '⚒️ Şifre Demircisi' : '⚒️ Password Smith'}
-        </h3>
-        <p className="text-slate-300 mb-4">
-          {isTurkish 
-            ? 'Şifre yaz ve kılıcını güçlendir! Güçlü şifre = Güçlü kılıç!'
-            : 'Type a password and forge your sword! Strong password = Strong sword!'}
-        </p>
+    <div className="ps-wrap">
+      <div className="ps-head">
+        <h3 className="ps-title">{t.title}</h3>
+        <p className="ps-subtitle">{t.subtitle}</p>
       </div>
 
-      {/* Sword Display */}
-      <div className="flex flex-col items-center mb-8">
-        <motion.div
-          className={`w-48 h-48 bg-gradient-to-br ${currentSword.color} rounded-2xl flex items-center justify-center shadow-2xl mb-4 relative overflow-hidden`}
-          animate={{
-            scale: strength === 100 ? [1, 1.1, 1] : 1,
-            boxShadow: strength === 100 
-              ? ['0 0 20px rgba(168, 85, 247, 0.5)', '0 0 40px rgba(168, 85, 247, 0.8)', '0 0 20px rgba(168, 85, 247, 0.5)']
-              : '0 10px 30px rgba(0, 0, 0, 0.3)'
-          }}
-          transition={{ duration: 1, repeat: strength === 100 ? Infinity : 0 }}
-        >
-          <div className="text-8xl">{currentSword.emoji}</div>
-          {strength === 100 && (
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
-              animate={{ x: ['-100%', '100%'] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-            />
-          )}
-        </motion.div>
-        
-        <h4 className="text-2xl font-bold text-white mb-2">{currentSword.name}</h4>
-        <p className="text-slate-400 text-sm">
-          {isTurkish ? 'Seviye' : 'Level'}: {Object.keys(swordLevels).indexOf(swordLevel) + 1}/4
-        </p>
-      </div>
-
-      {/* Password Input */}
-      <div className="mb-6">
-        <label className="block text-slate-300 font-semibold mb-2">
-          {isTurkish ? 'Şifrenizi Girin' : 'Enter Your Password'}
-        </label>
-        <div className="relative">
-          <input
-            type={showPassword ? 'text' : 'password'}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full px-4 py-3 bg-slate-800 border-2 border-slate-700 rounded-lg text-white text-lg font-mono focus:outline-none focus:border-purple-500 transition-colors"
-            placeholder={isTurkish ? 'Şifre yazın...' : 'Type password...'}
-          />
-          <button
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-slate-400 hover:text-white"
-          >
-            {showPassword ? '👁️' : '👁️‍🗨️'}
-          </button>
-        </div>
-      </div>
-
-      {/* Strength Meter */}
-      <div className="mb-6">
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-slate-300 font-semibold">
-            {isTurkish ? 'Şifre Gücü' : 'Password Strength'}
-          </span>
-          <span className={`font-bold text-lg ${strength < 25 ? 'text-red-400' : strength < 50 ? 'text-orange-400' : strength < 75 ? 'text-yellow-400' : 'text-green-400'}`}>
-            {getStrengthLabel()} ({strength}%)
-          </span>
-        </div>
-        <div className="w-full h-6 bg-slate-800 rounded-full overflow-hidden">
+      <div className="ps-main">
+        {/* Sword card */}
+        <div className="ps-sword-area">
           <motion.div
-            className={`h-full bg-gradient-to-r ${getStrengthColor()}`}
-            initial={{ width: 0 }}
-            animate={{ width: `${strength}%` }}
-            transition={{ duration: 0.3 }}
-          />
-        </div>
-      </div>
+            className={`ps-sword-card ${currentSword.bg}`}
+            animate={{
+              scale: strength === 100 ? [1, 1.03, 1] : 1,
+            }}
+            transition={{ duration: 1, repeat: strength === 100 ? Infinity : 0 }}
+          >
+            <div className="ps-sparkles" aria-hidden="true" />
+            <div className="ps-sword-emoji">{currentSword.emoji}</div>
+          </motion.div>
 
-      {/* Feedback List */}
-      <div className="mb-6 bg-slate-800 rounded-lg p-4 min-h-[150px]">
-        <h5 className="text-slate-300 font-semibold mb-3">
-          {isTurkish ? 'Şifre Kontrol Listesi' : 'Password Checklist'}
-        </h5>
-        <div className="space-y-2">
-          {feedback.length === 0 ? (
-            <p className="text-slate-500 text-sm">
-              {isTurkish ? 'Şifre yazmaya başla...' : 'Start typing your password...'}
-            </p>
-          ) : (
-            feedback.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                className={`flex items-center gap-2 text-sm ${
-                  item.type === 'success' ? 'text-green-400' :
-                  item.type === 'warning' ? 'text-yellow-400' :
-                  'text-blue-400'
-                }`}
+          <div className="ps-sword-meta">
+            <div className="ps-sword-name">{currentSword.name}</div>
+            <div className="ps-sword-badge">
+              {currentSword.badge} • {lvlIndex}/4
+            </div>
+          </div>
+        </div>
+
+        {/* Input + meter */}
+        <div className="ps-panel">
+          <div className="ps-field">
+            <label className="ps-label">{t.inputLabel}</label>
+
+            <div className="ps-input-row">
+              <input
+                className="ps-input"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder={t.placeholder}
+                autoComplete="off"
+              />
+              <button
+                type="button"
+                className="ps-eye"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? t.hide : t.show}
+                title={showPassword ? t.hide : t.show}
               >
-                <span>{item.text}</span>
+                {showPassword ? "👁️" : "👁️‍🗨️"}
+              </button>
+            </div>
+
+            <div className="ps-legend">{t.legend}</div>
+          </div>
+
+          <div className="ps-meter-block">
+            <div className="ps-meter-top">
+              <div className="ps-meter-label">{t.meter}</div>
+              <div className="ps-meter-value">
+                {strengthLabel()} <span className="ps-meter-pct">({strength}%)</span>
+              </div>
+            </div>
+
+            <div className="ps-meter-rail">
+              <motion.div
+                className={meterClass()}
+                initial={{ width: 0 }}
+                animate={{ width: `${strength}%` }}
+                transition={{ duration: 0.25 }}
+              />
+            </div>
+          </div>
+
+          <div className="ps-checklist">
+            <div className="ps-checklist-title">{t.checklist}</div>
+
+            <div className="ps-items">
+              {items.length === 0 ? (
+                <div className="ps-empty">
+                  {isTurkish ? "Şifre yazmaya başla..." : "Start typing your password..."}
+                </div>
+              ) : (
+                items.map((it) => (
+                  <motion.div
+                    key={it.key}
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.18 }}
+                    className={`ps-item ${it.ok ? "ok" : "no"} ${it.optional ? "opt" : ""}`}
+                  >
+                    <span className="ps-item-icon">{it.ok ? "✅" : "⬜"}</span>
+                    <span className="ps-item-text">{it.text}</span>
+                    {it.optional && <span className="ps-opt">{isTurkish ? "BONUS" : "BONUS"}</span>}
+                  </motion.div>
+                ))
+              )}
+            </div>
+
+            <div className="ps-actions">
+              <motion.button
+                type="button"
+                className="ps-btn"
+                onClick={reset}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {t.clear}
+              </motion.button>
+            </div>
+          </div>
+
+          <AnimatePresence>
+            {strength === 100 && (
+              <motion.div
+                className="ps-win"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 14 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="ps-win-title">{t.finalTitle}</div>
+                <div className="ps-win-desc">{t.finalDesc}</div>
               </motion.div>
-            ))
+            )}
+          </AnimatePresence>
+
+          {Array.isArray(tips) && tips.length > 0 && (
+            <div className="ps-tips">
+              <div className="ps-tips-title">{t.tipsTitle}</div>
+              <ul className="ps-tips-list">
+                {tips.map((x, i) => (
+                  <li key={i}>{x}</li>
+                ))}
+              </ul>
+            </div>
           )}
         </div>
       </div>
 
-      {/* Action Buttons */}
-      <div className="flex justify-center gap-4">
-        <motion.button
-          onClick={resetPassword}
-          className="px-6 py-3 bg-slate-700 hover:bg-slate-600 rounded-lg font-semibold text-white"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          {isTurkish ? '🔄 Temizle' : '🔄 Clear'}
-        </motion.button>
-      </div>
+      <style>{`
+        .ps-wrap{
+          width:100%;
+          max-width: 920px;
+          margin: 0 auto;
+          padding: 18px;
+          border-radius: 22px;
+          border: 1px solid rgba(99,102,241,.18);
+          background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.80));
+          box-shadow: 0 14px 36px rgba(2,6,23,.08);
+        }
+        .ps-head{ text-align:center; margin-bottom: 14px; }
+        .ps-title{
+          margin: 0 0 6px 0;
+          font-size: 1.55rem;
+          font-weight: 1000;
+          letter-spacing: .2px;
+          background: linear-gradient(135deg, #7c3aed, #2563eb);
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+        .ps-subtitle{ margin:0; font-weight: 800; opacity: .85; }
 
-      {/* Tips */}
-      {strength === 100 && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mt-6 p-4 bg-green-500/20 border border-green-500/50 rounded-lg text-center"
-        >
-          <p className="text-green-400 font-bold text-lg">
-            {isTurkish ? '🎉 Mükemmel! Elmas kılıcını kazandın!' : '🎉 Perfect! You forged a diamond sword!'}
-          </p>
-          <p className="text-green-300 text-sm mt-2">
-            {isTurkish 
-              ? 'Bu şifre çok güçlü! Güvenli bir şekilde kullanabilirsin.'
-              : 'This password is very strong! You can use it safely.'}
-          </p>
-        </motion.div>
-      )}
+        .ps-main{
+          display:grid;
+          grid-template-columns: 280px 1fr;
+          gap: 16px;
+          align-items: start;
+        }
+
+        .ps-sword-area{
+          position: sticky;
+          top: 16px;
+          display:flex;
+          flex-direction: column;
+          gap: 10px;
+          align-items: center;
+        }
+
+        .ps-sword-card{
+          width: 240px;
+          height: 240px;
+          border-radius: 22px;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          position: relative;
+          overflow:hidden;
+          border: 1px solid rgba(255,255,255,.35);
+          box-shadow: 0 18px 40px rgba(2,6,23,.18);
+        }
+
+        .ps-rusty{ background: linear-gradient(135deg, #94a3b8, #475569); }
+        .ps-iron{ background: linear-gradient(135deg, #cbd5e1, #64748b); }
+        .ps-steel{ background: linear-gradient(135deg, #60a5fa, #2563eb); }
+        .ps-diamond{ background: linear-gradient(135deg, #a78bfa, #ec4899); }
+
+        .ps-sword-emoji{
+          font-size: 5.2rem;
+          filter: drop-shadow(0 10px 20px rgba(0,0,0,.25));
+          z-index: 2;
+        }
+
+        /* sparkle overlay (dependency-free celebration) */
+        .ps-sparkles{
+          position:absolute; inset:0;
+          background:
+            radial-gradient(circle at 20% 30%, rgba(255,255,255,.30), transparent 35%),
+            radial-gradient(circle at 75% 40%, rgba(255,255,255,.22), transparent 38%),
+            radial-gradient(circle at 40% 80%, rgba(255,255,255,.18), transparent 45%);
+          opacity: 0.0;
+          z-index: 1;
+          transition: opacity .2s ease;
+        }
+        .ps-diamond .ps-sparkles{ opacity: .55; animation: psShimmer 1.6s linear infinite; }
+        @keyframes psShimmer{
+          0%{ transform: translateX(-6%); }
+          50%{ transform: translateX(6%); }
+          100%{ transform: translateX(-6%); }
+        }
+
+        .ps-sword-meta{ text-align:center; }
+        .ps-sword-name{ font-weight: 1000; font-size: 1.15rem; }
+        .ps-sword-badge{
+          display:inline-flex;
+          gap: 8px;
+          align-items:center;
+          margin-top: 6px;
+          padding: 8px 12px;
+          border-radius: 999px;
+          border: 1px solid rgba(15,23,42,.12);
+          background: rgba(255,255,255,.85);
+          font-weight: 900;
+          opacity: .9;
+          box-shadow: 0 10px 22px rgba(2,6,23,.06);
+        }
+
+        .ps-panel{
+          border-radius: 20px;
+          border: 1px solid rgba(15,23,42,.10);
+          background: rgba(255,255,255,.82);
+          box-shadow: 0 10px 24px rgba(2,6,23,.06);
+          padding: 14px;
+        }
+
+        .ps-field{ margin-bottom: 12px; }
+        .ps-label{ display:block; font-weight: 1000; margin-bottom: 8px; }
+        .ps-input-row{ position:relative; display:flex; gap: 10px; align-items:center; }
+        .ps-input{
+          width: 100%;
+          padding: 12px 12px;
+          border-radius: 14px;
+          border: 1.5px solid rgba(15,23,42,.12);
+          outline: none;
+          font-weight: 900;
+          letter-spacing: .8px;
+          font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+          background: rgba(255,255,255,.94);
+          box-shadow: 0 10px 22px rgba(2,6,23,.06);
+        }
+        .ps-input:focus{
+          border-color: rgba(59,130,246,.70);
+          box-shadow: 0 0 0 4px rgba(59,130,246,.14), 0 10px 22px rgba(2,6,23,.06);
+        }
+        .ps-eye{
+          flex: 0 0 auto;
+          padding: 10px 12px;
+          border-radius: 14px;
+          border: 1px solid rgba(15,23,42,.12);
+          background: rgba(255,255,255,.92);
+          cursor: pointer;
+          font-weight: 900;
+          box-shadow: 0 10px 22px rgba(2,6,23,.06);
+        }
+        .ps-eye:active{ transform: scale(.98); }
+
+        .ps-legend{
+          margin-top: 10px;
+          font-weight: 800;
+          opacity: .82;
+          padding: 10px 12px;
+          border-radius: 14px;
+          border: 1px solid rgba(99,102,241,.14);
+          background: rgba(99,102,241,.06);
+        }
+
+        .ps-meter-block{
+          margin-top: 12px;
+          padding: 12px;
+          border-radius: 18px;
+          border: 1px solid rgba(15,23,42,.10);
+          background: rgba(255,255,255,.88);
+          box-shadow: 0 10px 22px rgba(2,6,23,.05);
+        }
+        .ps-meter-top{
+          display:flex;
+          justify-content:space-between;
+          align-items: baseline;
+          gap: 10px;
+          margin-bottom: 10px;
+        }
+        .ps-meter-label{ font-weight: 1000; }
+        .ps-meter-value{ font-weight: 1000; }
+        .ps-meter-pct{ opacity: .8; font-weight: 900; }
+
+        .ps-meter-rail{
+          width: 100%;
+          height: 14px;
+          border-radius: 999px;
+          background: rgba(15,23,42,.08);
+          overflow:hidden;
+          border: 1px solid rgba(15,23,42,.08);
+        }
+        .ps-meter{
+          height: 100%;
+          border-radius: 999px;
+        }
+        .ps-red{ background: linear-gradient(90deg, #ef4444, #b91c1c); }
+        .ps-orange{ background: linear-gradient(90deg, #f97316, #c2410c); }
+        .ps-yellow{ background: linear-gradient(90deg, #f59e0b, #b45309); }
+        .ps-green{ background: linear-gradient(90deg, #22c55e, #059669); }
+
+        .ps-checklist{
+          margin-top: 12px;
+          padding: 12px;
+          border-radius: 18px;
+          border: 1px solid rgba(15,23,42,.10);
+          background: rgba(255,255,255,.88);
+          box-shadow: 0 10px 22px rgba(2,6,23,.05);
+        }
+        .ps-checklist-title{ font-weight: 1000; margin-bottom: 10px; }
+        .ps-items{ display:grid; gap: 8px; }
+        .ps-empty{ opacity:.7; font-weight: 800; padding: 8px 0; }
+
+        .ps-item{
+          display:flex;
+          align-items:center;
+          gap: 10px;
+          padding: 10px 12px;
+          border-radius: 14px;
+          border: 1px solid rgba(15,23,42,.10);
+          background: rgba(255,255,255,.92);
+          box-shadow: 0 10px 22px rgba(2,6,23,.04);
+        }
+        .ps-item.ok{ border-color: rgba(34,197,94,.35); background: rgba(34,197,94,.08); }
+        .ps-item.no{ border-color: rgba(148,163,184,.22); background: rgba(148,163,184,.06); }
+        .ps-item-icon{ width: 22px; text-align:center; }
+        .ps-item-text{ font-weight: 900; }
+        .ps-opt{
+          margin-left:auto;
+          padding: 4px 8px;
+          border-radius: 999px;
+          font-weight: 1000;
+          border: 1px solid rgba(236,72,153,.25);
+          background: rgba(236,72,153,.08);
+          opacity: .95;
+          font-size: .78rem;
+        }
+
+        .ps-actions{
+          display:flex;
+          justify-content:flex-end;
+          margin-top: 10px;
+        }
+        .ps-btn{
+          padding: 10px 12px;
+          border-radius: 14px;
+          border: 1px solid rgba(15,23,42,.12);
+          background: rgba(255,255,255,.92);
+          cursor:pointer;
+          font-weight: 1000;
+          box-shadow: 0 10px 22px rgba(2,6,23,.06);
+        }
+        .ps-btn:active{ transform: scale(.98); }
+
+        .ps-win{
+          margin-top: 12px;
+          padding: 12px;
+          border-radius: 18px;
+          border: 1px solid rgba(34,197,94,.35);
+          background: rgba(34,197,94,.10);
+          box-shadow: 0 10px 22px rgba(2,6,23,.05);
+        }
+        .ps-win-title{ font-weight: 1000; margin-bottom: 6px; }
+        .ps-win-desc{ font-weight: 800; opacity: .9; }
+
+        .ps-tips{
+          margin-top: 12px;
+          padding: 12px;
+          border-radius: 18px;
+          border: 1px solid rgba(99,102,241,.16);
+          background: rgba(99,102,241,.06);
+        }
+        .ps-tips-title{ font-weight: 1000; margin-bottom: 6px; }
+        .ps-tips-list{ margin: 0; padding-left: 18px; font-weight: 800; line-height: 1.5; }
+
+        @media (max-width: 860px){
+          .ps-main{ grid-template-columns: 1fr; }
+          .ps-sword-area{ position: static; }
+          .ps-sword-card{ width: 100%; max-width: 420px; height: 220px; }
+        }
+      `}</style>
     </div>
   );
-};
-
-export default PasswordSmithGame;
-
+}

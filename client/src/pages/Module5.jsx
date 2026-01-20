@@ -109,10 +109,10 @@ const SectionComponent = ({ section, isTurkish }) => {
                   </ul>
                 </div>
               )}
-
-              {contentItem.quiz && (
-                <InteractiveQuiz quizItems={contentItem.quiz} isTurkish={isTurkish} />
-              )}
+              {/*
+                Module 5 quizzes are rendered ONLY in the activity-box to avoid duplicate questions.
+                (Content cards may also include contentItem.quiz in the language files.)
+              */}
             </motion.div>
           ))}
         </div>

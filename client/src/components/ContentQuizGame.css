@@ -1,0 +1,270 @@
+/* ===============================
+   ContentQuizGame.css
+   Modern / Game-like UI
+   =============================== */
+
+.content-quiz-game {
+  position: relative;
+  border-radius: 24px;
+  padding: 26px;
+  background: linear-gradient(180deg, rgba(99, 102, 241, 0.08), rgba(255, 255, 255, 0.85));
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  box-shadow:
+    0 18px 40px rgba(17, 24, 39, 0.10),
+    0 2px 10px rgba(17, 24, 39, 0.06);
+  overflow: hidden;
+}
+
+/* subtle decorative glow */
+.content-quiz-game::before {
+  content: '';
+  position: absolute;
+  top: -140px;
+  left: -140px;
+  width: 340px;
+  height: 340px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.25), transparent 62%);
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+.content-quiz-game::after {
+  content: '';
+  position: absolute;
+  bottom: -180px;
+  right: -180px;
+  width: 420px;
+  height: 420px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.18), transparent 62%);
+  pointer-events: none;
+}
+
+/* Empty state */
+.content-quiz-game.empty {
+  background: #fff;
+  border: 1px dashed rgba(99, 102, 241, 0.35);
+  box-shadow: 0 10px 24px rgba(17, 24, 39, 0.06);
+}
+
+.content-quiz-game.empty p {
+  margin: 0;
+  padding: 18px 10px;
+  text-align: center;
+  font-weight: 600;
+  color: rgba(55, 65, 81, 0.9);
+}
+
+/* Header */
+.content-quiz-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 1;
+}
+
+.content-quiz-progress,
+.content-quiz-score {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: rgba(55, 65, 81, 0.95);
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(99, 102, 241, 0.18);
+  padding: 8px 12px;
+  border-radius: 999px;
+  box-shadow: 0 8px 18px rgba(17, 24, 39, 0.06);
+  backdrop-filter: blur(6px);
+}
+
+/* Question */
+.content-quiz-question {
+  position: relative;
+  z-index: 1;
+  margin: 18px 0 16px;
+  padding: 16px 16px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(99, 102, 241, 0.16);
+  color: rgba(17, 24, 39, 0.95);
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.35;
+  box-shadow: 0 12px 26px rgba(17, 24, 39, 0.08);
+}
+
+/* Options wrapper */
+.content-quiz-options {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+}
+
+/* Mobile: stack options */
+@media (max-width: 560px) {
+  .content-quiz-game {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .content-quiz-options {
+    grid-template-columns: 1fr;
+  }
+
+  .content-quiz-question {
+    font-size: 16px;
+    padding: 14px;
+  }
+}
+
+/* Option button */
+.content-quiz-option {
+  appearance: none;
+  border: 1.8px solid rgba(229, 231, 235, 1);
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 18px;
+  padding: 16px 14px;
+  font-size: 16px;
+  font-weight: 750;
+  color: rgba(31, 41, 55, 0.95);
+  cursor: pointer;
+  text-align: center;
+  min-height: 56px;
+  box-shadow:
+    0 10px 22px rgba(17, 24, 39, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease,
+    color 180ms ease;
+}
+
+.content-quiz-option:hover:not(:disabled) {
+  transform: translateY(-2px);
+  border-color: rgba(99, 102, 241, 0.55);
+  box-shadow:
+    0 16px 32px rgba(17, 24, 39, 0.10),
+    0 0 0 6px rgba(99, 102, 241, 0.10);
+}
+
+.content-quiz-option:active:not(:disabled) {
+  transform: translateY(0px) scale(0.99);
+}
+
+/* Selected feedback states (your component adds correct/wrong classes) */
+.content-quiz-option.correct {
+  border-color: rgba(16, 185, 129, 0.55);
+  background: rgba(236, 253, 245, 0.95);
+  color: rgba(6, 95, 70, 0.98);
+  box-shadow:
+    0 16px 34px rgba(16, 185, 129, 0.12),
+    0 0 0 6px rgba(16, 185, 129, 0.10);
+}
+
+.content-quiz-option.wrong {
+  border-color: rgba(239, 68, 68, 0.55);
+  background: rgba(254, 242, 242, 0.95);
+  color: rgba(127, 29, 29, 0.98);
+  box-shadow:
+    0 16px 34px rgba(239, 68, 68, 0.10),
+    0 0 0 6px rgba(239, 68, 68, 0.10);
+}
+
+/* Disabled (after selection) */
+.content-quiz-option:disabled {
+  cursor: default;
+  opacity: 0.96;
+}
+
+/* Feedback box */
+.content-quiz-feedback {
+  position: relative;
+  z-index: 1;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  font-weight: 800;
+  text-align: center;
+  border: 1px solid rgba(229, 231, 235, 1);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 26px rgba(17, 24, 39, 0.08);
+}
+
+.content-quiz-feedback.correct {
+  border-color: rgba(16, 185, 129, 0.35);
+  background: rgba(236, 253, 245, 0.92);
+  color: rgba(6, 95, 70, 0.98);
+}
+
+.content-quiz-feedback.wrong {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(254, 242, 242, 0.92);
+  color: rgba(127, 29, 29, 0.98);
+}
+
+/* Actions */
+.content-quiz-actions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.content-quiz-next,
+.content-quiz-restart {
+  border: none;
+  border-radius: 999px;
+  padding: 11px 22px;
+  font-weight: 900;
+  font-size: 14px;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(99, 102, 241, 1), rgba(139, 92, 246, 1));
+  box-shadow:
+    0 14px 28px rgba(99, 102, 241, 0.22),
+    0 6px 16px rgba(139, 92, 246, 0.16);
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 180ms ease;
+}
+
+.content-quiz-next:hover:not(:disabled),
+.content-quiz-restart:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow:
+    0 18px 34px rgba(99, 102, 241, 0.28),
+    0 8px 18px rgba(139, 92, 246, 0.18);
+}
+
+.content-quiz-next:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* Completed state */
+.content-quiz-complete {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 18px 10px;
+}
+
+.content-quiz-complete h4 {
+  margin: 8px 0 10px;
+  font-size: 22px;
+  font-weight: 950;
+  color: rgba(99, 102, 241, 1);
+}
+
+.content-quiz-complete p {
+  margin: 0 0 14px;
+  font-weight: 700;
+  color: rgba(55, 65, 81, 0.9);
+}

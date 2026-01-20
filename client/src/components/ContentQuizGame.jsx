@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import './ContentQuizGame.css';
 
 const ContentQuizGame = ({ section, isTurkish }) => {
   const questions = useMemo(() => {

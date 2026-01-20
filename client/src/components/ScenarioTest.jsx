@@ -324,7 +324,7 @@ const ScenarioTest = ({ isTurkish = true }) => {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         .scenario-test-container {
           width: 100%;
           padding: 1.5rem 2rem;

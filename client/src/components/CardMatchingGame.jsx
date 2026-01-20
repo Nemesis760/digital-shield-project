@@ -1,239 +1,350 @@
-import { useMemo, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import './card-matching.css';
+import { useEffect, useMemo, useState } from "react";
 
-function CardMatchingGame({ isTurkish, data }) {
-  // --- Veri Hazırlığı (Değişmedi) ---
-  const legacyScenarios = [
-    {
-      id: 1,
-      text: isTurkish
-        ? "Arkadaşının doğum gününü kutlayan bir gönderi paylaştın."
-        : "You shared a post celebrating your friend's birthday.",
-      correct: 'active',
-      explanation: isTurkish
-        ? "Kendi isteğinle paylaştığın için bu aktif ayak izidir."
-        : "This is an active footprint because you shared it intentionally."
-    },
-    {
-      id: 2,
-      text: isTurkish
-        ? "Bir alışveriş sitesinde gezdin, bir şey almadın ama sonra o ürünün reklamını gördün."
-        : "You browsed a shopping site, didn't buy anything, but then saw an ad for that product.",
-      correct: 'passive',
-      explanation: isTurkish
-        ? "Farkında olmadan takip edildiğin için bu pasif ayak izidir."
-        : "This is a passive footprint because you were tracked without your awareness."
-    },
-    {
-      id: 3,
-      text: isTurkish
-        ? "Instagram'da bir fotoğraf yükledin."
-        : "You uploaded a photo on Instagram.",
-      correct: 'active',
-      explanation: isTurkish
-        ? "Bilerek paylaştığın için aktif ayak izidir."
-        : "This is an active footprint because you shared it intentionally."
-    },
-    {
-      id: 4,
-      text: isTurkish
-        ? "Bir web sitesi çerezlerle seni takip etti."
-        : "A website tracked you with cookies.",
-      correct: 'passive',
-      explanation: isTurkish
-        ? "Farkında olmadan oluştuğu için pasif ayak izidir."
-        : "This is a passive footprint because it was created without your awareness."
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function nowMs() {
+  return typeof performance !== "undefined" ? performance.now() : Date.now();
+}
+
+export default function CardMatchGame({ pairs = [], isTurkish }) {
+  const baseCards = useMemo(() => {
+    // pairs: [{term, def}]
+    const clean = (pairs || []).filter((p) => p?.term && p?.def);
+    const items = clean.flatMap((p, idx) => [
+      { id: `t-${idx}`, type: "term", value: String(p.term), pairId: idx },
+      { id: `d-${idx}`, type: "def", value: String(p.def), pairId: idx },
+    ]);
+    return items;
+  }, [pairs]);
+
+  const [seed, setSeed] = useState(0);
+
+  const cards = useMemo(() => {
+    return shuffle(baseCards.map((c) => ({ ...c, uid: `${c.id}-${seed}` })));
+  }, [baseCards, seed]);
+
+  const [flipped, setFlipped] = useState([]); // array of indices (max 2)
+  const [matched, setMatched] = useState(() => new Set()); // uid
+  const [moves, setMoves] = useState(0);
+  const [score, setScore] = useState(0);
+  const [lock, setLock] = useState(false);
+
+  const [startTime, setStartTime] = useState(() => nowMs());
+  const [elapsed, setElapsed] = useState(0);
+  const [done, setDone] = useState(false);
+
+  // timer
+  useEffect(() => {
+    if (done) return;
+    const t = setInterval(() => {
+      setElapsed(Math.max(0, Math.floor((nowMs() - startTime) / 1000)));
+    }, 400);
+    return () => clearInterval(t);
+  }, [startTime, done]);
+
+  const reset = () => {
+    setSeed((s) => s + 1);
+    setFlipped([]);
+    setMatched(new Set());
+    setMoves(0);
+    setScore(0);
+    setLock(false);
+    setStartTime(nowMs());
+    setElapsed(0);
+    setDone(false);
+  };
+
+  // auto-complete check
+  useEffect(() => {
+    if (!cards.length) return;
+    if (matched.size === cards.length && !done) {
+      setDone(true);
+      // bonus: hızlı bitirene ekstra
+      const timeBonus = Math.max(0, 120 - elapsed) * 2; // 0..240
+      setScore((s) => s + timeBonus);
     }
-  ];
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [matched, cards.length]);
 
-  const activity = useMemo(() => {
-    if (!data || !Array.isArray(data.situations)) return null;
-    const options = data.network_types || data.categories;
-    if (!Array.isArray(options) || options.length === 0) return null;
-    return { situations: data.situations, options };
-  }, [data]);
+  const onFlip = (idx) => {
+    if (lock || done) return;
+    const c = cards[idx];
+    if (!c) return;
+    if (matched.has(c.uid)) return;
+    if (flipped.includes(idx)) return;
 
-  const scenarios = activity
-    ? activity.situations.map((item) => ({
-        id: item.id,
-        text: isTurkish ? item.text_tr : item.text_en,
-        correct: item.correct_match,
-        explanation: isTurkish ? item.explanation_tr : item.explanation_en // Veriden geliyorsa
-      }))
-    : legacyScenarios;
+    if (flipped.length === 2) return;
 
-  const optionList = activity
-    ? activity.options.map((option) => ({
-        id: option.id,
-        label: isTurkish ? option.label_tr : option.label_en,
-      }))
-    : [
-        { id: 'active', label: isTurkish ? '👆 Aktif' : '👆 Active' },
-        { id: 'passive', label: isTurkish ? '👀 Pasif' : '👀 Passive' },
-      ];
+    const next = [...flipped, idx];
+    setFlipped(next);
 
-  const feedbackText = activity
-    ? {
-        correct: isTurkish ? data.feedback?.correct_tr : data.feedback?.correct_en,
-        wrong: isTurkish ? data.feedback?.incorrect_tr : data.feedback?.incorrect_en,
+    if (next.length === 2) {
+      setMoves((m) => m + 1);
+      const [aIdx, bIdx] = next;
+      const a = cards[aIdx];
+      const b = cards[bIdx];
+
+      const isPair = a.pairId === b.pairId && a.type !== b.type;
+
+      if (isPair) {
+        // match
+        setMatched((prev) => {
+          const n = new Set(prev);
+          n.add(a.uid);
+          n.add(b.uid);
+          return n;
+        });
+
+        // scoring:
+        // +100 base, + hızlılık bonusu (az hamle + hızlı eşleşme)
+        setScore((s) => s + 100);
+
+        // küçük animasyon için kısa süre lock
+        setLock(true);
+        setTimeout(() => {
+          setFlipped([]);
+          setLock(false);
+        }, 450);
+      } else {
+        // wrong: -10 (min 0)
+        setScore((s) => Math.max(0, s - 10));
+        setLock(true);
+        setTimeout(() => {
+          setFlipped([]);
+          setLock(false);
+        }, 650);
       }
-    : null;
-
-  // --- Yeni State Yapısı ---
-  const [currentIndex, setCurrentIndex] = useState(0); // Hangi sorudayız?
-  const [feedback, setFeedback] = useState(null); // Cevap verildi mi? Sonuç ne?
-  const [isFinished, setIsFinished] = useState(false); // Oyun bitti mi?
-
-  const currentScenario = scenarios[currentIndex];
-
-  // İlerleme çubuğu yüzdesi
-  const progressPercentage = ((currentIndex) / scenarios.length) * 100;
-
-  const handleCardClick = (type) => {
-    if (feedback) return; // Zaten cevaplandıysa tıklamayı engelle
-
-    const isCorrect = currentScenario.correct === type;
-    const explanationText = currentScenario.explanation || (isCorrect 
-      ? (isTurkish ? "Harika! Doğru bildin." : "Great! That's correct.") 
-      : (isTurkish ? "Yanlış cevap." : "Incorrect answer."));
-
-    setFeedback({
-      type: isCorrect ? 'correct' : 'wrong',
-      message: isCorrect 
-        ? (feedbackText?.correct || (isTurkish ? '🎉 Doğru!' : '🎉 Correct!'))
-        : (feedbackText?.wrong || (isTurkish ? '❌ Yanlış!' : '❌ Wrong!')),
-      explanation: explanationText
-    });
-  };
-
-  const handleNextQuestion = () => {
-    setFeedback(null);
-    if (currentIndex < scenarios.length - 1) {
-      setCurrentIndex(prev => prev + 1);
-    } else {
-      setIsFinished(true);
     }
   };
 
-  // Başlıklar
-  const title = activity
-    ? (isTurkish ? data.title_tr : data.title_en)
-    : (isTurkish ? '👣 Hangi İz? Kart Oyunu' : '👣 Which Footprint? Card Game');
+  const totalPairs = Math.floor(cards.length / 2);
+  const matchedPairs = Math.floor(matched.size / 2);
 
-  const instructions = activity
-    ? (isTurkish ? data.instructions_tr : data.instructions_en)
-    : null;
-
-  // --- Render ---
   return (
-    <div className="card-matching-game single-mode">
-      {/* Üst Bilgi ve Progress Bar */}
-      <div className="game-header">
-        <h3>{title}</h3>
-        {!isFinished && (
-          <div className="progress-container">
-            <div className="progress-bar" style={{ width: `${progressPercentage}%` }}></div>
-            <span className="progress-text">{currentIndex + 1} / {scenarios.length}</span>
+    <div className="cm-wrap">
+      <div className="cm-top">
+        <div className="cm-title">{isTurkish ? "Kart Eşleştirme" : "Card Match"}</div>
+
+        <div className="cm-stats">
+          <span className="cm-pill">{isTurkish ? "Skor" : "Score"}: <b>{score}</b></span>
+          <span className="cm-pill">{isTurkish ? "Hamle" : "Moves"}: <b>{moves}</b></span>
+          <span className="cm-pill">{isTurkish ? "Süre" : "Time"}: <b>{elapsed}s</b></span>
+          <span className="cm-pill">{matchedPairs}/{totalPairs} {isTurkish ? "Eşleşme" : "Matches"}</span>
+        </div>
+
+        <div className="cm-actions">
+          <button type="button" className="cm-btn" onClick={reset}>
+            {isTurkish ? "Yeniden Başlat" : "Restart"}
+          </button>
+        </div>
+      </div>
+
+      {done && (
+        <div className="cm-done">
+          <div className="cm-done-card">
+            <div className="cm-done-title">{isTurkish ? "🎉 Tebrikler!" : "🎉 Well done!"}</div>
+            <div className="cm-done-text">
+              {isTurkish
+                ? `Tüm kartları eşleştirdin. Skorun: ${score} • Süre: ${elapsed}s • Hamle: ${moves}`
+                : `You matched all cards. Score: ${score} • Time: ${elapsed}s • Moves: ${moves}`}
+            </div>
+            <button type="button" className="cm-btn cm-btn-primary" onClick={reset}>
+              {isTurkish ? "Tekrar Oyna" : "Play Again"}
+            </button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
 
-      <div className="game-content-area">
-        <AnimatePresence mode='wait'>
-          {!isFinished ? (
-            <motion.div
-              key={currentScenario.id}
-              className={`single-scenario-card ${feedback ? feedback.type : ''}`}
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: -50, opacity: 0 }}
-              transition={{ duration: 0.3 }}
+      <div className="cm-grid" aria-label="Card matching board">
+        {cards.map((c, idx) => {
+          const isFlipped = flipped.includes(idx) || matched.has(c.uid);
+          const isMatched = matched.has(c.uid);
+
+          return (
+            <button
+              key={c.uid}
+              type="button"
+              className={`cm-card ${isFlipped ? "is-flipped" : ""} ${isMatched ? "is-matched" : ""}`}
+              onClick={() => onFlip(idx)}
+              disabled={lock || done}
             >
-              {/* Soru Metni */}
-              <div className="question-section">
-                <p className="scenario-text-large">{currentScenario.text}</p>
-              </div>
+              <div className="cm-inner">
+                <div className="cm-face cm-front">
+                  <span className="cm-q">?</span>
+                </div>
 
-              {/* Seçenek Butonları */}
-              <div className="options-grid">
-                {optionList.map((option, index) => {
-                  // Buton renklerini belirle
-                  let btnClass = 'option-btn-large';
-                  if (index === 0) btnClass += ' active-theme'; // Aktif için özel stil
-                  if (index === 1) btnClass += ' passive-theme'; // Pasif için özel stil
-                  
-                  // Cevap verildiyse ve bu buton doğru cevapsa vurgula
-                  if (feedback && currentScenario.correct === option.id) {
-                     btnClass += ' correct-answer-highlight';
-                  }
-                  // Yanlış cevap verildiyse ve bu butona basıldıysa
-                  if (feedback?.type === 'wrong' && feedback.selected === option.id) {
-                     btnClass += ' wrong-answer-dim';
-                  }
-
-                  return (
-                    <button
-                      key={option.id}
-                      className={btnClass}
-                      onClick={() => handleCardClick(option.id)}
-                      disabled={!!feedback} // Cevap verildiyse butonları kilitle
-                    >
-                      {option.label}
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Geri Bildirim ve Açıklama Alanı (SABİT) */}
-              {feedback && (
-                <motion.div 
-                  className="feedback-panel"
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                >
-                  <div className={`feedback-status ${feedback.type}`}>
-                    {feedback.message}
+                <div className="cm-face cm-back">
+                  <div className={`cm-tag ${c.type === "term" ? "term" : "def"}`}>
+                    {c.type === "term" ? (isTurkish ? "Terim" : "Term") : (isTurkish ? "Açıklama" : "Definition")}
                   </div>
-                  <p className="feedback-explanation-text">
-                    {feedback.explanation}
-                  </p>
-                  
-                  <button className="next-question-btn" onClick={handleNextQuestion}>
-                    {currentIndex === scenarios.length - 1 
-                      ? (isTurkish ? "Sonuçları Gör" : "See Results") 
-                      : (isTurkish ? "Sonraki Soru ➜" : "Next Question ➜")}
-                  </button>
-                </motion.div>
-              )}
-            </motion.div>
-          ) : (
-            // Bitiş Ekranı
-            <motion.div
-              className="completion-card"
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-            >
-              <div className="completion-icon">🏆</div>
-              <h3>{isTurkish ? 'Tebrikler!' : 'Congratulations!'}</h3>
-              <p>
-                {isTurkish 
-                  ? 'Tüm senaryoları tamamladın.' 
-                  : 'You have completed all scenarios.'}
-              </p>
-              <button className="restart-btn" onClick={() => {
-                setIsFinished(false);
-                setCurrentIndex(0);
-                setFeedback(null);
-              }}>
-                {isTurkish ? 'Tekrar Oyna' : 'Play Again'}
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
+                  <div className="cm-text">{c.value}</div>
+                </div>
+              </div>
+            </button>
+          );
+        })}
       </div>
+
+      <div className="cm-hint">
+        {isTurkish
+          ? "İpucu: Bir terim ile onun açıklamasını eşleştir."
+          : "Tip: Match a term with its definition."}
+      </div>
+
+      <style>
+        {`
+        .cm-wrap{
+          width:100%;
+          max-width:900px;
+          margin:0 auto;
+          border-radius:16px;
+          border:1px solid var(--border-color, rgba(0,0,0,.1));
+          background:var(--bg-secondary, rgba(255,255,255,.75));
+          padding:14px;
+        }
+        .cm-top{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+        .cm-title{font-weight:900;font-size:1.1rem;}
+        .cm-stats{display:flex;gap:8px;flex-wrap:wrap}
+        .cm-pill{
+          padding:6px 10px;border-radius:999px;
+          border:1px solid rgba(0,0,0,.12);
+          background:rgba(255,255,255,.7);
+          font-weight:700;
+        }
+        .cm-actions{display:flex;gap:8px;justify-content:flex-end}
+        .cm-btn{
+          padding:8px 12px;border-radius:12px;
+          border:1px solid rgba(0,0,0,.12);
+          background:var(--bg-primary, #fff);
+          cursor:pointer;font-weight:800;
+        }
+        .cm-btn-primary{
+          background:var(--gradient-primary, linear-gradient(135deg,#6366f1,#3b82f6));
+          color:#fff;border:none;
+        }
+
+        .cm-grid{
+          display:grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap:10px;
+        }
+        @media (max-width: 860px){ .cm-grid{ grid-template-columns: repeat(3, 1fr);} }
+        @media (max-width: 560px){ .cm-grid{ grid-template-columns: repeat(2, 1fr);} }
+
+        .cm-card{
+          height:120px;
+          border:none;
+          background:transparent;
+          cursor:pointer;
+          perspective: 900px;
+          padding:0;
+        }
+        .cm-card:disabled{cursor:not-allowed;opacity:.9}
+
+        .cm-inner{
+          width:100%;
+          height:100%;
+          position:relative;
+          transform-style:preserve-3d;
+          transition: transform .45s ease;
+          border-radius:16px;
+        }
+        .cm-card.is-flipped .cm-inner{ transform: rotateY(180deg); }
+
+        .cm-face{
+          position:absolute; inset:0;
+          border-radius:16px;
+          border:1px solid rgba(0,0,0,.12);
+          display:flex; align-items:center; justify-content:center;
+          backface-visibility:hidden;
+          overflow:hidden;
+          box-shadow: 0 6px 18px rgba(0,0,0,.10);
+        }
+        .cm-front{
+          background: linear-gradient(135deg, rgba(99,102,241,.16), rgba(59,130,246,.16));
+        }
+        .cm-q{
+          font-size:2.4rem;
+          font-weight:900;
+          opacity:.85;
+        }
+        .cm-back{
+          background: rgba(255,255,255,.92);
+          transform: rotateY(180deg);
+          padding:12px;
+          display:flex;
+          flex-direction:column;
+          align-items:flex-start;
+          justify-content:space-between;
+          gap:10px;
+        }
+
+        .cm-tag{
+          font-size:.78rem;
+          font-weight:900;
+          padding:6px 10px;
+          border-radius:999px;
+          border:1px solid rgba(0,0,0,.12);
+          background: rgba(255,255,255,.85);
+        }
+        .cm-tag.term{ border-color: rgba(59,130,246,.45); }
+        .cm-tag.def{ border-color: rgba(236,72,153,.45); }
+
+        .cm-text{
+          width:100%;
+          font-weight:900;
+          line-height:1.2;
+          color: var(--text-primary, #0f172a);
+          text-align:left;
+          font-size: .95rem;
+        }
+
+        /* matched animation */
+        .cm-card.is-matched .cm-face{
+          border-color: rgba(16,185,129,.55);
+          box-shadow: 0 10px 26px rgba(16,185,129,.18);
+        }
+        .cm-card.is-matched .cm-inner{
+          animation: cmPulse .55s ease;
+        }
+        @keyframes cmPulse{
+          0%{ transform: scale(1) rotateY(180deg); }
+          50%{ transform: scale(1.03) rotateY(180deg); }
+          100%{ transform: scale(1) rotateY(180deg); }
+        }
+
+        .cm-hint{
+          margin-top:10px;
+          opacity:.85;
+          font-weight:700;
+        }
+
+        /* done overlay */
+        .cm-done{
+          margin-bottom:12px;
+        }
+        .cm-done-card{
+          border-radius:16px;
+          border:1px solid rgba(16,185,129,.35);
+          background: rgba(16,185,129,.10);
+          padding:12px;
+          display:flex;
+          align-items:center;
+          justify-content:space-between;
+          gap:12px;
+          flex-wrap:wrap;
+        }
+        .cm-done-title{font-weight:1000;font-size:1.05rem}
+        .cm-done-text{font-weight:800;opacity:.9}
+        `}
+      </style>
     </div>
   );
 }
-
-export default CardMatchingGame;

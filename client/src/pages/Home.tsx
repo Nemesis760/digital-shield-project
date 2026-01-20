@@ -11,15 +11,17 @@ export default function Home() {
   // Progress tracking (localStorage'dan al)
   const [progress, setProgress] = useState(() => {
     const saved = localStorage.getItem('digitalShieldProgress');
-    return saved ? JSON.parse(saved) : {
-      module1: false,
-      module2: false,
-      module3: false,
-      module4: false,
-      module5: false,
-      totalScore: 0,
-      badges: []
-    };
+    return saved
+      ? JSON.parse(saved)
+      : {
+          module1: false,
+          module2: false,
+          module3: false,
+          module4: false,
+          module5: false,
+          totalScore: 0,
+          badges: []
+        };
   });
 
   // Listen for localStorage changes to update progress
@@ -33,7 +35,7 @@ export default function Home() {
 
     // Listen for custom event when module is completed
     window.addEventListener('moduleCompleted', handleStorageChange);
-    
+
     // Also check periodically (for same-tab updates)
     const interval = setInterval(() => {
       const saved = localStorage.getItem('digitalShieldProgress');
@@ -52,17 +54,22 @@ export default function Home() {
   }, [progress]);
 
   // User level calculation
-  const completedModules = Object.values(progress).filter(v => v === true).length;
-  const userLevel = completedModules === 0 ? 'Novice Detective' : 
-                   completedModules <= 2 ? 'Junior Detective' :
-                   completedModules <= 4 ? 'Senior Detective' : 'Cyber Master';
+  const completedModules = Object.values(progress).filter((v) => v === true).length;
+  const userLevel =
+    completedModules === 0
+      ? 'Novice Detective'
+      : completedModules <= 2
+        ? 'Junior Detective'
+        : completedModules <= 4
+          ? 'Senior Detective'
+          : 'Cyber Master';
 
   // Metinler
   const content = {
     hero: {
       title: isTurkish ? 'Dijital Dedektif Akademisine Hoş Geldin!' : 'Welcome to Digital Detective Academy!',
-      subtitle: isTurkish 
-        ? 'Teknolojinin gizemlerini çöz, dijital dünyada güvenle dolaş!' 
+      subtitle: isTurkish
+        ? 'Teknolojinin gizemlerini çöz, dijital dünyada güvenle dolaş!'
         : 'Solve the mysteries of technology, navigate the digital world safely!',
       cta: isTurkish ? 'Göreve Başla' : 'Start Mission'
     },
@@ -151,7 +158,7 @@ export default function Home() {
     content.modules.m3,
     content.modules.m4,
     content.modules.m5,
-    content.modules.m6,
+    content.modules.m6
   ];
 
   return (
@@ -159,16 +166,18 @@ export default function Home() {
       {/* Navbar */}
       <nav className="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-700 shadow-lg">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg">
-              🛡️
+          <div className="flex items-center gap-3">
+            {/* Logo: Kalkan yok, dedektif teması */}
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/10 border border-white/15 backdrop-blur-md shadow-lg">
+              <span className="text-xl">🕵️‍♂️</span>
             </div>
-            <span className="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-              Dijital Kalkan
+
+            <span className="font-extrabold text-lg md:text-xl bg-clip-text text-transparent bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300">
+              {isTurkish ? 'Dijital Dedektif Akademisi' : 'Digital Detective Academy'}
             </span>
           </div>
-          
-          <button 
+
+          <button
             onClick={toggleLanguage}
             className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800 hover:bg-slate-700 transition-colors font-medium text-sm border border-slate-600"
           >
@@ -182,14 +191,10 @@ export default function Home() {
       <header className="relative overflow-hidden pt-20 pb-16">
         <div className="absolute inset-0 bg-[url('https://source.unsplash.com/1920x1080/?matrix,cyber')] opacity-10"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-slate-900/50 to-slate-900"></div>
-        
+
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.span 
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+            <motion.span
               className="inline-block px-4 py-1.5 rounded-full bg-blue-500/20 text-blue-300 font-semibold text-sm mb-6 border border-blue-500/30"
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 2, repeat: Infinity }}
@@ -199,11 +204,9 @@ export default function Home() {
             <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400">
               {content.hero.title}
             </h1>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">
-              {content.hero.subtitle}
-            </p>
-            
-            <motion.a 
+            <p className="text-xl text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed">{content.hero.subtitle}</p>
+
+            <motion.a
               href="#mission-map"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-bold text-lg shadow-2xl hover:shadow-blue-500/50 transition-all"
               whileHover={{ scale: 1.05 }}
@@ -222,32 +225,23 @@ export default function Home() {
           <div className="max-w-4xl mx-auto">
             <h2 className="text-2xl font-bold mb-6 text-center">{content.userStats.title}</h2>
             <div className="grid md:grid-cols-3 gap-6">
-              <motion.div 
-                className="bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-700"
-                whileHover={{ scale: 1.05 }}
-              >
+              <motion.div className="bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-700" whileHover={{ scale: 1.05 }}>
                 <div className="flex items-center gap-3 mb-2">
                   <Trophy className="w-6 h-6 text-yellow-400" />
                   <span className="text-slate-400 text-sm">{content.userStats.level}</span>
                 </div>
                 <p className="text-2xl font-bold text-yellow-400">{userLevel}</p>
               </motion.div>
-              
-              <motion.div 
-                className="bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-700"
-                whileHover={{ scale: 1.05 }}
-              >
+
+              <motion.div className="bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-700" whileHover={{ scale: 1.05 }}>
                 <div className="flex items-center gap-3 mb-2">
                   <BookOpen className="w-6 h-6 text-blue-400" />
                   <span className="text-slate-400 text-sm">{content.userStats.modules}</span>
                 </div>
                 <p className="text-2xl font-bold text-blue-400">{completedModules}/6</p>
               </motion.div>
-              
-              <motion.div 
-                className="bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-700"
-                whileHover={{ scale: 1.05 }}
-              >
+
+              <motion.div className="bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-700" whileHover={{ scale: 1.05 }}>
                 <div className="flex items-center gap-3 mb-2">
                   <Star className="w-6 h-6 text-purple-400" />
                   <span className="text-slate-400 text-sm">{content.userStats.score}</span>
@@ -282,7 +276,7 @@ export default function Home() {
                   const startY = Math.floor(index / 3) * 50 + 25;
                   const endX = ((index + 1) % 3) * 33.33 + 16.66;
                   const endY = Math.floor((index + 1) / 3) * 50 + 25;
-                  
+
                   return (
                     <motion.line
                       key={index}
@@ -332,9 +326,7 @@ export default function Home() {
                           </div>
                           <h3 className="text-xl font-bold mb-2 text-slate-500">{island.title}</h3>
                           <p className="text-slate-600 text-sm mb-4">{island.desc}</p>
-                          <p className="text-xs text-slate-500">
-                            {isTurkish ? 'Önceki modülü tamamla' : 'Complete previous module'}
-                          </p>
+                          <p className="text-xs text-slate-500">{isTurkish ? 'Önceki modülü tamamla' : 'Complete previous module'}</p>
                         </div>
                       </motion.div>
                     ) : (
@@ -347,22 +339,18 @@ export default function Home() {
                           <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${island.color} opacity-20 rounded-bl-full`}></div>
                           <div className="relative z-10">
                             <div className="mb-4 flex justify-center">
-                              <motion.div 
+                              <motion.div
                                 className={`w-20 h-20 rounded-full bg-gradient-to-br ${island.color} flex items-center justify-center shadow-lg`}
                                 animate={{ rotate: [0, 5, -5, 0] }}
                                 transition={{ duration: 2, repeat: Infinity }}
                               >
-                                <div className="text-white">
-                                  {island.icon}
-                                </div>
+                                <div className="text-white">{island.icon}</div>
                               </motion.div>
                             </div>
                             <h3 className="text-xl font-bold mb-2 text-center">{island.title}</h3>
                             <p className="text-slate-300 text-sm text-center mb-4">{island.desc}</p>
                             <div className="flex items-center justify-center gap-2 text-blue-400 group-hover:text-blue-300 transition-colors">
-                              <span className="text-sm font-semibold">
-                                {isTurkish ? 'Keşfet' : 'Explore'}
-                              </span>
+                              <span className="text-sm font-semibold">{isTurkish ? 'Keşfet' : 'Explore'}</span>
                               <ArrowRight className="w-4 h-4" />
                             </div>
                           </div>
@@ -382,7 +370,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {content.features.map((feature, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -391,9 +379,7 @@ export default function Home() {
                 className="bg-slate-800/80 backdrop-blur-sm rounded-xl p-6 border border-slate-700 text-center hover:border-blue-500 transition-colors"
                 whileHover={{ scale: 1.05 }}
               >
-                <div className="mb-4 flex justify-center">
-                  {feature.icon}
-                </div>
+                <div className="mb-4 flex justify-center">{feature.icon}</div>
                 <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
                 <p className="text-slate-400">{feature.desc}</p>
               </motion.div>
@@ -406,7 +392,8 @@ export default function Home() {
       <footer className="py-10 bg-slate-900 border-t border-slate-700">
         <div className="container mx-auto px-4 text-center">
           <p className="text-sm text-slate-400">
-            &copy; {new Date().getFullYear()} Dijital Kalkan. Tüm hakları saklıdır.
+            &copy; {new Date().getFullYear()} {isTurkish ? 'Dijital Dedektif Akademisi' : 'Digital Detective Academy'}.
+            {isTurkish ? ' Tüm hakları saklıdır.' : ' All rights reserved.'}
           </p>
         </div>
       </footer>

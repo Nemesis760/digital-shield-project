@@ -21,6 +21,71 @@
   margin: 1.5rem 0 2rem;
 }
 
+/* --- Module 4: “Konu anlatımı” akışı (Module 3 benzeri) --- */
+.m4-learn-box{
+  border-radius: 16px;
+  border: 1px solid rgba(59,130,246,.16);
+  background: rgba(59,130,246,.06);
+  padding: 12px 14px;
+  margin: 12px 0 14px;
+}
+.m4-learn-title{
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+.m4-learn-sub{
+  margin: 0;
+  color: var(--text-secondary);
+  font-weight: 600;
+  line-height: 1.55;
+}
+
+.m4-flow{
+  display: grid;
+  gap: 14px;
+  margin: 14px 0 18px;
+}
+.m4-flow-item{
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 18px;
+  align-items: center;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(15,23,42,.10);
+  background: rgba(255,255,255,.75);
+  box-shadow: 0 10px 22px rgba(2,6,23,.06);
+}
+.m4-flow-text{ min-width: 0; }
+.m4-flow-bullet{
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  font-weight: 600;
+}
+.m4-flow-dot{
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(16,185,129,.14);
+  color: rgba(16,185,129,1);
+  font-weight: 900;
+  margin-top: 2px;
+}
+.m4-flow-image{
+  width: 100%;
+  max-width: 360px;
+  justify-self: end;
+}
+
 .m4-text-block {
   flex: 1;
   min-width: 0;
@@ -56,6 +121,174 @@
   border: 1px solid var(--border-color);
   border-radius: 12px;
   padding: 0.9rem 1rem;
+}
+
+/* --- Module 4 Sorter (drag & drop) --- */
+.m4-sorter-dnd{
+  margin-top: 10px;
+}
+.m4-sorter-top{
+  margin-bottom: 10px;
+}
+.m4-sorter-title{
+  margin: 0 0 6px 0;
+  font-weight: 900;
+  color: #6366f1;
+  font-size: 1.1rem;
+}
+.m4-sorter-instr{
+  margin: 0;
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.m4-sorter-board{
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 14px;
+  margin: 12px 0;
+}
+
+.m4-sorter-col{
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(15,23,42,.10);
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 10px 22px rgba(2,6,23,.06);
+}
+.m4-sorter-col-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom: 10px;
+}
+.m4-sorter-col-title{
+  font-weight: 1000;
+  color: #0f172a;
+}
+
+.m4-sorter-pool{
+  display: grid;
+  gap: 10px;
+  min-height: 220px;
+}
+
+.m4-sorter-zones{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.m4-sorter-zone{
+  border-radius: 18px;
+  border: 2px dashed rgba(15,23,42,.16);
+  padding: 12px;
+  background: rgba(255,255,255,.70);
+  min-height: 260px;
+  box-shadow: 0 10px 22px rgba(2,6,23,.06);
+}
+.m4-sorter-zone.safe{
+  border-color: rgba(16,185,129,.55);
+  background: linear-gradient(180deg, rgba(16,185,129,.10), rgba(255,255,255,.75));
+}
+.m4-sorter-zone.risky{
+  border-color: rgba(244,63,94,.55);
+  background: linear-gradient(180deg, rgba(244,63,94,.10), rgba(255,255,255,.75));
+}
+
+.m4-sorter-zone-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.m4-sorter-zone-badge{
+  font-weight: 1000;
+  letter-spacing: .6px;
+  font-size: .9rem;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(15,23,42,.10);
+  background: rgba(255,255,255,.85);
+}
+.m4-sorter-zone-badge.safe{
+  color: rgba(16,185,129,1);
+  border-color: rgba(16,185,129,.35);
+}
+.m4-sorter-zone-badge.risky{
+  color: rgba(244,63,94,1);
+  border-color: rgba(244,63,94,.35);
+}
+.m4-sorter-zone-sub{
+  color: var(--text-secondary);
+  font-weight: 900;
+  font-size: .9rem;
+}
+
+.m4-sorter-zone-body{
+  display:grid;
+  gap: 10px;
+}
+
+.m4-sorter-card{
+  border-radius: 16px;
+  border: 1px solid rgba(15,23,42,.12);
+  background: rgba(255,255,255,.92);
+  padding: 12px;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.35;
+  box-shadow: 0 10px 20px rgba(2,6,23,.06);
+  cursor: grab;
+  user-select:none;
+}
+.m4-sorter-card:active{ cursor: grabbing; }
+
+.m4-sorter-card.is-correct{
+  border-color: rgba(16,185,129,.70);
+  background: linear-gradient(180deg, rgba(16,185,129,.18), rgba(255,255,255,.92));
+}
+.m4-sorter-card.is-wrong{
+  border-color: rgba(244,63,94,.70);
+  background: linear-gradient(180deg, rgba(244,63,94,.16), rgba(255,255,255,.92));
+}
+
+.m4-sorter-empty{
+  color: rgba(15,23,42,.60);
+  font-weight: 800;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px dashed rgba(15,23,42,.14);
+  background: rgba(255,255,255,.70);
+  text-align: center;
+}
+
+.m4-sorter-actions{
+  display:flex;
+  gap: 10px;
+  align-items:center;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.m4-sorter-reset{
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(15,23,42,.12);
+  background: rgba(255,255,255,.9);
+  cursor: pointer;
+  font-weight: 900;
+}
+
+.m4-sorter-feedback{
+  margin-top: 10px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(15,23,42,.10);
+  background: rgba(255,255,255,.85);
+  box-shadow: 0 8px 18px rgba(2,6,23,.05);
+  font-weight: 900;
+  color: rgba(15,23,42,.85);
 }
 
 .m4-game-notes-title {
@@ -451,6 +684,21 @@
   .m4-btn {
     padding: 10px 16px;
     font-size: 0.9rem;
+  }
+
+  .m4-sorter-board{
+    grid-template-columns: 1fr;
+  }
+  .m4-sorter-zones{
+    grid-template-columns: 1fr;
+  }
+
+  .m4-flow-item{
+    grid-template-columns: 1fr;
+  }
+  .m4-flow-image{
+    max-width: 320px;
+    justify-self: center;
   }
 
   .m4-success-card {

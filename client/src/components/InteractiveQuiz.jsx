@@ -8,7 +8,8 @@ function InteractiveQuiz({ quizItems, isTurkish }) {
 
   const isCorrectAnswer = (quizItem, selected) => {
     if (quizItem.type === 'true_false') return selected === quizItem.answer;
-    if (quizItem.type === 'multiple_choice') return quizItem.options?.[selected]?.correct === true;
+    if (quizItem.type === 'multiple_choice')
+      return quizItem.options?.[selected]?.correct === true;
     return false;
   };
 
@@ -19,21 +20,42 @@ function InteractiveQuiz({ quizItems, isTurkish }) {
 
   const getCorrectText = (quizItem) => {
     if (quizItem.type === 'true_false') {
-      return quizItem.answer ? (isTurkish ? 'Do?ru' : 'True') : (isTurkish ? 'Yanl??' : 'False');
+      return quizItem.answer
+        ? (isTurkish ? 'Doğru' : 'True')
+        : (isTurkish ? 'Yanlış' : 'False');
     }
+
     if (quizItem.type === 'multiple_choice') {
       const correctOpt = quizItem.options?.find((o) => o.correct);
       return getOptionText(correctOpt);
     }
+
     return '';
   };
 
+  // ✅ reason_tr / reason_en (preferred)
+  // Supports:
+  // reason_tr: { correct: "...", wrong: "..." }
+  // reason_en: { correct: "...", wrong: "..." }
+  const getReasonText = (quizItem, isCorrect) => {
+    const reason = isTurkish ? quizItem.reason_tr : quizItem.reason_en;
+
+    if (reason && typeof reason === 'object') {
+      return isCorrect ? reason.correct || '' : reason.wrong || '';
+    }
+
+    if (typeof reason === 'string') return reason;
+
+    // fallback (older content)
+    const expl = isTurkish ? quizItem.explanation_tr : quizItem.explanation_en;
+    return expl || '';
+  };
+
+  // fallback helper for older feedback objects/strings
   const resolveFeedback = (feedback) => {
     if (!feedback) return '';
     if (typeof feedback === 'string') return feedback;
-    if (typeof feedback === 'object') {
-      return isTurkish ? feedback.tr || '' : feedback.en || '';
-    }
+    if (typeof feedback === 'object') return isTurkish ? feedback.tr || '' : feedback.en || '';
     return '';
   };
 
@@ -52,40 +74,49 @@ function InteractiveQuiz({ quizItems, isTurkish }) {
   if (!quizItems || quizItems.length === 0) {
     return (
       <div className="interactive-quiz-container">
-        <p>{isTurkish ? 'Quiz sorular? bulunamad?.' : 'Quiz questions not found.'}</p>
+        <p>{isTurkish ? 'Quiz soruları bulunamadı.' : 'Quiz questions not found.'}</p>
       </div>
     );
   }
 
   return (
     <div className="interactive-quiz-container">
-      <h4 className="quiz-section-title">{isTurkish ? 'Kendini Test Et:' : 'Test Yourself:'}</h4>
+      <h4 className="quiz-section-title">
+        {isTurkish ? 'Kendini Test Et:' : 'Test Yourself:'}
+      </h4>
 
       {quizItems.map((quizItem, quizIndex) => {
         const answered = !!showResults[quizIndex];
         const selected = selectedAnswers[quizIndex];
         const correct = answered ? isCorrectAnswer(quizItem, selected) : null;
+
         const questionText =
           quizItem.question || (isTurkish ? quizItem.question_tr : quizItem.question_en);
 
-        const explanation = isTurkish ? quizItem.explanation_tr : quizItem.explanation_en;
-        const baseCorrectFeedback = resolveFeedback(quizItem.correctFeedback) || (isTurkish
-          ? `Do?ru. Bu sorunun mant???: ${explanation || 'do?ru se?imi yapt?n.'}`
-          : `Correct. The reasoning: ${explanation || 'you selected the right choice.'}`);
-        const baseWrongFeedback = resolveFeedback(quizItem.wrongFeedback) || (isTurkish
-          ? `Yanl??. Do?rusu ?u y?zden: ${explanation || 'do?ru se?enek farkl?d?r.'}`
-          : `Incorrect. The reason is: ${explanation || 'the correct choice is different.'}`);
-        const correctText = getCorrectText(quizItem);
-        const wrongFeedback =
-          quizItem.type === 'multiple_choice' && correctText
-            ? `${baseWrongFeedback} ${isTurkish ? 'Do?ru cevap:' : 'Correct answer:'} ${correctText}`
-            : baseWrongFeedback;
+        // Legacy feedback fallback (if reason_* not provided)
+        const legacyExplanation = isTurkish ? quizItem.explanation_tr : quizItem.explanation_en;
 
-        const explanationText =
-          explanation ||
+        const legacyCorrectFeedback =
+          resolveFeedback(quizItem.correctFeedback) ||
           (isTurkish
-            ? `Bu sorunun mant???: do?ru cevap ${getCorrectText(quizItem)}.`
-            : `The logic: the correct answer is ${getCorrectText(quizItem)}.`);
+            ? `Doğru. ${legacyExplanation || ''}`.trim()
+            : `Correct. ${legacyExplanation || ''}`.trim());
+
+        const legacyWrongFeedback =
+          resolveFeedback(quizItem.wrongFeedback) ||
+          (isTurkish
+            ? `Yanlış. ${legacyExplanation || ''}`.trim()
+            : `Incorrect. ${legacyExplanation || ''}`.trim());
+
+        const correctText = getCorrectText(quizItem);
+
+        // For BOTH true_false and multiple_choice:
+        // Prefer reason_text; if empty, fall back to legacy feedback.
+        const reasonCorrect = getReasonText(quizItem, true);
+        const reasonWrong = getReasonText(quizItem, false);
+
+        const finalCorrectReason = reasonCorrect || legacyCorrectFeedback;
+        const finalWrongReason = reasonWrong || legacyWrongFeedback;
 
         return (
           <motion.div
@@ -101,40 +132,48 @@ function InteractiveQuiz({ quizItems, isTurkish }) {
               <div className="quiz-true-false-buttons">
                 <motion.button
                   className={`true-false-btn true-btn ${
-                    answered && selected === true ? (quizItem.answer === true ? 'correct' : 'wrong') : ''
+                    answered && selected === true
+                      ? quizItem.answer === true
+                        ? 'correct'
+                        : 'wrong'
+                      : ''
                   } ${answered && quizItem.answer === true ? 'show-correct' : ''}`}
                   onClick={() => handleTF(quizIndex, true)}
                   disabled={answered}
                 >
-                  {isTurkish ? '? Do?ru' : '? True'}
+                  {isTurkish ? '✔ Doğru' : '✔ True'}
                 </motion.button>
 
                 <motion.button
                   className={`true-false-btn false-btn ${
-                    answered && selected === false ? (quizItem.answer === false ? 'correct' : 'wrong') : ''
+                    answered && selected === false
+                      ? quizItem.answer === false
+                        ? 'correct'
+                        : 'wrong'
+                      : ''
                   } ${answered && quizItem.answer === false ? 'show-correct' : ''}`}
                   onClick={() => handleTF(quizIndex, false)}
                   disabled={answered}
                 >
-                  {isTurkish ? '? Yanl??' : '? False'}
+                  {isTurkish ? '✘ Yanlış' : '✘ False'}
                 </motion.button>
               </div>
             )}
 
             {quizItem.type === 'multiple_choice' && (
               <div className="interactive-quiz-options">
-                {quizItem.options.map((option, optIndex) => {
+                {quizItem.options?.map((option, optIndex) => {
                   const isSelected = selected === optIndex;
-                  const isCorrect = option.correct === true;
+                  const isOptCorrect = option.correct === true;
 
                   return (
                     <motion.button
                       key={optIndex}
                       className={`interactive-quiz-option ${
                         answered
-                          ? isCorrect
+                          ? isOptCorrect
                             ? 'correct'
-                            : isSelected && !isCorrect
+                            : isSelected && !isOptCorrect
                             ? 'wrong'
                             : ''
                           : isSelected
@@ -145,8 +184,8 @@ function InteractiveQuiz({ quizItems, isTurkish }) {
                       disabled={answered}
                     >
                       <span className="option-text">{getOptionText(option)}</span>
-                      {answered && isCorrect && <span className="option-icon">?</span>}
-                      {answered && isSelected && !isCorrect && <span className="option-icon">?</span>}
+                      {answered && isOptCorrect && <span className="option-icon">✔</span>}
+                      {answered && isSelected && !isOptCorrect && <span className="option-icon">✘</span>}
                     </motion.button>
                   );
                 })}
@@ -163,18 +202,25 @@ function InteractiveQuiz({ quizItems, isTurkish }) {
                 >
                   {correct ? (
                     <div>
-                      <p>? {isTurkish ? 'Do?ru!' : 'Correct!'}</p>
-                      <p className="quiz-explain">{baseCorrectFeedback}</p>
-                      {quizItem.type === 'true_false' && (
-                        <p className="quiz-explain">{explanationText}</p>
-                      )}
+                      <p>✔ {isTurkish ? 'Doğru!' : 'Correct!'}</p>
+                      <p className="quiz-explain">
+                        {isTurkish ? 'Neden doğru? ' : 'Why correct? '}
+                        {finalCorrectReason}
+                      </p>
                     </div>
                   ) : (
                     <div>
-                      <p>? {isTurkish ? 'Yanl??!' : 'Incorrect!'}</p>
-                      <p className="quiz-explain">{wrongFeedback}</p>
-                      {quizItem.type === 'true_false' && (
-                        <p className="quiz-explain">{explanationText}</p>
+                      <p>✘ {isTurkish ? 'Yanlış!' : 'Incorrect!'}</p>
+                      <p className="quiz-explain">
+                        {isTurkish ? 'Neden yanlış? ' : 'Why wrong? '}
+                        {finalWrongReason}
+                      </p>
+
+                      {/* Always show correct answer on wrong */}
+                      {correctText && (
+                        <p className="quiz-explain">
+                          {isTurkish ? 'Doğru cevap:' : 'Correct answer:'} {correctText}
+                        </p>
                       )}
                     </div>
                   )}

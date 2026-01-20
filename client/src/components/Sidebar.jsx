@@ -224,7 +224,7 @@ const Sidebar = () => {
         )}
       </AnimatePresence>
 
-      <style jsx>{`
+      <style>{`
         /* TOGGLE BUTTON */
         .sidebar-toggle {
           position: fixed;
