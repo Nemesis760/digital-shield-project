@@ -1,46 +1,93 @@
 # Digital Shield Project
 
-Interactive Vite + React training modules for digital safety and cybersecurity.
+This repository contains the **landing page and final report website** for the Digital Shield Project, prepared as part of the **CEIT 435 course**.
 
-## Requirements
-- Node.js 18+ (or newer)
+The page is published as a **single HTML site** and is intended for presentation, evaluation, and public access.
 
-## Install
-```bash
-npm install
-```
+---
 
-## Run (dev)
-```bash
-npm run dev
-```
+## Live Page
 
-Vite runs with `client/` as the app root. Open the URL printed in the console.
+Landing page (GitHub Pages):  
+https://Nemesis760.github.io/digital-shield-project/
 
-## Build
-```bash
-npm run build
-```
+Working prototype (interactive platform):  
+https://Nemesis760.github.io/digital-shield-working-prototype/
 
-Build output is written to `dist/`.
+---
 
-## Preview the build
-```bash
-npm run preview
-```
+## About This Repository
 
-## Project structure
-- `client/index.html`: Vite entry HTML
-- `client/src/main.tsx`: React entry
-- `client/src/pages`: Module pages
-- `client/src/content`: Module content data
-- `client/public/images`: Static assets
+This repository is **not** the development environment of the project.
 
-## Media (Images & Videos)
-- Images live under `client/public/images/...` and are referenced with `/images/...` paths.
-- Videos are defined via `video_links` in content files and rendered as buttons in the UI.
-- Large binaries/zip artifacts should not be committed to git.
+It includes:
+- a single-page landing website,
+- project overview and final report content,
+- project goals, features, and findings,
+- a link to the working prototype.
 
-## Asset policy
-- Do not commit `client/public/*.zip`. Keep large artifacts outside the repo.
-- Avoid committing files larger than 100 MB to git.
+The interactive learning platform itself is developed and published separately.
+
+---
+
+## Project Summary
+
+The Digital Shield Project is an educational web project designed for **middle school students (ages 11–13)**.
+
+The aim of the project is to help students:
+- understand basic digital safety concepts,
+- recognize common cybersecurity threats,
+- develop safer online behavior.
+
+The learning content is supported with interactive and game-based activities in the working prototype.
+
+---
+
+## Repository Contents
+
+- `docs/index.html` — Landing page (final report website)
+- Static assets used by the landing page
+- Project description and summary information
+
+No build step is required for this repository.
+
+---
+
+## What Is Not Included Here
+
+- React or Vite source code
+- Game logic or interactive modules
+- Development or build scripts
+
+These are part of the **working prototype repository**.
+
+---
+
+## Technologies Used (Landing Page)
+
+- HTML  
+- CSS  
+- JavaScript  
+- GitHub Pages (deployment)
+
+---
+
+## Project Team
+
+- **Volkan Ulusoy** — Development and UI/UX  
+- **Paloosha Sheikh** — Instructional Design  
+
+(Project developed as Group 12.)
+
+---
+
+## Deployment
+
+The landing page is deployed using **GitHub Pages** from the `/docs` directory.
+
+---
+
+## Contact
+
+GitHub:  
+https://github.com/Nemesis760
